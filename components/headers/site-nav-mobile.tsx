@@ -8,8 +8,7 @@ function SiteNavMobile() {
   const pathName = usePathname();
 
   return (
-    <div className="md:hidden fixed bottom-8 bg-accent w-[80vw] py-2 px-2 right-1/2 left-1/2 -translate-x-1/2 rounded-xl flex items-center justify-around border border-foreground/20">
-      <nav>
+    <nav className="md:hidden fixed bottom-8 bg-accent w-[80vw] py-2 px-2 right-1/2 left-1/2 -translate-x-1/2 rounded-xl flex items-center justify-around border border-foreground/20">
         {MOBILE_NAV.map((item) => {
           const isActiveItem = pathName === item.href;
 
@@ -33,8 +32,7 @@ function SiteNavMobile() {
             </Link>
           );
         })}
-      </nav>
-    </div>
+    </nav>
   );
 }
 
