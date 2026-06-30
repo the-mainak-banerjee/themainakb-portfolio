@@ -1,5 +1,6 @@
 import PrimaryLogo from "../primary-logo";
 import SiteNavDesktop from "./site-nav-desktop";
+import SiteNavMobile from "./site-nav-mobile";
 import ThemeSwitcher from "./theme-switcher";
 
 function SiteHeader() {
@@ -10,6 +11,7 @@ function SiteHeader() {
         <SiteNavDesktop />
         <ThemeSwitcher />
       </div>
+      <SiteNavMobile />
     </header>
   );
 }
