@@ -24,9 +24,10 @@ function SiteNavMobile() {
 
   return (
     <motion.nav
-      animate={{ scale: isCompact ? 0.8 : 1}}
+      animate={{ scale: isCompact ? 0.8 : 1 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="bg-accent border-foreground/20 fixed right-1/2 bottom-4 left-1/2 flex w-[80vw] -translate-x-1/2 items-center justify-around rounded-xl border px-2 py-2 md:hidden">
+      className="bg-accent supports-backdrop-filter:bg-accent/60 border-foreground/20 fixed right-1/2 bottom-4 left-1/2 flex w-[80vw] -translate-x-1/2 items-center justify-around rounded-xl border px-2 py-2 backdrop-blur md:hidden"
+    >
       {MOBILE_NAV.map((item) => {
         const isActiveItem = pathName === item.href;
 
@@ -39,7 +40,7 @@ function SiteNavMobile() {
               isActiveItem && "text-foreground",
             )}
             onClick={() => {
-              if(!isCompact) return;
+              if (!isCompact) return;
               setIsCompact(false);
             }}
           >

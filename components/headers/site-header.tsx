@@ -5,14 +5,18 @@ import ThemeSwitcher from "./theme-switcher";
 
 function SiteHeader() {
   return (
-    <header className="container my-4 flex items-center justify-between">
-      <PrimaryLogo />
-      <div className="divide-x-2 divide-muted-foreground/50 flex items-center gap-4">
-        <SiteNavDesktop />
-        <ThemeSwitcher />
-      </div>
+    <>
+      <header className="bg-background supports-backdrop-filter:bg-background/60 z-50 backdrop-blur sticky top-0">
+        <div className="container flex items-center justify-between py-2">
+          <PrimaryLogo />
+          <div className="divide-muted-foreground/50 flex items-center gap-4 divide-x-2">
+            <SiteNavDesktop />
+            <ThemeSwitcher />
+          </div>
+        </div>
+      </header>
       <SiteNavMobile />
-    </header>
+    </>
   );
 }
 
