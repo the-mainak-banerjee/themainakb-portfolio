@@ -1,38 +1,60 @@
 "use client";
 import { MOBILE_NAV } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { useMotionValueEvent, useScroll, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 function SiteNavMobile() {
   const pathName = usePathname();
+  const { scrollY } = useScroll();
+  const [isCompact, setIsCompact] = useState(false);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const prev = scrollY.getPrevious();
+    if (!prev) return;
+    if (latest > prev) {
+      if (isCompact) return;
+      setIsCompact(true);
+    } else {
+      if (!isCompact) return;
+      setIsCompact(false);
+    }
+  });
 
   return (
-    <nav className="md:hidden fixed bottom-8 bg-accent w-[80vw] py-2 px-2 right-1/2 left-1/2 -translate-x-1/2 rounded-xl flex items-center justify-around border border-foreground/20">
-        {MOBILE_NAV.map((item) => {
-          const isActiveItem = pathName === item.href;
+    <motion.nav
+      animate={{ scale: isCompact ? 0.8 : 1}}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="bg-accent border-foreground/20 fixed right-1/2 bottom-8 left-1/2 flex w-[80vw] -translate-x-1/2 items-center justify-around rounded-xl border px-2 py-2 md:hidden">
+      {MOBILE_NAV.map((item) => {
+        const isActiveItem = pathName === item.href;
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "relative flex flex-col items-center gap-1 text-xs text-muted-foreground/80 transition-all duration-300 ease-out",
-                isActiveItem && "text-foreground",
-              )}
-            >
-              <item.icon size={16} className="z-50" />
-              <span className="z-50">{item.title}</span>
-              {/* {isActiveItem && (
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={cn(
+              "text-muted-foreground/80 relative flex flex-col items-center gap-1 text-xs transition-all duration-300 ease-out",
+              isActiveItem && "text-foreground",
+            )}
+            onClick={() => {
+              if(!isCompact) return;
+              setIsCompact(false);
+            }}
+          >
+            <item.icon size={16} className="z-50" />
+            <span className="z-50">{item.title}</span>
+            {/* {isActiveItem && (
               <motion.div
                 layoutId="nav_item"
                 className="absolute inset-0 bg-ring rounded-md"
               ></motion.div>
             )} */}
-            </Link>
-          );
-        })}
-    </nav>
+          </Link>
+        );
+      })}
+    </motion.nav>
   );
 }
 
