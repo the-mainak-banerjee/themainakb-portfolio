@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Typography } from "@/components/ui/typography";
+import { VisuallyHidden } from "@/components/global/visually-hidden";
 
 function SocialIcons() {
   return (
@@ -21,7 +22,7 @@ function SocialIcons() {
                   <a
                     href={item.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener"
                     className="group flex items-center"
                   >
                     <div className="md:border-foreground/20 relative inline-block rounded-md p-2 md:border">
@@ -34,6 +35,7 @@ function SocialIcons() {
                     >
                       {item.label}
                     </Typography>
+                    <VisuallyHidden>{item.label}</VisuallyHidden>
                   </a>
                 </TooltipTrigger>
                 <TooltipContent>

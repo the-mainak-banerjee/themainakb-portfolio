@@ -16,7 +16,17 @@ function ContactInfo() {
         <div className="bg-foreground h-1 w-1 rounded-full"></div>
         <div className="flex items-center gap-0.5">
           <Mail size={16} />
-          <Typography variant="caption">{USER.email}</Typography>
+          <a
+            href={`mailto:${USER.email}`}
+            className="group decoration-1 hover:underline hover:underline-offset-4"
+          >
+            <Typography
+              variant="caption"
+              className="group-hover:text-foreground"
+            >
+              {USER.email}
+            </Typography>
+          </a>
           <CopyButton
             value={USER.email}
             label="Copy Email"
