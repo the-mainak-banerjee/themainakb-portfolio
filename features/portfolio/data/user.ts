@@ -18,7 +18,8 @@ export const USER: User = {
     dark: "/profile_image_dark.png",
   },
   address: "Kolkata, India",
-  telegramId: "Journey5205",
+  telegramId: "themainakb",
+  email: "developer.mainakbanerjee@gmail.com",
   jobTitle: "React Developer",
   about: `I'm Mainak, a React developer who ships fast without shipping sloppy.
   

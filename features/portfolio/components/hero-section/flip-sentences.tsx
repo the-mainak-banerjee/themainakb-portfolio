@@ -37,7 +37,7 @@ function FlipSentences({ sentences }: IFlipSentencesProps) {
             color: "var(--muted-foreground)",
             transition: {
               duration: 0.4,
-              delay: 0.4,
+              delay: 0.3,
             },
           }}
           transition={{
@@ -58,7 +58,7 @@ function FlipSentences({ sentences }: IFlipSentencesProps) {
           animate={{
             //   clipPath: "inset(0 0% 0 0)",
             opacity: 1,
-            transition: { duration: 0.5, ease: "easeInOut", delay: 0.9 },
+            transition: { duration: 0.5, ease: "easeInOut", delay: 0.5 },
           }}
           exit={{
             // clipPath: "inset(0 0 0 100%)",
