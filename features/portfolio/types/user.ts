@@ -1,3 +1,5 @@
+import { IconName } from "@/components/global/icons/registry";
+
 export type User = {
   firstName: string;
   lastName: string;
@@ -14,7 +16,7 @@ export type User = {
   address: string;
   phoneNumber?: string;
   telegramId?: string;
-  email?: string;
+  email: string;
   website?: string;
   jobTitle: string;
   about: string;
@@ -22,3 +24,13 @@ export type User = {
   keywords: string[];
   timeZone: string;
 };
+
+
+export interface SocialMediaLink {
+  icon: IconName;
+  label: string;
+  url: string;
+  info: string
+}
+
+export type User_Social_Media = SocialMediaLink[];

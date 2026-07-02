@@ -18,7 +18,7 @@ function Greetings({className}: {className?: string}) {
   const greeting = getGreeting(currentTime.getHours());
 
   return (
-    <Typography variant="body-lg" className={cn("font-semibold", className)}>
+    <Typography variant="body" className={cn("font-semibold", className)}>
       {greeting},
     </Typography>
   );

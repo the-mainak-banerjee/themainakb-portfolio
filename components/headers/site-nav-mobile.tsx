@@ -36,7 +36,7 @@ function SiteNavMobile() {
             key={item.href}
             href={item.href}
             className={cn(
-              "text-muted-foreground/80 relative flex flex-col items-center gap-1 text-xs transition-all duration-300 ease-out",
+              "text-muted-foreground/80 relative flex flex-col items-center gap-1 text-xs transition-all duration-300 ease-out font-mono",
               isActiveItem && "text-foreground",
             )}
             onClick={() => {

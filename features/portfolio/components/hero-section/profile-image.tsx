@@ -7,7 +7,7 @@ import { USER } from "../../data/user";
 function ProfileImage() {
   const { resolvedTheme } = useTheme();
   return (
-    <div className="from-foreground/40 to-foreground/80 relative h-30 w-30 min-w-30 rounded-full bg-linear-to-b p-1 md:h-40 md:w-40 md:min-w-40">
+    <div className="from-foreground/40 to-foreground/80 relative h-30 w-30 min-w-30 rounded-full bg-linear-to-b p-1 ">
       <Image
         src={
           resolvedTheme === "dark"

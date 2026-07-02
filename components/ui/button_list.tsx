@@ -72,13 +72,12 @@ export const PrimaryButton = ({
   );
 };
 
-
 export const MagneticButton = ({
   children,
   className,
   strength = 0.2,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { strength?: number}) => {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { strength?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -96,15 +95,15 @@ export const MagneticButton = ({
   const handleMouseLeave = () => {
     setPosition({ x: 0, y: 0 });
   };
-  
+
   const hasMoved = position.x !== 0 || position.y !== 0;
   return (
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "w-fit rounded-md border border-dashed transition-colors duration-150",
-        hasMoved ? "border-ring" : "border-transparent",
+        "w-fit border border-dashed transition-colors duration-150",
+        hasMoved ? "border-ring bg-ring/30" : "border-transparent",
       )}
     >
       <motion.div
@@ -115,7 +114,7 @@ export const MagneticButton = ({
       >
         <button
           className={cn(
-            "dark:from-foreground/40 from-foreground/60 to-foreground text-secondary hover:dark:from-foreground hover:dark:to-foreground/40 hover:from-foreground hover:to-foreground/60 rounded-lg bg-linear-to-br px-4 py-2 font-medium backdrop-blur transition-all duration-150 active:scale-95",
+            "bg-foreground hover:from-ring/60 hover:to-ring text-secondary hover:dark:text-foreground px-4 py-2 font-medium backdrop-blur transition-all duration-150 hover:bg-linear-to-br active:scale-95",
             className,
           )}
           {...props}
@@ -124,5 +123,185 @@ export const MagneticButton = ({
         </button>
       </motion.div>
     </div>
+  );
+};
+
+export const SecondaryButton = ({
+  children,
+  ...props
+}: HTMLMotionProps<"button">) => {
+  return (
+    <motion.button
+      initial="initial"
+      whileHover="hover"
+      whileTap={{ scale: 0.97 }}
+      className="group bg-accent relative overflow-hidden px-4 py-2"
+      variants={{
+        initial: {
+          scale: 1,
+        },
+        hover: {
+          scale: 1.03,
+          transition: {
+            type: "spring",
+            stiffness: 300,
+            damping: 20,
+          },
+        },
+      }}
+      {...props}
+    >
+      {/* Animated gradient */}
+      <motion.div
+        className="from-ring/80 to-ring absolute inset-0 bg-linear-to-br"
+        variants={{
+          initial: {
+            opacity: 0,
+            scale: 0.95,
+          },
+          hover: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+              duration: 0.3,
+              ease: "easeOut",
+            },
+          },
+        }}
+      />
+
+      {/* Gloss sweep */}
+      <motion.div
+        className="bg-foreground/80 absolute top-0 -left-full h-full w-1/2 -skew-x-12 blur-xl"
+        variants={{
+          initial: {
+            left: "-100%",
+          },
+          hover: {
+            left: "150%",
+            transition: {
+              duration: 0.7,
+              ease: "easeInOut",
+            },
+          },
+        }}
+      />
+
+      {/* Text */}
+      <motion.span
+        className="relative z-10 block"
+        variants={{
+          initial: {
+            y: 0,
+          },
+          hover: {
+            y: -1,
+            transition: {
+              type: "spring",
+              stiffness: 400,
+              damping: 25,
+            },
+          },
+        }}
+      >
+        {children}
+      </motion.span>
+
+      {/* Top Left */}
+      <motion.span
+        className="border-ring absolute top-0 left-0 h-3 w-3 border-t-2 border-l-2"
+        variants={{
+          initial: {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+          },
+          hover: {
+            opacity: 0,
+            scale: 0.5,
+            x: -8,
+            y: -8,
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            },
+          },
+        }}
+      />
+
+      {/* Top Right */}
+      <motion.span
+        className="border-ring absolute top-0 right-0 h-3 w-3 border-t-2 border-r-2"
+        variants={{
+          initial: {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+          },
+          hover: {
+            opacity: 0,
+            scale: 0.5,
+            x: 8,
+            y: -8,
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            },
+          },
+        }}
+      />
+
+      {/* Bottom Left */}
+      <motion.span
+        className="border-ring absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2"
+        variants={{
+          initial: {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+          },
+          hover: {
+            opacity: 0,
+            scale: 0.5,
+            x: -8,
+            y: 8,
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            },
+          },
+        }}
+      />
+
+      {/* Bottom Right */}
+      <motion.span
+        className="border-ring absolute right-0 bottom-0 h-3 w-3 border-r-2 border-b-2"
+        variants={{
+          initial: {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            y: 0,
+          },
+          hover: {
+            opacity: 0,
+            scale: 0.5,
+            x: 8,
+            y: 8,
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            },
+          },
+        }}
+      />
+    </motion.button>
   );
 };
