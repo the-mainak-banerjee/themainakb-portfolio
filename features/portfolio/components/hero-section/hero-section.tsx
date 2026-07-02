@@ -4,20 +4,23 @@ import FlipSentences from "./flip-sentences";
 import Greetings from "./greetings";
 import ProfileImage from "./profile-image";
 import Actions from "./actions";
+import ContactInfo from "./contact-info";
 
 function HeroSection() {
   return (
-    <div className="space-y-8">
-      <div className="flex items-end gap-4 md:items-center md:gap-6">
-        <ProfileImage />
-        <div className="mb-2 md:mb-0">
-          <Typography variant="h4" className="font-bold" as="h1">
-            {USER.displayName}
-          </Typography>
-          <FlipSentences sentences={USER.animatedSentences} />
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <div className="flex items-end gap-4 md:gap-6">
+          <ProfileImage />
+          <div className="mb-2">
+            <Typography variant="h4" className="font-bold" as="h1">
+              {USER.displayName}
+            </Typography>
+            <FlipSentences sentences={USER.animatedSentences} />
+          </div>
         </div>
+        <ContactInfo />
       </div>
-
 
       <div className="space-y-4">
         <div>
