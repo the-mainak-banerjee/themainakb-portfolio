@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Typography } from "../ui/typography";
+import { VisuallyHidden } from "./visually-hidden";
 
 interface CopyButtonProps {
   /** The text that gets copied to the clipboard */
@@ -123,6 +124,7 @@ export function CopyButton({
             <span className="invisible">
               <Copy size={size} />
             </span>
+            <VisuallyHidden>{copied ? "Copied!" : label }</VisuallyHidden>
           </button>
         </TooltipTrigger>
         <TooltipContent>

@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { Typography } from "../ui/typography";
+import { VisuallyHidden } from "../global/visually-hidden";
 
 function ThemeSwitcher() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -39,6 +40,7 @@ function ThemeSwitcher() {
                 isHovered ? "opacity-100" : "opacity-0"
               }`}
             />
+            <VisuallyHidden>Toogle Theme</VisuallyHidden>
           </button>
         </TooltipTrigger>
         <TooltipContent>
