@@ -22,6 +22,7 @@ import { RevealPill } from "@/componentbank";
 export interface IExperienceCard {
   job_role: User_Job_Roles;
   is_active?: boolean;
+  is_hovered?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }
@@ -176,6 +177,7 @@ function ExperienceCardModal({
 function ExperienceCard({
   job_role,
   is_active,
+  is_hovered,
   onClick,
   onClose,
 }: IExperienceCard) {
@@ -256,14 +258,23 @@ function ExperienceCard({
         >
           <Expand size={18} />
         </motion.div>
-        <motion.div
-          className="bg-border/40 absolute inset-0 z-10"
-          variants={{
-            initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
-            hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
-          }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        />
+        {is_hovered && (
+          <motion.div
+            className="bg-border/40 absolute inset-0 z-10"
+            layout
+            layoutId="hover_bg"
+            // variants={{
+            //   initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
+            //   hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
+            // }}
+            // transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 35,
+            }}
+          />
+        )}
       </motion.button>
     </div>
   );
