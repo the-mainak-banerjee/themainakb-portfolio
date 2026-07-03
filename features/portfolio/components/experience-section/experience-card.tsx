@@ -13,14 +13,16 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import RecognizationBox from "./recognization-box";
 import { calculateDuration, formatYearMonth } from "@/lib/utils";
 import { IconButton } from "@/components/ui/button_list";
+import { RevealPill } from "@/componentbank";
 
 export interface IExperienceCard {
   job_role: User_Job_Roles;
   is_active?: boolean;
+  is_hovered?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }
@@ -58,6 +60,8 @@ function ExperienceCardModal({
         >
           <X size={16} />
         </IconButton>
+
+        {/* Company Details Start */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Image
@@ -72,6 +76,8 @@ function ExperienceCardModal({
               <Typography variant="caption">{job_role.job_role}</Typography>
             </div>
           </div>
+
+          {/* Company Location and Job Location Start */}
           <div className="flex items-center gap-2">
             <div className="text-muted-foreground flex items-center gap-1">
               <MapPin size={16} />
@@ -89,6 +95,8 @@ function ExperienceCardModal({
             </div>
           </div>
         </div>
+
+        {/* Company Experience Start */}
         <div className="divide-border border-border grid grid-cols-3 divide-x rounded-lg border">
           <div className="px-4 py-3">
             <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
@@ -119,9 +127,40 @@ function ExperienceCardModal({
             </Typography>
           </div>
         </div>
+
+        {/* Achievements Start */}
         {job_role.achievements && (
           <RecognizationBox achievements={job_role.achievements} />
         )}
+
+        <div className="space-y-4">
+          <Typography variant="label" as="p">
+            Tools on board
+          </Typography>
+          <div className="flex flex-wrap gap-2">
+            <LayoutGroup>
+              {job_role.tools.map((tool) => {
+                return (
+                  <motion.a
+                    key={tool.slug}
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <RevealPill
+                      key={tool.slug}
+                      icon={tool.icon}
+                      label={tool.name}
+                      expandCard={true}
+                      id={job_role.company_name + tool.name}
+                    />
+                  </motion.a>
+                );
+              })}
+            </LayoutGroup>
+          </div>
+        </div>
+
         <div className="space-y-4">
           <Typography variant="label" as="p">
             What I did?
@@ -138,6 +177,7 @@ function ExperienceCardModal({
 function ExperienceCard({
   job_role,
   is_active,
+  is_hovered,
   onClick,
   onClose,
 }: IExperienceCard) {
@@ -218,14 +258,23 @@ function ExperienceCard({
         >
           <Expand size={18} />
         </motion.div>
-        <motion.div
-          className="bg-border/40 absolute inset-0 z-10"
-          variants={{
-            initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
-            hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
-          }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        />
+        {is_hovered && (
+          <motion.div
+            className="bg-border/40 absolute inset-0 z-10"
+            layout
+            layoutId="hover_bg"
+            // variants={{
+            //   initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
+            //   hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
+            // }}
+            // transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 35,
+            }}
+          />
+        )}
       </motion.button>
     </div>
   );

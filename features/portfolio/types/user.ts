@@ -49,6 +49,7 @@ export interface User_Job_Roles {
   achievements?: { title: string; description?: string; image?: IImage }[];
   description: string;
   job_role: string;
+  tools: TechTool[]
 }
 
 export interface TechTool {

@@ -6,6 +6,7 @@ import { LayoutGroup, stagger } from "motion/react";
 import { RevealPill } from "@/componentbank";
 import { motion } from "motion/react";
 import { container_item_reveal_variants, container_reveal_variants, REVEAL_VARIANTS_NAME } from "@/lib/motion_utils";
+import { cn } from "@/lib/utils";
 
 export interface ITechStackCard {
   stackGroup: User_Stack;
@@ -35,7 +36,7 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
         variants={container_item_reveal_variants}
       >
         <stackGroup.icon size={16} />
-        <Typography variant="caption-sm" className="shrink-0">
+        <Typography variant="caption-sm" className={cn("shrink-0", hovered ? "text-foreground" : "")}>
           {stackGroup.label}
         </Typography>
       </motion.div>
@@ -59,6 +60,7 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
                   key={tool.slug}
                   icon={tool.icon}
                   label={tool.name}
+                  id={`tech_stack_${tool.name}`}
                 />
               </motion.a>
             );
@@ -85,14 +87,14 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
           />
         </motion.svg>
       </motion.div>
-      <motion.div
+      {/* <motion.div
         className="bg-border/40 absolute inset-0 z-10"
         variants={{
           initial: { clipPath: "inset(0 100% 100% 0)", opacity: 0 },
           hover: { clipPath: "inset(0 0% 0% 0)", opacity: 1 },
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-      />
+      /> */}
     </motion.div>
   );
 }

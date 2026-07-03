@@ -30,6 +30,86 @@ My work involves close collaboration with backend, AI, QA, and design teams to e
         },
       },
     ],
+    tools: [
+      {
+        name: "JavaScript",
+        slug: "javascript",
+        icon: "javascript",
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      },
+      {
+        name: "TypeScript",
+        slug: "typescript",
+        icon: "typescript",
+        url: "https://www.typescriptlang.org/docs",
+      },
+      {
+        name: "React",
+        slug: "react",
+        icon: "react",
+        url: "https://react.dev",
+      },
+      {
+        name: "Next.js",
+        slug: "nextjs",
+        icon: "nextjs",
+        url: "https://nextjs.org",
+      },
+      {
+        name: "Tailwind CSS",
+        slug: "tailwind",
+        icon: "tailwind",
+        url: "https://tailwindcss.com",
+      },
+      {
+        name: "shadcn/ui",
+        slug: "shadcn",
+        icon: "shadcn",
+        url: "https://ui.shadcn.com",
+      },
+      {
+        name: "TanStack",
+        slug: "tanstack",
+        icon: "tanstack",
+        url: "https://tanstack.com",
+      },
+      {
+        name: "Git",
+        slug: "git",
+        icon: "git",
+        url: "https://git-scm.com",
+      },
+      {
+        name: "GitHub",
+        slug: "github",
+        icon: "github",
+        url: "https://github.com",
+      },
+      {
+        name: "Postman",
+        slug: "postman",
+        icon: "postman",
+        url: "https://postman.com",
+      },
+      {
+        name: "Vercel",
+        slug: "vercel",
+        icon: "vercel",
+        url: "https://vercel.com",
+      },
+      {
+        name: "Firebase",
+        slug: "firebase",
+        icon: "firebase",
+        url: "https://firebase.google.com",
+      },
+      {
+        name: "Figma",
+        slug: "figma",
+        icon: "figma",
+        url: "https://figma.com",
+      },
+    ],
   },
   {
     company_name: "Welkin Digital",
@@ -47,6 +127,56 @@ My work involves close collaboration with backend, AI, QA, and design teams to e
     description: `As a front-end react developer, my job role entails working with cutting-edge technologies such as Next.js, Tailwind CSS, SCSS, and many more to create responsive, high-performance web applications.
 
 I am responsible for converting figma mockups and prototypes into fully functional, intuitive user interfaces, as well as ensuring seamless functionality across different devices and platforms that deliver a seamless user experience.`,
+    tools: [
+      {
+        name: "JavaScript",
+        slug: "javascript",
+        icon: "javascript",
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      },
+      {
+        name: "TypeScript",
+        slug: "typescript",
+        icon: "typescript",
+        url: "https://www.typescriptlang.org/docs",
+      },
+      {
+        name: "React",
+        slug: "react",
+        icon: "react",
+        url: "https://react.dev",
+      },
+      {
+        name: "Next.js",
+        slug: "nextjs",
+        icon: "nextjs",
+        url: "https://nextjs.org",
+      },
+      {
+        name: "Tailwind CSS",
+        slug: "tailwind",
+        icon: "tailwind",
+        url: "https://tailwindcss.com",
+      },
+      {
+        name: "Bitbucket",
+        slug: "bitbucket",
+        icon: "bitbucket",
+        url: "https://bitbucket.org/product/",
+      },
+      {
+        name: "Postman",
+        slug: "postman",
+        icon: "postman",
+        url: "https://postman.com",
+      },
+      {
+        name: "Vercel",
+        slug: "vercel",
+        icon: "vercel",
+        url: "https://vercel.com",
+      },
+    ],
   },
 ];
 

@@ -12,6 +12,9 @@ import {
 
 function ExperienceSection() {
   const [selectedJobRole, setSelectedJobRole] = useState<number | null>(null);
+  const [hoveredJobRoleCard, setHoveredJobRoleCard] = useState<string | null>(
+    null,
+  );
   return (
     <SectionContainer sectionHeading="Experience" sectionLabel="Career">
       <motion.div
@@ -48,12 +51,15 @@ function ExperienceSection() {
               <motion.div
                 className={isLast ? "flex-1" : "flex-1 pb-6"}
                 variants={container_item_reveal_variants}
+                onHoverStart={() => setHoveredJobRoleCard(role.company_name)}
+                onHoverEnd={() => setHoveredJobRoleCard(null)}
               >
                 <ExperienceCard
                   job_role={role}
                   onClose={() => setSelectedJobRole(null)}
                   onClick={() => setSelectedJobRole(idx)}
                   is_active={selectedJobRole === idx}
+                  is_hovered={hoveredJobRoleCard === role.company_name}
                 />
               </motion.div>
             </div>
