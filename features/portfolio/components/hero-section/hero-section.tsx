@@ -10,7 +10,7 @@ function HeroSection() {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <div className="flex items-end gap-4 md:gap-6">
+        <div className="flex items-center gap-4 md:gap-6">
           <ProfileImage />
           <div className="mb-2">
             <Typography variant="h4" className="font-bold" as="h1">

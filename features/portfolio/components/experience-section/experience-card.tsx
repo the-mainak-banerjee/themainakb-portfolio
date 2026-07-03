@@ -38,7 +38,7 @@ function ExperienceCardModal({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="bg-accent fixed inset-0 z-70 my-auto mx-2 md:mx-auto h-150 max-w-xl overflow-y-auto rounded-xl px-6 py-6"
+      className="bg-accent fixed inset-0 z-70 mx-2 my-auto h-150 max-w-xl overflow-y-auto rounded-xl px-6 py-6 md:mx-auto"
     >
       <motion.div
         className="space-y-8"
@@ -89,7 +89,7 @@ function ExperienceCardModal({
             </div>
           </div>
         </div>
-        <div className="divide-hover-fill-icon border-hover-fill-icon grid grid-cols-3 divide-x rounded-lg border">
+        <div className="divide-border border-border grid grid-cols-3 divide-x rounded-lg border">
           <div className="px-4 py-3">
             <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
               <Calendar size={11} /> Start
@@ -166,7 +166,7 @@ function ExperienceCard({
       </AnimatePresence>
 
       <motion.button
-        className="border-hover-fill-icon from-muted-foreground/40 hover:to-muted-foreground/40 flex w-full cursor-pointer flex-col items-start justify-between gap-4 border to-transparent px-4 py-2 text-left transition-colors duration-300 ease-out hover:from-transparent md:flex-row md:bg-linear-to-r relative"
+        className="border-border bg-card relative flex w-full cursor-pointer flex-col items-start justify-between gap-4 border px-4 py-2 text-left md:flex-row"
         onClick={onClick}
         initial="initial"
         whileHover="hover"
@@ -181,20 +181,20 @@ function ExperienceCard({
         animate={{ opacity: is_active ? 0 : 1 }}
         transition={{ opacity: { duration: 0.3 } }}
       >
-        <motion.div className="flex items-center gap-2">
+        <motion.div className="z-20 flex items-center gap-2 md:items-end">
           <Image
             src={job_role.company_image.src}
             alt={job_role.company_image.alt}
             width={64}
             height={64}
-            className="rounded-md"
+            className="bg-hover-fill-icon rounded-md"
           />
           <div className="flex flex-col">
             <Typography>{job_role.company_name}</Typography>
             <Typography variant="caption">{job_role.job_role}</Typography>
           </div>
         </motion.div>
-        <div className="flex flex-col text-left md:text-right md:self-end gap-1">
+        <div className="z-20 flex flex-col gap-1 text-left md:self-end md:text-right">
           <div className="text-muted-foreground flex items-center gap-2">
             <MapPin size={12} />
             <Typography variant="caption">
@@ -214,10 +214,18 @@ function ExperienceCard({
             hover: { x: 3, opacity: 1 },
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-muted-foreground shrink-0 absolute top-2 md:top-1 right-3"
+          className="text-muted-foreground absolute top-2 right-3 z-20 shrink-0"
         >
           <Expand size={18} />
-        </motion.div>{" "}
+        </motion.div>
+        <motion.div
+          className="bg-border/40 absolute inset-0 z-10"
+          variants={{
+            initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
+            hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        />
       </motion.button>
     </div>
   );
