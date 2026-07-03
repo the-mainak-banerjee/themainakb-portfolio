@@ -1,13 +1,10 @@
-import { Typography } from "@/components/ui/typography";
+import SectionContainer from "@/components/global/section-container";
 
 function ToolsSection() {
   return (
-    <div className="space-y-6">
-      <Typography variant="h5" as="h2">
-        Stack
-      </Typography>
-      
-    </div>
+    <SectionContainer sectionHeading="Tech Stack" sectionLabel="Toolbox">
+      Hello
+    </SectionContainer>
   );
 }
 
