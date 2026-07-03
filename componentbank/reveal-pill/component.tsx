@@ -9,14 +9,15 @@ interface IRevealPill {
   icon: IconName;
   label: string;
   expandCard?: boolean;
+  id: string
 }
 
-const PillContent = ({ icon, label }: Pick<IRevealPill , "icon" | "label">) => {
+const PillContent = ({ icon, label, id }: Pick<IRevealPill , "icon" | "label" | "id">) => {
   return (
     <>
       <motion.div
         layout
-        layoutId={`${label}-icon`}
+        layoutId={`${id}-icon`}
         transition={{ layout: { duration: 0.4, ease: "easeOut" } }}
         className="text-tool-icon z-20"
       >
@@ -29,7 +30,7 @@ const PillContent = ({ icon, label }: Pick<IRevealPill , "icon" | "label">) => {
   );
 };
 
-export function RevealPill({ icon, label, expandCard }: IRevealPill) {
+export function RevealPill({ icon, label, expandCard, id }: IRevealPill) {
   const [isHovered, setIsHovered] = useState(false);
   const shouldExpand = expandCard || isHovered;
   const handleHoverState = () => setIsHovered(true);
@@ -43,16 +44,16 @@ export function RevealPill({ icon, label, expandCard }: IRevealPill) {
       {shouldExpand ? (
         <motion.div
           layout
-          layoutId={label}
+          layoutId={id}
           className={containerClassName}
           transition={{ layout: { duration: 0.4, ease: "easeOut" } }}
         >
-          <PillContent icon={icon} label={label} />
+          <PillContent icon={icon} label={label} id={id} />
           <AnimatePresence>
             {shouldExpand && (
               <motion.span
                 layout
-                key={label}
+                key={id}
                 className="z-20 hidden text-sm whitespace-nowrap lg:inline"
                 initial={{ opacity: 0, x: -15, scale: 0.5 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -76,11 +77,11 @@ export function RevealPill({ icon, label, expandCard }: IRevealPill) {
       ) : (
         <motion.div
           layout
-          layoutId={label}
+          layoutId={id}
           className={containerClassName}
           transition={{ layout: { duration: 0.4, ease: "easeOut" } }}
         >
-          <PillContent icon={icon} label={label} />
+          <PillContent icon={icon} label={label} id={id} />
         </motion.div>
       )}
     </motion.div>
