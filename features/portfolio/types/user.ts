@@ -1,5 +1,6 @@
 import { IconName } from "@/components/global/icons/registry";
 import { IImage } from "@/types/common";
+import { LucideIcon } from "lucide-react";
 
 export type User = {
   firstName: string;
@@ -27,12 +28,11 @@ export type User = {
   jobRoles: User_Job_Roles[];
 };
 
-
 export interface SocialMediaLink {
   icon: IconName;
   label: string;
   url: string;
-  info: string
+  info: string;
 }
 
 export type User_Social_Media = SocialMediaLink[];
@@ -48,5 +48,20 @@ export interface User_Job_Roles {
   is_current_company: boolean;
   achievements?: { title: string; description?: string; image?: IImage }[];
   description: string;
-  job_role: string
+  job_role: string;
+}
+
+export interface TechTool {
+  name: string;
+  slug: string;
+  icon: IconName;
+  url: string;
+}
+
+export interface User_Stack {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  span?: string;
+  tools: TechTool[];
 }

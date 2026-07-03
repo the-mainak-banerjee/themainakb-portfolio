@@ -25,7 +25,7 @@ function SocialIcons() {
                     rel="noopener"
                     className="group flex items-center"
                   >
-                    <div className="md:border-foreground/20 relative inline-block rounded-md p-2 md:border">
+                    <div className="md:border-foreground/20 relative inline-block rounded-md p-2 md:border text-tool-icon">
                       <Icon name={item.icon} size={12} />
                       <div className="bg-hover-fill-icon absolute inset-0 hidden rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 md:block" />
                     </div>
