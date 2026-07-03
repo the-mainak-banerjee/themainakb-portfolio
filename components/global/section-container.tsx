@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { Typography } from "../ui/typography";
 import { cn } from "@/lib/utils";
+import { Reveal } from "./reveal";
+import SectionLabel from "./section-label";
 
 export interface ISectionContainer {
   sectionHeading: string;
@@ -16,19 +18,15 @@ function SectionContainer({
   className,
 }: ISectionContainer) {
   return (
-    <div className={cn("space-y-6", className)}>
-      <div className="flex items-center gap-4">
-        <div className="border-border h-px flex-1 border-t border-dashed" />
-        <Typography variant="caption-sm" className="shrink-0">
-          {sectionLabel}
+    <Reveal>
+      <div className={cn("space-y-6", className)}>
+        {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
+        <Typography variant="h5" as="h2">
+          {sectionHeading}
         </Typography>
-        <div className="border-border h-px flex-1 border-t border-dashed" />
+        {children}
       </div>
-      <Typography variant="h5" as="h2">
-        {sectionHeading}
-      </Typography>
-      {children}
-    </div>
+    </Reveal>
   );
 }
 
