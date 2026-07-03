@@ -1,0 +1,226 @@
+"use client";
+import { Typography } from "@/components/ui/typography";
+import { User_Job_Roles } from "@/features/portfolio/types/user";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
+import {
+  Building,
+  Calendar,
+  Clock,
+  Expand,
+  MapPin,
+  Wifi,
+  X,
+} from "lucide-react";
+import Image from "next/image";
+import React from "react";
+import { AnimatePresence, motion } from "motion/react";
+import RecognizationBox from "./recognization-box";
+import { calculateDuration, formatYearMonth } from "@/lib/utils";
+import { IconButton } from "@/components/ui/button_list";
+
+export interface IExperienceCard {
+  job_role: User_Job_Roles;
+  is_active?: boolean;
+  onClick?: () => void;
+  onClose?: () => void;
+}
+
+function ExperienceCardModal({
+  job_role,
+  onClose,
+}: Pick<IExperienceCard, "job_role" | "onClose">) {
+  const ref = useOutsideClick(onClose!);
+  return (
+    <motion.div
+      key={job_role.company_name + "modal"}
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="bg-accent fixed inset-0 z-70 my-auto mx-2 md:mx-auto h-150 max-w-xl overflow-y-auto rounded-xl px-6 py-6"
+    >
+      <motion.div
+        className="space-y-8"
+        initial={{ opacity: 0, filter: "blur(10px)", y: 32 }}
+        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        exit={{ opacity: 0, filter: "blur(8px)", y: 20 }}
+        transition={{
+          duration: 0.35,
+          ease: [0.22, 1, 0.36, 1],
+          delay: 0.1,
+        }}
+      >
+        <IconButton
+          label="Close Modal"
+          className="absolute top-0 right-0"
+          onClick={onClose}
+        >
+          <X size={16} />
+        </IconButton>
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Image
+              src={job_role.company_image.src}
+              alt={job_role.company_image.alt}
+              width={64}
+              height={64}
+              className="rounded-md"
+            />
+            <div className="flex flex-col">
+              <Typography>{job_role.company_name}</Typography>
+              <Typography variant="caption">{job_role.job_role}</Typography>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="text-muted-foreground flex items-center gap-1">
+              <MapPin size={16} />
+              <Typography variant="caption">
+                {job_role.company_location},
+              </Typography>
+            </div>
+            <div className="text-muted-foreground flex items-center gap-1">
+              {job_role.job_location === "On Site" ? (
+                <Building size={16} />
+              ) : (
+                <Wifi size={16} />
+              )}
+              <Typography variant="caption">{job_role.job_location}</Typography>
+            </div>
+          </div>
+        </div>
+        <div className="divide-hover-fill-icon border-hover-fill-icon grid grid-cols-3 divide-x rounded-lg border">
+          <div className="px-4 py-3">
+            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+              <Calendar size={11} /> Start
+            </span>
+            <Typography variant="caption">
+              {formatYearMonth(job_role.start_date)}
+            </Typography>
+          </div>
+          <div className="px-4 py-3">
+            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+              <Calendar size={11} /> End
+            </span>
+            <Typography variant="caption">
+              {job_role.is_current_company
+                ? "Currently Working"
+                : formatYearMonth(job_role.end_date!)}
+            </Typography>
+          </div>
+          <div className="px-4 py-3">
+            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+              <Clock size={11} /> Duration
+            </span>
+            <Typography variant="caption" className="text-foreground">
+              {job_role.is_current_company
+                ? calculateDuration(job_role.start_date)?.formatted
+                : job_role.duration}
+            </Typography>
+          </div>
+        </div>
+        {job_role.achievements && (
+          <RecognizationBox achievements={job_role.achievements} />
+        )}
+        <div className="space-y-4">
+          <Typography variant="label" as="p">
+            What I did?
+          </Typography>
+          <Typography variant="body-sm" className="whitespace-pre-line">
+            {job_role.description}
+          </Typography>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function ExperienceCard({
+  job_role,
+  is_active,
+  onClick,
+  onClose,
+}: IExperienceCard) {
+  const end_date = job_role.is_current_company
+    ? "Present"
+    : formatYearMonth(job_role.end_date!);
+  const duration = job_role.is_current_company
+    ? calculateDuration(job_role.start_date)?.formatted
+    : job_role.duration;
+  return (
+    <div className="">
+      <AnimatePresence>
+        {is_active && (
+          <motion.div
+            key={job_role.company_name + "modal_bg"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="bg-foreground/20 fixed inset-0 z-60 h-full w-full backdrop-blur-sm"
+          />
+        )}
+        {is_active && (
+          <ExperienceCardModal job_role={job_role} onClose={onClose} />
+        )}
+      </AnimatePresence>
+
+      <motion.button
+        className="border-hover-fill-icon from-muted-foreground/40 hover:to-muted-foreground/40 flex w-full cursor-pointer flex-col items-start justify-between gap-4 border to-transparent px-4 py-2 text-left transition-colors duration-300 ease-out hover:from-transparent md:flex-row md:bg-linear-to-r relative"
+        onClick={onClick}
+        initial="initial"
+        whileHover="hover"
+        whileTap={{ scale: 0.95 }}
+        variants={{
+          initial: { scale: 1 },
+          hover: {
+            scale: 1.01,
+            transition: { duration: 0.3, ease: "easeOut" },
+          },
+        }}
+        animate={{ opacity: is_active ? 0 : 1 }}
+        transition={{ opacity: { duration: 0.3 } }}
+      >
+        <motion.div className="flex items-center gap-2">
+          <Image
+            src={job_role.company_image.src}
+            alt={job_role.company_image.alt}
+            width={64}
+            height={64}
+            className="rounded-md"
+          />
+          <div className="flex flex-col">
+            <Typography>{job_role.company_name}</Typography>
+            <Typography variant="caption">{job_role.job_role}</Typography>
+          </div>
+        </motion.div>
+        <div className="flex flex-col text-left md:text-right md:self-end gap-1">
+          <div className="text-muted-foreground flex items-center gap-2">
+            <MapPin size={12} />
+            <Typography variant="caption">
+              {job_role.company_location}({job_role.job_location})
+            </Typography>{" "}
+          </div>
+          <div className="text-muted-foreground flex items-center gap-2">
+            <Calendar size={12} />
+            <Typography variant="caption">
+              {formatYearMonth(job_role.start_date)} - {end_date} ({duration})
+            </Typography>
+          </div>
+        </div>
+        <motion.div
+          variants={{
+            initial: { x: 0, opacity: 0.5 },
+            hover: { x: 3, opacity: 1 },
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="text-muted-foreground shrink-0 absolute top-2 md:top-1 right-3"
+        >
+          <Expand size={18} />
+        </motion.div>{" "}
+      </motion.button>
+    </div>
+  );
+}
+
+export default ExperienceCard;

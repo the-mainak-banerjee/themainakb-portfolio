@@ -3,6 +3,14 @@
 import { cn } from "@/lib/utils";
 import { HTMLMotionProps, motion } from "motion/react";
 import { ButtonHTMLAttributes, MouseEvent, useRef, useState } from "react";
+import { VisuallyHidden } from "../global/visually-hidden";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./tooltip";
+import { Typography } from "./typography";
 
 // export const PrimaryButton = ({
 //   children,
@@ -303,5 +311,52 @@ export const SecondaryButton = ({
         }}
       />
     </motion.button>
+  );
+};
+
+export const IconButtonSkeleton = ({
+  children,
+  className,
+  label,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & { label: string }) => {
+  return (
+    <button
+      className={cn(
+        "group relative flex h-7 w-7 items-center justify-center",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <div className="bg-hover-fill-icon absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+      <VisuallyHidden>{label}</VisuallyHidden>
+    </button>
+  );
+};
+
+export const IconButton = ({
+  children,
+  with_tooltip,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  label: string;
+  with_tooltip?: boolean;
+}) => {
+  return with_tooltip ? (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <IconButtonSkeleton {...props}>{children}</IconButtonSkeleton>
+        </TooltipTrigger>
+        <TooltipContent>
+          <Typography variant="caption" className="text-background">
+            {props.label}
+          </Typography>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  ) : (
+    <IconButtonSkeleton {...props}>{children}</IconButtonSkeleton>
   );
 };

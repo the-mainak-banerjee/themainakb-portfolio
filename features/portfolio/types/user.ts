@@ -1,4 +1,5 @@
 import { IconName } from "@/components/global/icons/registry";
+import { IImage } from "@/types/common";
 
 export type User = {
   firstName: string;
@@ -23,6 +24,7 @@ export type User = {
   ogImage?: string;
   keywords: string[];
   timeZone: string;
+  jobRoles: User_Job_Roles[];
 };
 
 
@@ -34,3 +36,17 @@ export interface SocialMediaLink {
 }
 
 export type User_Social_Media = SocialMediaLink[];
+
+export interface User_Job_Roles {
+  company_name: string;
+  company_image: IImage;
+  company_location: string;
+  job_location: "Remote" | "On Site";
+  start_date: string; // "2023-01"
+  end_date?: string; // "2026-07"
+  duration?: string;
+  is_current_company: boolean;
+  achievements?: { title: string; description?: string; image?: IImage }[];
+  description: string;
+  job_role: string
+}

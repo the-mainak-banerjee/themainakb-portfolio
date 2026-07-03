@@ -102,7 +102,7 @@ const variants: Record<TypographyVariant, string> = {
 
   label: `
     font-geist-sans
-    text-sm
+    text-xs
     font-medium
     tracking-wide
     uppercase
