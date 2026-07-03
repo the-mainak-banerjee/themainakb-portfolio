@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import { User_Stack } from "../../types/user";
 import { Typography } from "@/components/ui/typography";
-import { LayoutGroup } from "motion/react";
+import { LayoutGroup, stagger } from "motion/react";
 import { RevealPill } from "@/componentbank";
 import { motion } from "motion/react";
+import { container_item_reveal_variants, container_reveal_variants, REVEAL_VARIANTS_NAME } from "@/lib/motion_utils";
 
 export interface ITechStackCard {
   stackGroup: User_Stack;
 }
+
 function TechStackCard({ stackGroup }: ITechStackCard) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -18,30 +20,51 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       className={"border-border relative flex flex-col gap-4 border px-6 py-4"}
-      initial="initial"
+      initial={REVEAL_VARIANTS_NAME.initial}
       whileHover="hover"
+      whileInView={REVEAL_VARIANTS_NAME.whileInView}
+      viewport={{
+        once: true,
+        amount: 0.1,
+      }}
+      variants={container_reveal_variants}
     >
-      <motion.div layout className="flex items-center gap-2">
+      <motion.div
+        layout
+        className="flex items-center gap-2"
+        variants={container_item_reveal_variants}
+      >
         <stackGroup.icon size={16} />
         <Typography variant="caption-sm" className="shrink-0">
           {stackGroup.label}
         </Typography>
       </motion.div>
-      <div className="flex flex-wrap gap-2 z-20">
+      <motion.div
+        variants={{
+          visible: { transition: { delayChildren: stagger(0.08) } },
+        }}
+        className="z-20 flex flex-wrap gap-2"
+      >
         <LayoutGroup>
           {stackGroup.tools.map((tool) => {
             return (
-              <a key={tool.slug} href={tool.url} target="_blank" rel="noopener">
+              <motion.a
+                key={tool.slug}
+                href={tool.url}
+                target="_blank"
+                rel="noopener"
+                variants={container_item_reveal_variants}
+              >
                 <RevealPill
                   key={tool.slug}
                   icon={tool.icon}
                   label={tool.name}
                 />
-              </a>
+              </motion.a>
             );
           })}
         </LayoutGroup>
-      </div>
+      </motion.div>
 
       <motion.div layout className="absolute top-0 -right-5">
         <motion.svg
@@ -61,7 +84,6 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
             strokeWidth="1.5"
           />
         </motion.svg>
-       
       </motion.div>
       <motion.div
         className="bg-border/40 absolute inset-0 z-10"
