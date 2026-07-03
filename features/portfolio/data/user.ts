@@ -1,5 +1,55 @@
-import { User } from "../types/user";
+import { User, User_Job_Roles } from "../types/user";
 // ToDo Complete the user data with all the required fields and values.
+
+const USER_JOB_ROLES: User_Job_Roles[] = [
+  {
+    company_name: "Digimantra",
+    company_location: "Mohali, Punjab, India",
+    job_location: "On Site",
+    start_date: "2024-11",
+    end_date: "2026-3",
+    duration: "1 yr 5 mos",
+    job_role: "Software Development Engineer",
+    is_current_company: false,
+    company_image: {
+      src: "/digimantra_labs_logo.jpg",
+      alt: "Digimantra Labs Logo",
+    },
+    description: `Working as a Frontend Developer, contributing to multiple high-impact SaaS and AI-driven products. My role involves building scalable UI architectures, integrating Generative AI capabilities, developing admin dashboards, and delivering seamless user-facing features using modern frontend technologies including React.js, Next.js (App Router), TypeScript, and Tailwind CSS.
+
+I have successfully built and shipped responsive, maintainable, and production-ready interfaces while ensuring performance, accessibility, and clean developer experience. Along with UI development, I’ve also worked on full workflows that include backend logic and AI integrations using Mastra AI.
+
+My work involves close collaboration with backend, AI, QA, and design teams to ensure alignment between product goals, technical implementation, and end-user experience. I also actively mentor junior developers through code reviews, pair programming, and knowledge-sharing, helping maintain high-quality standards across the codebase and supporting their growth.`,
+    achievements: [
+      {
+        title: "Most Inspiring Digitian",
+        description: "Awarded Employee of the Quarter for Q3 2025.",
+        image: {
+          src: "/digimantra_award.jpg",
+          alt: "Award for employee of the quarter",
+        },
+      },
+    ],
+  },
+  {
+    company_name: "Welkin Digital",
+    company_location: "Hyderabad, Telengana, India",
+    job_location: "Remote",
+    start_date: "2022-12",
+    end_date: "2024-11",
+    duration: "2 yrs",
+    job_role: "Frontend Developer",
+    is_current_company: false,
+    company_image: {
+      src: "/welkin_digital_logo.jpg",
+      alt: "Welkin Digital Logo",
+    },
+    description: `As a front-end react developer, my job role entails working with cutting-edge technologies such as Next.js, Tailwind CSS, SCSS, and many more to create responsive, high-performance web applications.
+
+I am responsible for converting figma mockups and prototypes into fully functional, intuitive user interfaces, as well as ensuring seamless functionality across different devices and platforms that deliver a seamless user experience.`,
+  },
+];
+
 export const USER: User = {
   firstName: "Mainak",
   lastName: "Banerjee",
@@ -21,6 +71,7 @@ export const USER: User = {
   telegramId: "themainakb",
   email: "developer.mainakbanerjee@gmail.com",
   jobTitle: "React Developer",
+  jobRoles: USER_JOB_ROLES,
   about: `I'm Mainak, a React developer who ships fast without shipping sloppy.
   
 Over the last 3 years, I've shipped 7+ production frontends across SaaS, e-commerce, and B2C products.

@@ -87,7 +87,7 @@ export function CopyButton({
                     filter: "blur(4px)",
                   }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute inset-0 flex items-center justify-center text-green-500"
+                  className="absolute inset-0 flex items-center justify-center"
                 >
                   <Check size={size} strokeWidth={2.25} />
                 </motion.span>

@@ -8,12 +8,12 @@ import { CopyButton } from "@/components/global/copy-button";
 function ContactInfo() {
   return (
     <div className="flex flex-col-reverse justify-between md:flex-row md:items-center">
-      <div className="ml-1 flex items-center gap-2 md:ml-0">
+      <div className="ml-1 flex flex-col-reverse md:flex-row md:items-center gap-2 md:ml-0">
         <div className="flex items-center gap-px">
           <MapPin size={16} />
           <Typography variant="caption">{USER.address}</Typography>
         </div>
-        <div className="bg-foreground h-1 w-1 rounded-full"></div>
+        <div className="bg-foreground h-1 w-1 rounded-full hidden md:block"></div>
         <div className="flex items-center gap-0.5">
           <Mail size={16} />
           <a
