@@ -11,6 +11,7 @@ type TypographyVariant =
   | "body-lg"
   | "body-sm"
   | "caption"
+  | "caption-sm"
   | "label";
 
 type TypographyProps<T extends ElementType = "p"> = {
@@ -100,6 +101,13 @@ const variants: Record<TypographyVariant, string> = {
     text-muted-foreground
   `,
 
+  "caption-sm": `
+    text-muted-foreground
+    font-mono
+    text-xs
+    tracking-widest
+    uppercase`,
+
   label: `
     font-geist-sans
     text-xs
@@ -128,6 +136,7 @@ export function Typography<T extends ElementType = "p">({
       "body-lg": "p",
       "body-sm": "p",
       caption: "span",
+      "caption-sm": "span",
       label: "span",
     }[variant] as ElementType);
 

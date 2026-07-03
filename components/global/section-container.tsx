@@ -19,15 +19,15 @@ function SectionContainer({
     <div className={cn("space-y-6", className)}>
       <div className="flex items-center gap-4">
         <div className="border-border h-px flex-1 border-t border-dashed" />
-        <span className="text-muted-foreground shrink-0 font-mono text-xs tracking-widest uppercase">
+        <Typography variant="caption-sm" className="shrink-0">
           {sectionLabel}
-        </span>
+        </Typography>
         <div className="border-border h-px flex-1 border-t border-dashed" />
       </div>
       <Typography variant="h5" as="h2">
         {sectionHeading}
       </Typography>
-      <div>{children}</div>
+      {children}
     </div>
   );
 }

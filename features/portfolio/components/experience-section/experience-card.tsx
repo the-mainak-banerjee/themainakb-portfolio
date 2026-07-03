@@ -221,8 +221,8 @@ function ExperienceCard({
         <motion.div
           className="bg-border/40 absolute inset-0 z-10"
           variants={{
-            initial: { clipPath: "inset(100% 0 0 0)", opacity: 0 },
-            hover: { clipPath: "inset(0% 0 0 0)", opacity: 1 },
+            initial: { clipPath: "inset(100% 100% 100% 100%)", opacity: 0 },
+            hover: { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 },
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         />
