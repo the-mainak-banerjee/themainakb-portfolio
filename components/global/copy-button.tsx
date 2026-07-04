@@ -28,7 +28,7 @@ export function CopyButton({
   value,
   label = "Copy",
   resetDelay = 1800,
-  size = 16,
+  size = 12,
   className,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);

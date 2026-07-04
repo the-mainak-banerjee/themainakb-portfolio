@@ -5,14 +5,20 @@ import { Typography } from "@/components/ui/typography";
 import { LayoutGroup, stagger } from "motion/react";
 import { RevealPill } from "@/componentbank";
 import { motion } from "motion/react";
-import { container_item_reveal_variants, container_reveal_variants, REVEAL_VARIANTS_NAME } from "@/lib/motion_utils";
+import {
+  container_item_reveal_variants,
+  container_reveal_variants,
+  REVEAL_VARIANTS_NAME,
+} from "@/lib/motion_utils";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useMobile";
 
 export interface ITechStackCard {
   stackGroup: User_Stack;
 }
 
 function TechStackCard({ stackGroup }: ITechStackCard) {
+  const isMobile = useIsMobile();
   const [hovered, setHovered] = useState(false);
   return (
     <motion.div
@@ -36,7 +42,10 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
         variants={container_item_reveal_variants}
       >
         <stackGroup.icon size={16} />
-        <Typography variant="caption-sm" className={cn("shrink-0", hovered ? "text-foreground" : "")}>
+        <Typography
+          variant="caption-sm"
+          className={cn("shrink-0", hovered ? "text-foreground" : "")}
+        >
           {stackGroup.label}
         </Typography>
       </motion.div>
@@ -54,7 +63,27 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
                 href={tool.url}
                 target="_blank"
                 rel="noopener"
-                variants={container_item_reveal_variants}
+                variants={{
+                  initial: {
+                    opacity: 0,
+                    y: 10,
+                  },
+                  visible: {
+                    opacity: isMobile ? 1 : 0.8,
+                    y: 0,
+                    transition: {
+                      duration: 0.3,
+                      ease: "easeOut",
+                    },
+                  },
+                  hover: {
+                    opacity: 1,
+                    transition: {
+                      duration: 0.3,
+                      ease: "easeOut",
+                    },
+                  }
+                }}
               >
                 <RevealPill
                   key={tool.slug}
@@ -74,7 +103,7 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
           style={{
             width: 96,
             height: 96,
-            opacity: hovered ? 0.2 : 0.07,
+            opacity: isMobile ? 0.2 : hovered ? 0.5 : 0.07,
             transition: "opacity 0.4s ease",
           }}
           viewBox="0 0 100 100"
