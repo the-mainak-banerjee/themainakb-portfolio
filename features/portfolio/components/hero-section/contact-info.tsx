@@ -7,15 +7,15 @@ import { CopyButton } from "@/components/global/copy-button";
 
 function ContactInfo() {
   return (
-    <div className="flex flex-col-reverse justify-between md:flex-row md:items-center">
-      <div className="ml-1 flex flex-col-reverse md:flex-row md:items-center gap-2 md:ml-0">
-        <div className="flex items-center gap-px">
-          <MapPin size={16} />
+    <div className="flex flex-col justify-between md:flex-row md:items-center gap-1">
+      <div className="flex flex-col md:flex-row md:items-center  md:gap-2">
+        <div className="flex items-center gap-1">
+          <MapPin size={12} />
           <Typography variant="caption">{USER.address}</Typography>
         </div>
         <div className="bg-foreground h-1 w-1 rounded-full hidden md:block"></div>
-        <div className="flex items-center gap-0.5">
-          <Mail size={16} />
+        <div className="flex items-center gap-1">
+          <Mail size={12} />
           <a
             href={`mailto:${USER.email}`}
             className="group decoration-1 hover:underline hover:underline-offset-4"
@@ -30,7 +30,7 @@ function ContactInfo() {
           <CopyButton
             value={USER.email}
             label="Copy Email"
-            className="h-6 w-6 border-0"
+            className="h-4 w-4 border-0"
           />
         </div>
       </div>

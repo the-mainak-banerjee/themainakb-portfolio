@@ -18,6 +18,7 @@ import RecognizationBox from "./recognization-box";
 import { calculateDuration, formatYearMonth } from "@/lib/utils";
 import { IconButton } from "@/components/ui/button_list";
 import { RevealPill } from "@/componentbank";
+import { Portal } from "@/components/global/portal";
 
 export interface IExperienceCard {
   job_role: User_Job_Roles;
@@ -97,7 +98,7 @@ function ExperienceCardModal({
         </div>
 
         {/* Company Experience Start */}
-        <div className="divide-border border-border grid grid-cols-3 divide-x rounded-lg border">
+        <div className="divide-border border-border grid grid-cols-3 divide-x border">
           <div className="px-4 py-3">
             <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
               <Calendar size={11} /> Start
@@ -188,21 +189,23 @@ function ExperienceCard({
     ? calculateDuration(job_role.start_date)?.formatted
     : job_role.duration;
   return (
-    <div className="">
+    <div>
       <AnimatePresence>
         {is_active && (
-          <motion.div
-            key={job_role.company_name + "modal_bg"}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.5 } }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="bg-foreground/20 fixed inset-0 z-60 h-full w-full backdrop-blur-sm"
-          />
+          <Portal>
+            <motion.div
+              key={job_role.company_name + "modal_bg"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.5 } }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="bg-foreground/20 fixed inset-0 z-60 h-full w-full backdrop-blur-sm"
+            />
+            <ExperienceCardModal job_role={job_role} onClose={onClose} />
+          </Portal>
         )}
-        {is_active && (
-          <ExperienceCardModal job_role={job_role} onClose={onClose} />
-        )}
+        {/* {is_active && (
+        )} */}
       </AnimatePresence>
 
       <motion.button

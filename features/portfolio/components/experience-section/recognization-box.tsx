@@ -36,7 +36,7 @@ function RecognizationBox({ achievements }: IRecognizationBox) {
         return (
           <motion.div
             key={idx}
-            className="border-border rounded-lg border px-4 py-3"
+            className="border-border border px-4 py-3"
           >
             <div className="flex justify-between max-w-full">
               <div className="flex min-w-0 flex-1 items-center gap-3">
