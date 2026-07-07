@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
+import { ComponentType } from "react";
 import { RegistryItem } from "shadcn/schema";
 
 export type ComponentPreview = {
-  path: string;
+  component: ComponentType;
   description?: string;
 };
 
@@ -38,6 +40,9 @@ export const registry: CategoryEntry[] = [
             target: "@components/magnetic-button.tsx",
           },
         ],
+        preview: {
+          component: dynamic(() => import("@/registry/previews/magnetic-button-demo")),
+        },
       },
     ],
   },

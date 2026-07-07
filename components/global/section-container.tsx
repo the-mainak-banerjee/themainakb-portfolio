@@ -21,7 +21,7 @@ function SectionContainer({
     <Reveal>
       <div className={cn("space-y-6", className)}>
         {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
-        <Typography variant="h5" as="h2">
+        <Typography variant="h2">
           {sectionHeading}
         </Typography>
         {children}
