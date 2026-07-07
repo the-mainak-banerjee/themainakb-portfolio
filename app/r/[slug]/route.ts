@@ -1,4 +1,5 @@
-import { loadRegistryItem, RegistryItemNotFoundError } from "shadcn/registry";
+import { buildRegistryItem } from "@/lib/registry-builder";
+import { RegistryItemNotFoundError } from "shadcn/registry";
 
 export async function GET(
   _request: Request,
@@ -12,7 +13,8 @@ export async function GET(
   const itemName = slug.replace(/\.json$/, "");
 
   try {
-    const item = await loadRegistryItem(itemName);
+    const item = buildRegistryItem(itemName);
+    // const item = await loadRegistryItem(itemName);
 
     return Response.json(item);
   } catch (error) {
