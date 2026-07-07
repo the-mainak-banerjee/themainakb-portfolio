@@ -18,7 +18,7 @@ function ContactInfo() {
           <Mail size={12} />
           <a
             href={`mailto:${USER.email}`}
-            className="group decoration-1 hover:underline hover:underline-offset-4"
+            className="group decoration-1 hover:underline hover:underline-offset-4 flex items-center justify-center"
           >
             <Typography
               variant="caption"
