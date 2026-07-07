@@ -6,6 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function isActiveNavItem(itemLink: string, pathName: string) {
+  const mainPathName = pathName.split("/")[1];
+  return itemLink === `/${mainPathName}`;
+}
+
 export function getGreeting(hour: number): string {
   if (hour >= 5 && hour < 12) {
     return "Good Morning";
@@ -24,7 +29,6 @@ export function formatYearMonth(dateString: string) {
     year: "numeric",
   }).format(new Date(year, month - 1));
 }
-
 
 export function calculateDuration(
   startDate: string, // "2023-01"
