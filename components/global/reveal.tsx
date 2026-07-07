@@ -23,6 +23,7 @@ function RevealHeader({ children }: { children: ReactNode }) {
       whileInView={{ opacity: 1, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
+      className="bg-background supports-backdrop-filter:bg-background/60 sticky top-0 z-50 backdrop-blur"
     >
       {children}
     </motion.header>
