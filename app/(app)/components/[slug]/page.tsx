@@ -1,4 +1,6 @@
 import { DocContent } from "@/components/global/doc-content";
+import SectionListContainer from "@/components/global/section-list-container";
+import DocHeader from "@/features/doc/components/doc-header";
 import { getComponentDoc } from "@/features/doc/data/documents";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -12,11 +14,8 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
     notFound();
   }
   return (
-    <div>
-      <div>
-        Header
-        <div className="group/heading">Breadcrumb, Share, Next and Prev Button</div>
-      </div>
+    <SectionListContainer>
+      <DocHeader categorySlug={doc.categorySlug} itemTitle={doc.title} itemName={doc.name} slug={`/components/${slug}`} />
       <div>
         Body
         <p>Preview tabs</p>
@@ -25,8 +24,10 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
         <p>API References</p>
         <p>Refernces/Credits</p>
       </div>
-      <DocContent source={doc.content} />
-    </div>
+      <div>
+        <DocContent source={doc.content} />
+      </div>
+    </SectionListContainer>
   );
 }
 

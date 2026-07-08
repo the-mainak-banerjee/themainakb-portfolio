@@ -16,7 +16,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ShareContextValue = {
@@ -142,28 +141,35 @@ function ShareMenu({
   );
 }
 
-export type ShareMenuTriggerProps = React.ComponentProps<
-  typeof DropdownMenuPrimitive.Trigger
-> & {
-  buttonClassName?: string;
-};
+export type ShareMenuTriggerProps = Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>,
+  "asChild" | "children"
+> &
+  React.ComponentProps<"button">;
 
 function ShareMenuTrigger({
   children,
-  buttonClassName,
+  className,
+  disabled,
+  onClick,
+  ref,
   ...props
 }: ShareMenuTriggerProps) {
   return (
     <DropdownMenuTrigger asChild {...props}>
-      <Button
-        variant="outline"
-        size="icon"
+      <button
+        ref={ref}
+        type="button"
+        disabled={disabled}
+        onClick={onClick}
         aria-label="Share"
-        className={buttonClassName}
-        {...props}
+        className={cn(
+          "inline-flex size-9 items-center justify-center rounded-md border border-input bg-background text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50",
+          className,
+        )}
       >
-        {children ?? <Share2 className="size-4" />}
-      </Button>
+        {children ?? <Share2 className="size-4.5" />}
+      </button>
     </DropdownMenuTrigger>
   );
 }
@@ -187,14 +193,14 @@ const AnimatedDropdownContent = React.forwardRef<
 AnimatedDropdownContent.displayName = "AnimatedDropdownContent";
 
 type ShareMenuVariant = {
-    opacity?: number;
-    scale?: number;
-    y?: number;
-    x?: number;
-    filter?: string;
-    clipPath?: string;
-    rotateX?: number;
-    transition?: Transition;
+  opacity?: number;
+  scale?: number;
+  y?: number;
+  x?: number;
+  filter?: string;
+  clipPath?: string;
+  rotateX?: number;
+  transition?: Transition;
 } & Target;
 
 type ShareMenuVariants = {
@@ -307,7 +313,7 @@ const shareMenuAnimationPresets: Record<
   /** Rectangular wipe reveal, top-down — like a blind opening. */
   inset: {
     menuVariants: {
-      hidden: {y: -4, clipPath: "inset(0 0 100% 0)" },
+      hidden: { y: -4, clipPath: "inset(0 0 100% 0)" },
       visible: {
         y: 0,
         clipPath: "inset(0 0 0% 0)",

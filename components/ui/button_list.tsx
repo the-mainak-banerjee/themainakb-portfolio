@@ -2,7 +2,13 @@
 
 import { cn } from "@/lib/utils";
 import { HTMLMotionProps, motion } from "motion/react";
-import { ButtonHTMLAttributes, MouseEvent, useRef, useState } from "react";
+import {
+  ButtonHTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  useRef,
+  useState,
+} from "react";
 import { VisuallyHidden } from "../global/visually-hidden";
 import {
   Tooltip,
@@ -318,8 +324,12 @@ export const IconButtonSkeleton = ({
   children,
   className,
   label,
+  allowHoverAnimation = true,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { label: string }) => {
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  label: string;
+  allowHoverAnimation?: boolean;
+}) => {
   return (
     <button
       className={cn(
@@ -329,7 +339,9 @@ export const IconButtonSkeleton = ({
       {...props}
     >
       {children}
-      <div className="bg-hover-fill-icon absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+      {allowHoverAnimation && (
+        <div className="bg-hover-fill-icon absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+      )}
       <VisuallyHidden>{label}</VisuallyHidden>
     </button>
   );
@@ -338,10 +350,13 @@ export const IconButtonSkeleton = ({
 export const IconButton = ({
   children,
   with_tooltip,
+  toolTipContent,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string;
   with_tooltip?: boolean;
+  toolTipContent?: ReactNode;
+  allowHoverAnimation?: boolean;
 }) => {
   return with_tooltip ? (
     <TooltipProvider>
@@ -350,9 +365,9 @@ export const IconButton = ({
           <IconButtonSkeleton {...props}>{children}</IconButtonSkeleton>
         </TooltipTrigger>
         <TooltipContent>
-          <Typography variant="caption" className="text-background">
+          {toolTipContent ? toolTipContent : <Typography variant="caption" className="text-background">
             {props.label}
-          </Typography>
+          </Typography>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
