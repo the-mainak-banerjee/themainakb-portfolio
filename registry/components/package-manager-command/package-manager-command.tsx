@@ -171,7 +171,6 @@ export function PackageManagerCommand({
                       : "text-muted-foreground hover:text-foreground",
                   )}
                 >
-                  {/* {icon} */}
                   {label}
                   {active && (
                     <motion.span
