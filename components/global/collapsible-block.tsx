@@ -7,7 +7,7 @@ import {
 } from "../ui/collapsible";
 import { Button } from "../ui/button";
 
-function CollapsableBlock({
+function CollapsibleBlock({
   className,
   children,
   ...props
@@ -42,4 +42,4 @@ function CollapsableBlock({
   );
 }
 
-export default CollapsableBlock;
+export default CollapsibleBlock;

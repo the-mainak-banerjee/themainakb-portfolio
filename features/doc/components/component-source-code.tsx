@@ -3,8 +3,14 @@ import path from "node:path";
 import { getComponentByName } from "@/registry/config";
 import { CodeBlock } from "@/components/global/code-block";
 import { Typography } from "@/components/ui/typography";
-import { File } from "lucide-react";
-import CollapsableBlock from "@/components/global/collapsable-block";
+import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
+import { FileCodeIcon } from "lucide-react";
 
 type ComponentSourceCodeProps = {
   /** Look up the file path from the registry by component name. */
@@ -33,6 +39,7 @@ export async function ComponentSourceCode({
       </Typography>
     );
   }
+
   const filePath = src ?? getComponentByName(name ?? "")?.files?.[0]?.path;
 
   if (!filePath) {
@@ -52,18 +59,61 @@ export async function ComponentSourceCode({
     );
   }
 
+  const showHeader = Boolean(title) || collapsible;
+
   return (
-    <div className="border-border bg-muted text-card-foreground w-full overflow-hidden rounded-md border">
-      <div className="flex items-center justify-between px-4 py-2.5">
-        {title && (
-          <div className="text-muted-foreground flex items-center gap-1 font-mono text-sm">
-            <File size={12} />
-            {title}
+    <Collapsible
+      defaultOpen={!collapsible}
+      className={cn(
+        "group/collapsible border-border bg-muted text-card-foreground",
+        "relative w-full overflow-hidden rounded-md border",
+      )}
+    >
+      {showHeader && (
+        <div className="flex items-center justify-between px-4 py-2.5">
+          {title ? (
+            <div className="text-muted-foreground flex items-center gap-1 font-mono text-sm">
+              <FileCodeIcon size={14} />
+              <span>{title}</span>
+            </div>
+          ) : (
+            <span />
+          )}
+
+          <div>
+            {collapsible && (
+              <CollapsibleTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground hover:text-foreground h-auto px-2 py-1 text-xs"
+                >
+                  <span className="hidden group-data-[state=closed]/collapsible:inline">
+                    Expand
+                  </span>
+                  <span className="hidden group-data-[state=open]/collapsible:inline">
+                    Collapse
+                  </span>
+                </Button>
+              </CollapsibleTrigger>
+            )}
+            {/* ToDo Copy */}
           </div>
+        </div>
+      )}
+
+      {/* ToDo Copy When ShowHeader False*/}
+
+      <CollapsibleContent
+        className={cn(
+          showHeader && "border-border border-t",
+          "relative overflow-hidden",
+          collapsible && "data-[state=closed]:max-h-80",
+          "data-[state=closed]:overflow-y-hidden",
+          "overflow-y-auto [&::-webkit-scrollbar]:hidden",
         )}
-        {/* ToDo_Copy */}
-      </div>
-      <CollapsableBlock defaultOpen={!collapsible}>
+        forceMount
+      >
         {code && (
           <CodeBlock
             code={code}
@@ -71,7 +121,24 @@ export async function ComponentSourceCode({
             className="rounded-none border-0"
           />
         )}
-      </CollapsableBlock>
-    </div>
+      </CollapsibleContent>
+
+      {collapsible && (
+        <div className="absolute inset-x-0 bottom-0 flex h-24 items-center justify-center group-data-[state=open]/collapsible:hidden">
+          <div className="from-background pointer-events-none absolute inset-0 bg-linear-to-t to-transparent mask-[linear-gradient(to_top,black_50%,transparent_100%)] backdrop-blur-[1px]" />
+
+          <CollapsibleTrigger asChild>
+            <Button
+              variant="secondary"
+              className="border-border text-muted-foreground relative rounded-md"
+            >
+              View Code
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+      )}
+    </Collapsible>
   );
 }
+
+export default ComponentSourceCode;
