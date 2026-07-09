@@ -3,12 +3,16 @@ import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, MouseEvent, useRef, useState } from "react";
 import { motion } from "motion/react";
 
+export type MagneticButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  strength?: number;
+};
+
 export const MagneticButton = ({
   children,
   className,
   strength = 0.2,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { strength?: number }) => {
+}: MagneticButtonProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 

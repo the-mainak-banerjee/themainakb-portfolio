@@ -9,6 +9,7 @@ export type ComponentPreview = {
 
 export type ComponentEntry = RegistryItem & {
   preview?: ComponentPreview;
+  propTypes?: string[]
 };
 
 export type ComponentEntryWithCategorySlug = ComponentEntry & {
@@ -54,6 +55,7 @@ export const registry: CategoryEntry[] = [
             target: "@components/magnetic-button.tsx",
           },
         ],
+        propTypes:["MagneticButtonProps"],
         preview: {
           component: dynamic(
             () => import("@/registry/previews/magnetic-button-demo"),

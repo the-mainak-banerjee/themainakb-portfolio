@@ -17,68 +17,25 @@ export const packageManagerAtom = atomWithStorage<PackageManager>(
   { getOnInit: true }, // read localStorage synchronously on mount, avoids a flash
 );
 
-function IconBadge({
-  bg,
-  textClassName,
-  children,
-}: {
-  bg: string;
-  textClassName?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <span
-      className={cn(
-        "flex size-3.5 shrink-0 items-center justify-center rounded-[3px] text-[8px] leading-none font-bold",
-        textClassName,
-      )}
-      style={{ backgroundColor: bg }}
-    >
-      {children}
-    </span>
-  );
-}
-
 const packageManagers: {
   id: PackageManager;
   label: string;
-  icon: React.ReactNode;
 }[] = [
   {
     id: "pnpm",
     label: "pnpm",
-    icon: (
-      <IconBadge bg="#F9AD00" textClassName="text-neutral-900">
-        p
-      </IconBadge>
-    ),
   },
   {
     id: "yarn",
     label: "yarn",
-    icon: (
-      <IconBadge bg="#2C8EBB" textClassName="text-white">
-        y
-      </IconBadge>
-    ),
   },
   {
     id: "npm",
     label: "npm",
-    icon: (
-      <IconBadge bg="#CB3837" textClassName="text-white">
-        n
-      </IconBadge>
-    ),
   },
   {
     id: "bun",
     label: "bun",
-    icon: (
-      <IconBadge bg="#FBF0DF" textClassName="text-neutral-900">
-        b
-      </IconBadge>
-    ),
   },
 ];
 
@@ -122,15 +79,31 @@ const commandVariants: Variants = {
   },
 };
 
-export type PackageManagerCommandProps = {
-  /** Command string per package manager. */
-  commands: PackageManagerCommandsList;
+type BasePackageManagerCommandProps = {
   className?: string;
+  axis?: "x" | "y";
+  // id: string;
 };
+
+export type PackageManagerCommandProps = BasePackageManagerCommandProps &
+  (
+    | {
+        /** An npm command that will be converted to all package managers. */
+        npmCommand: string;
+        commands?: never;
+      }
+    | {
+        /** Explicit commands for each package manager. */
+        commands: PackageManagerCommandsList;
+        npmCommand?: never;
+      }
+  );
 
 export function PackageManagerCommand({
   commands,
+  npmCommand,
   className,
+  axis = "x",
 }: PackageManagerCommandProps) {
   const [pm, setPm] = useAtom(packageManagerAtom);
   const [copied, setCopied] = React.useState(false);
@@ -138,8 +111,13 @@ export function PackageManagerCommand({
   const copiedTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const underlineId = React.useId();
 
-  const command = commands[pm];
+  const allCommands = commands
+    ? commands
+    : getPackageManagerCommands(npmCommand);
+
+  const command = allCommands[pm];
   const activeIndex = packageManagers.findIndex((p) => p.id === pm);
 
   const selectTab = (id: PackageManager) => {
@@ -179,7 +157,7 @@ export function PackageManagerCommand({
           onValueChange={(value) => selectTab(value as PackageManager)}
         >
           <TabsList className="h-auto gap-4 bg-transparent p-0">
-            {packageManagers.map(({ id, label, icon }) => {
+            {packageManagers.map(({ id, label }) => {
               const active = pm === id;
               return (
                 <TabsTrigger
@@ -197,7 +175,7 @@ export function PackageManagerCommand({
                   {label}
                   {active && (
                     <motion.span
-                      layoutId="install-command-underline"
+                      layoutId={`${underlineId}-install-command-underline`}
                       className="bg-foreground absolute right-0 -bottom-2.75 left-0 h-px w-full"
                       transition={{
                         type: "spring",
@@ -247,10 +225,14 @@ export function PackageManagerCommand({
       </div>
 
       <div className="border-border bg-card overflow-x-auto overscroll-x-contain border-t px-4 py-3.5 [&::-webkit-scrollbar]:hidden">
-        <AnimatePresence mode="wait" initial={false} custom={{direction, axis: "y"}}>
+        <AnimatePresence
+          mode="wait"
+          initial={false}
+          custom={{ direction, axis: axis }}
+        >
           <motion.div
             key={pm}
-            custom={{direction, axis: "y"}}
+            custom={{ direction, axis: axis }}
             variants={commandVariants}
             initial="hidden"
             animate="visible"
@@ -267,4 +249,96 @@ export function PackageManagerCommand({
       </div>
     </div>
   );
+}
+
+export function getPackageManagerCommands(
+  npmCommand: string,
+): PackageManagerCommandsList {
+  const command = npmCommand.trim();
+
+  // npm install -D / --save-dev
+  let match = command.match(/^npm\s+(?:install|i)\s+(-D|--save-dev)\s+(.+)$/);
+
+  if (match) {
+    const [, , packages] = match;
+
+    return {
+      npm: command,
+      pnpm: `pnpm add -D ${packages}`,
+      yarn: `yarn add -D ${packages}`,
+      bun: `bun add -D ${packages}`,
+    };
+  }
+
+  // npm install / i
+  match = command.match(/^npm\s+(?:install|i)\s+(.+)$/);
+
+  if (match) {
+    const packages = match[1];
+
+    return {
+      npm: command,
+      pnpm: `pnpm add ${packages}`,
+      yarn: `yarn add ${packages}`,
+      bun: `bun add ${packages}`,
+    };
+  }
+
+  // npm uninstall
+  match = command.match(/^npm\s+uninstall\s+(.+)$/);
+
+  if (match) {
+    const packages = match[1];
+
+    return {
+      npm: command,
+      pnpm: `pnpm remove ${packages}`,
+      yarn: `yarn remove ${packages}`,
+      bun: `bun remove ${packages}`,
+    };
+  }
+
+  // npm run
+  match = command.match(/^npm\s+run\s+(.+)$/);
+
+  if (match) {
+    const script = match[1];
+
+    return {
+      npm: command,
+      pnpm: `pnpm ${script}`,
+      yarn: `yarn ${script}`,
+      bun: `bun run ${script}`,
+    };
+  }
+
+  // npx
+  match = command.match(/^npx\s+(.+)$/);
+
+  if (match) {
+    const args = match[1];
+
+    return {
+      npm: command,
+      pnpm: `pnpm dlx ${args}`,
+      yarn: `yarn dlx ${args}`,
+      bun: `bunx ${args}`,
+    };
+  }
+
+  // npm create
+  match = command.match(/^npm\s+create\s+(.+)$/);
+
+  if (match) {
+    const args = match[1];
+
+    return {
+      npm: command,
+      pnpm: `pnpm create ${args}`,
+      yarn: `yarn create ${args}`,
+      bun: `bun create ${args}`,
+    };
+  }
+
+  throw new Error(`Unsupported npm command: "${npmCommand}"`);
 }
