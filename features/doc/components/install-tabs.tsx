@@ -34,7 +34,7 @@ export function InstallTabs({
     <Tabs
       value={value}
       onValueChange={(v) => setValue(v as InstallType)}
-      className={cn("relative my-6", className)}
+      className={cn("relative gap-6", className)}
     >
       {children}
     </Tabs>
@@ -47,19 +47,22 @@ export function InstallTabs({
  */
 export function InstallTabsListType() {
   return (
-    <TabsList className="mb-3 h-auto gap-4 bg-transparent p-0">
-      <TabsTrigger
-        value="cli"
-        className="data-[state=active]:bg-muted rounded-md border px-3 py-1.5 text-sm data-[state=active]:shadow-none"
-      >
-        CLI
-      </TabsTrigger>
-      <TabsTrigger
-        value="manual"
-        className="data-[state=active]:bg-muted rounded-md border px-3 py-1.5 text-sm data-[state=active]:shadow-none"
-      >
-        Manual
-      </TabsTrigger>
+    <TabsList className="bg-muted h-auto gap-4 rounded-md p-0.5">
+      {["CLI", "Manual"].map((item) => {
+        return (
+          <TabsTrigger
+            value={item.toLowerCase()}
+            key={item}
+            className={cn(
+              "font-geist-sans rounded-md",
+              "dark:data-active:bg-foreground dark:data-active:text-background dark:data-active:hover:text-background",
+              "data-active:bg-foreground data-active:text-background data-active:hover:text-background",
+            )}
+          >
+            {item}
+          </TabsTrigger>
+        );
+      })}
     </TabsList>
   );
 }

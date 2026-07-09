@@ -15,16 +15,13 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
   }
   return (
     <SectionListContainer>
-      <DocHeader categorySlug={doc.categorySlug} itemTitle={doc.title} itemName={doc.name} slug={`/components/${slug}`} />
-      <div>
-        Body
-        <p>Preview tabs</p>
-        <p>Installation</p>
-        <p>Usage</p>
-        <p>API References</p>
-        <p>Refernces/Credits</p>
-      </div>
-      <div>
+      <DocHeader
+        categorySlug={doc.categorySlug}
+        itemTitle={doc.title}
+        itemName={doc.name}
+        slug={`/components/${slug}`}
+      />
+      <div className="[&>*+*:not(h2):not(h3)]:mt-6">
         <DocContent source={doc.content} />
       </div>
     </SectionListContainer>

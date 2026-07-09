@@ -19,7 +19,7 @@ if (!entry) {
 }
 
 const mainFile = entry.files?.[0];
-const propType = entry.propTypes?.[0] ?? `${toPascalCase(entry.name)}Props`;
+// const propType = entry.propTypes?.[0] ?? `${toPascalCase(entry.name)}Props`;
 
 function toPascalCase(s: string) {
   return s.replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
@@ -34,11 +34,7 @@ updatedAt: ${new Date().toISOString().slice(0, 10)}
 
 <ComponentPreview name="${entry.name}" />
 
-## Features
-
-- TODO
-
-## Installation
+### Installation
 
 <InstallTabs>
 
@@ -70,7 +66,11 @@ updatedAt: ${new Date().toISOString().slice(0, 10)}
 
 </InstallTabs>
 
-## Usage
+### Features
+
+- TODO
+
+### Usage
 
 \`\`\`tsx
 import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/\\.tsx?$/, "")}";
@@ -80,10 +80,12 @@ import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/\\.t
 <${toPascalCase(entry.name)} />
 \`\`\`
 
-## API Reference
 
-<AutoTypeTable path="${mainFile?.path}" name="${propType}" />
 `;
+
+// ### API Reference
+
+// <AutoTypeTable path="${mainFile?.path}" name="${propType}" />
 
 const outDir = path.join(process.cwd(), `features/doc/content/${entry.categorySlug}`);
 fs.mkdirSync(outDir, { recursive: true });
