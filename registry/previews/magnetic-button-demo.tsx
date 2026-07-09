@@ -3,11 +3,13 @@ import { MagneticButton } from "../components/magnetic-button";
 
 function MagneticButtonDemo() {
   return (
-    <MagneticButton>
-      <span className="flex items-center gap-2">
-        <span>Quick Chat</span>
-      </span>
-    </MagneticButton>
+    <div className="w-full mx-auto flex items-center justify-center">
+      <MagneticButton>
+        <span className="flex items-center gap-2">
+          <span>Hover Over Me</span>
+        </span>
+      </MagneticButton>
+    </div>
   );
 }
 
