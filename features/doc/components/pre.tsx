@@ -46,5 +46,6 @@ export async function Pre({ children }: { children: React.ReactNode }) {
     return <pre className="not-prose">{children}</pre>;
   }
 
-  return <CodeBlock code={code} lang={lang} />;
+  return <CodeBlock code={code} lang={lang} allowCopy={true} />;
 }
+

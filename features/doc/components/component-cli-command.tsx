@@ -1,7 +1,5 @@
-import {
-  PackageManagerCommand,
-  PackageManagerCommandsList,
-} from "@/registry/components/package-manager-command/package-manager-command";
+import { PackageManagerCommand, PackageManagerCommandsList } from "@/registry/components/package-manager-command";
+
 
 const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL}/r`;
 

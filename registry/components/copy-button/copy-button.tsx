@@ -8,7 +8,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Typography } from "../ui/typography";
 
 interface BaseCopyButtonProps {
   /** The text that gets copied to the clipboard */
@@ -54,7 +53,7 @@ type CopyButtonProps = BaseCopyButtonProps &
       }
   );
 
-const CopyButtonSkeleton = React.forwardRef<
+const CopyButtonUi = React.forwardRef<
   HTMLButtonElement,
   Omit<CopyButtonProps, "tooltipLabel" | "withTooltip"> & {
     copied: boolean;
@@ -112,7 +111,7 @@ const CopyButtonSkeleton = React.forwardRef<
         className={cn(
           "relative items-center justify-center overflow-hidden rounded-md",
           "border-border text-muted-foreground border",
-          "hover:text-foreground hover:bg-hover-fill-icon",
+          "hover:text-foreground hover:bg-accent",
           "disabled:cursor-not-allowed",
           buttonText ? "flex gap-2 px-2 py-1" : "inline-flex h-8 w-8",
           className,
@@ -266,25 +265,25 @@ const CopyButtonSkeleton = React.forwardRef<
   },
 );
 
-CopyButtonSkeleton.displayName = "CopyButtonSkeleton";
+CopyButtonUi.displayName = "CopyButtonUi";
 
 function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const { buttonText } = props;
   const formattedTooltipLabel = tooltipLabel ?? buttonText ?? "Copy";
   if (!withTooltip)
-    return <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />;
+    return <CopyButtonUi copied={copied} setCopied={setCopied} {...props} />;
 
   return (
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />
+          <CopyButtonUi copied={copied} setCopied={setCopied} {...props} />
         </TooltipTrigger>
         <TooltipContent>
-          <Typography variant="caption" className="text-background">
+          <p className="text-background">
             {copied ? "Copied!" : formattedTooltipLabel}
-          </Typography>
+          </p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

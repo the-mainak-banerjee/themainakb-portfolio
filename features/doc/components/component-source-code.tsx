@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { FileCodeIcon } from "lucide-react";
+import CopyButton from "@/components/global/copy-button";
 
 type ComponentSourceCodeProps = {
   /** Look up the file path from the registry by component name. */
@@ -70,17 +71,17 @@ export async function ComponentSourceCode({
       )}
     >
       {showHeader && (
-        <div className="flex md:items-center justify-between px-4 py-2.5">
+        <div className="flex justify-between px-4 py-2.5 md:items-center">
           {title ? (
             <div className="text-muted-foreground flex gap-1 font-mono text-sm">
-              <FileCodeIcon size={14} className="mt-1"/>
+              <FileCodeIcon size={14} className="mt-1" />
               <span>{title}</span>
             </div>
           ) : (
             <span />
           )}
 
-          <div>
+          <div className="flex items-center">
             {collapsible && (
               <CollapsibleTrigger asChild>
                 <Button
@@ -97,12 +98,16 @@ export async function ComponentSourceCode({
                 </Button>
               </CollapsibleTrigger>
             )}
-            {/* ToDo Copy */}
+            {collapsible && (
+              <div className="h-4 w-0.5 bg-border" aria-hidden="true" />
+            )}
+            <CopyButton
+              value={code}
+              className="border-0 bg-transparent hover:bg-transparent"
+            />
           </div>
         </div>
       )}
-
-      {/* ToDo Copy When ShowHeader False*/}
 
       <CollapsibleContent
         className={cn(
@@ -119,6 +124,7 @@ export async function ComponentSourceCode({
             code={code}
             lang={lang}
             className="rounded-none border-0"
+            allowCopy={!showHeader}
           />
         )}
       </CollapsibleContent>

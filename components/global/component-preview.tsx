@@ -9,7 +9,7 @@ function ComponentPreview({ name }: { name: string }) {
   const code = getPreviewComponentCode(name);
 
   return (
-    <ComponentPreviewClient name={name}>
+    <ComponentPreviewClient name={name} code={code}>
       {code && <CodeBlock code={code} className="border-0 rounded-none bg-transparent"/>}
     </ComponentPreviewClient>
   );
