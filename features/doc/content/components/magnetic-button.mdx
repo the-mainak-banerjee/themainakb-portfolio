@@ -29,7 +29,10 @@ updatedAt: 2026-07-09
 
 <Step>Copy and paste the following code into your project</Step>
 
-<ComponentSourceCode name="magnetic-button" title="@components/magnetic-button.tsx" />
+<ComponentSourceCode
+  name="magnetic-button"
+  title="@components/magnetic-button.tsx"
+/>
 
 <Step>Update the import paths to match your project setup</Step>
 
@@ -41,14 +44,23 @@ updatedAt: 2026-07-09
 
 ### Features
 
-- TODO
+- **Magnetic Hover Effect** – Smoothly follows the cursor for a natural, interactive experience.
+- **Customizable Strength** – Adjust the magnetic movement intensity with a single `strength` prop.
+- **Fully Customizable** – Supports all native button props and custom styling via `className`.
+
 
 ### Usage
 
 ```tsx
-import { MagneticButton } from "@/@components/magnetic-button.tsx";
+import { MagneticButton } from "@/components/magnetic-button.tsx";
 ```
 
 ```tsx
-<MagneticButton />
+<MagneticButton onClick={() => console.log("Namaste")}>
+  Hover Over Me
+</MagneticButton>
 ```
+
+### Credit
+
+- [Manu Arora](https://youtu.be/4soTHg4Ed70?si=3WtopvlYhnz1MF31)

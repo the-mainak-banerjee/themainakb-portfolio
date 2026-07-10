@@ -1,6 +1,6 @@
 "use client";
 import { getComponentByName } from "@/registry/config";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Code, CodeXml, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { AnimatePresence, motion } from "motion/react";
@@ -54,12 +54,13 @@ function ComponentPreviewClient({
   children,
   name,
 }: ComponentPreviewClientProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [viewSource, setViewSource] = useState<boolean>(false);
   const [variantPair, setVariantPair] = useState<[VariantKey, VariantKey]>(() =>
     getRandomVariantPair(),
   );
   const componentDetails = getComponentByName(name);
-  const ref = useOutsideClick(onClose);
+  const ref = useOutsideClick(onClose, containerRef);
 
   if (!componentDetails) {
     return (
@@ -88,7 +89,10 @@ function ComponentPreviewClient({
         <CodeXml size={16} />
         <span>Live Preview</span>
       </div>
-      <div className="bg-card relative flex min-h-125 flex-col rounded-md">
+      <div
+        className="bg-card relative flex min-h-125 flex-col rounded-md"
+        ref={containerRef}
+      >
         <div className="mt-2 flex justify-end">
           <Button
             variant={"ghost"}

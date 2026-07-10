@@ -73,7 +73,7 @@ updatedAt: ${new Date().toISOString().slice(0, 10)}
 ### Usage
 
 \`\`\`tsx
-import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/\\.tsx?$/, "")}";
+import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/^@|\.tsx?$/g, "")}";
 \`\`\`
 
 \`\`\`tsx

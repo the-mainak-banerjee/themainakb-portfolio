@@ -10,7 +10,7 @@ export function Steps({
   return (
     <div
       className={cn(
-        "ml-4 pl-6.5 [counter-reset:step] space-y-8",
+        "md:ml-4 md:pl-6.5 md:border-l [counter-reset:step] space-y-8",
         className,
       )}
     >
@@ -29,7 +29,7 @@ export function Step({
   return (
     <h4
       className={cn(
-        "mb-2 scroll-m-20 text-base font-medium tracking-tight",
+        "mb-2 scroll-m-20 text-base font-medium tracking-tight ml-10 md:ml-0",
         "[counter-increment:step]",
         "before:bg-muted before:text-muted-foreground before:border-border",
         "before:absolute before:-ml-10 before:-mt-0.5 before:flex before:size-7 before:items-center",

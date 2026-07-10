@@ -21,7 +21,7 @@ export async function CodeBlock({
   return (
     <div
       className={cn(
-        "bg-card overflow-x-auto rounded-md border text-sm [&_pre]:bg-transparent! [&::-webkit-scrollbar]:hidden [&>pre]:p-4",
+        "bg-card overflow-x-auto rounded-md border text-sm [&_pre]:bg-transparent! [&::-webkit-scrollbar]:hidden [&>pre]:p-4 not-prose",
         className,
       )}
       dangerouslySetInnerHTML={{ __html: html }}

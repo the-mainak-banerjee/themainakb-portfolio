@@ -70,10 +70,10 @@ export async function ComponentSourceCode({
       )}
     >
       {showHeader && (
-        <div className="flex items-center justify-between px-4 py-2.5">
+        <div className="flex md:items-center justify-between px-4 py-2.5">
           {title ? (
-            <div className="text-muted-foreground flex items-center gap-1 font-mono text-sm">
-              <FileCodeIcon size={14} />
+            <div className="text-muted-foreground flex gap-1 font-mono text-sm">
+              <FileCodeIcon size={14} className="mt-1"/>
               <span>{title}</span>
             </div>
           ) : (

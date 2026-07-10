@@ -43,7 +43,7 @@ export async function Pre({ children }: { children: React.ReactNode }) {
 
   if (!code) {
     // Fallback for anything that isn't a recognizable fenced code block.
-    return <pre>{children}</pre>;
+    return <pre className="not-prose">{children}</pre>;
   }
 
   return <CodeBlock code={code} lang={lang} />;

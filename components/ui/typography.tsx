@@ -136,11 +136,11 @@ export function Typography<T extends ElementType = "p">({
   const isHeading = ["h1", "h2", "h3", "h4"].includes(variant);
 
   return (
-    <Component className={cn(variants[variant], className)} {...props}>
+    <Component className={cn(variants[variant], className, "not-prose")} {...props}>
       {isHeading && id ? (
         <a
           href={`#${id}`}
-          className="group inline-flex scroll-mt-24 items-center gap-2"
+          className="group inline-flex scroll-mt-24 items-center gap-2 hover:underline hover:underline-offset-2"
         >
           <span>{children}</span>
 

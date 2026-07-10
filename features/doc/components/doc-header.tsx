@@ -61,7 +61,7 @@ function DocHeader({
             <ShareMenuTrigger className="bg-hover-fill-icon hover:bg-hover-fill-icon flex h-7 w-7 items-center justify-center rounded-md border-0">
               <Share size={16} />
             </ShareMenuTrigger>
-            <ShareMenuContent>
+            <ShareMenuContent align="end">
               <ShareMenuCopy />
               <ShareMenuItem
                 icon={<Icon name="twitter" />}

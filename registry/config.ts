@@ -46,7 +46,7 @@ export const registry: CategoryEntry[] = [
         name: "magnetic-button",
         type: "registry:component",
         title: "Magnetic Button",
-        description: "A button with magnet effect on hover",
+        description: "A button with magnet effect on hover.",
         dependencies: ["motion"],
         files: [
           {

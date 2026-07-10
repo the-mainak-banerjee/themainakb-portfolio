@@ -1,6 +1,7 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
+import rehypeExternalLinks from "rehype-external-links";
 import { Typography } from "../ui/typography";
 import { TabsContent } from "../ui/tabs";
 import ComponentPreview from "./component-preview";
@@ -53,7 +54,10 @@ const mdxComponents: MDXRemoteProps["components"] = {
 export function DocContent({ source }: { source: string }) {
   const options: MDXRemoteProps["options"] = {
     mdxOptions: {
-      rehypePlugins: [rehypeSlug],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeExternalLinks, { target: "_blank", rel: "nofollow noopener"  }],
+      ],
     },
   };
   return (

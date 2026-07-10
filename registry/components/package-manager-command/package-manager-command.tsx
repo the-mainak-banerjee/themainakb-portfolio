@@ -147,7 +147,7 @@ export function PackageManagerCommand({
   return (
     <div
       className={cn(
-        "border-border bg-muted text-card-foreground w-full overflow-hidden rounded-md border",
+        "border-border bg-muted text-card-foreground w-full overflow-hidden rounded-md border not-prose",
         className,
       )}
     >

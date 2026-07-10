@@ -1,7 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, RefObject } from "react";
 
-export function useOutsideClick(callback: () => void) {
-  const ref = useRef<HTMLDivElement>(null);
+type OutsideClickTarget =
+  Document | HTMLElement | RefObject<HTMLElement | null> | null;
+
+export function useOutsideClick<T extends HTMLElement = HTMLDivElement>(
+  callback: () => void,
+  target?: OutsideClickTarget,
+) {
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -10,10 +16,21 @@ export function useOutsideClick(callback: () => void) {
       }
     };
 
-    document.addEventListener("click", handleClick);
+    // Resolve the actual DOM node/document to attach the listener to
+    const resolvedTarget =
+      target ?? (typeof document !== "undefined" ? document : null);
+    const node: EventTarget | null =
+      resolvedTarget && "current" in resolvedTarget
+        ? resolvedTarget.current
+        : resolvedTarget;
 
-    return () => document.removeEventListener("click", handleClick);
-  }, [callback]);
+    if (!node) return;
+
+    node.addEventListener("click", handleClick as EventListener);
+
+    return () =>
+      node.removeEventListener("click", handleClick as EventListener);
+  }, [callback, target]);
 
   return ref;
 }
