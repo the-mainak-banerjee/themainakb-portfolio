@@ -1,7 +1,6 @@
 "use client";
 import SectionContainer from "@/components/global/section-container";
 import { ArrowLeft, ArrowRight, Share } from "lucide-react";
-import React from "react";
 import { ComponentDoc } from "../types/document";
 import { CATEGORY_NAMES, getComponentNavigation } from "@/registry/config";
 import { Typography } from "@/components/ui/typography";
@@ -56,6 +55,7 @@ function DocHeader({
             {category}
           </Typography>
         </Link>
+
         <div className="flex items-center gap-2">
           <ShareMenu title={itemTitle!} url={slug}>
             <ShareMenuTrigger className="bg-hover-fill-icon hover:bg-hover-fill-icon flex h-7 w-7 items-center justify-center rounded-md border-0">
@@ -84,6 +84,7 @@ function DocHeader({
                 with_tooltip={true}
                 label={`Previous ${category}`}
                 allowHoverAnimation={false}
+                allowTapAnimation={true}
                 className="bg-hover-fill-icon rounded-md"
               >
                 <ArrowLeft size={16} />
@@ -96,6 +97,7 @@ function DocHeader({
                 with_tooltip={true}
                 label={`Next ${category}`}
                 allowHoverAnimation={false}
+                allowTapAnimation={true}
                 className="bg-hover-fill-icon rounded-md"
               >
                 <ArrowRight size={16} />

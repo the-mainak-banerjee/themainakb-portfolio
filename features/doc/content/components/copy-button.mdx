@@ -1,0 +1,62 @@
+---
+title: Copy Button
+description: A customizable copy-to-clipboard button with animated feedback and optional tooltip support.
+createdAt: 2026-07-10
+updatedAt: 2026-07-10
+---
+
+<ComponentPreview name="copy-button" />
+
+### Installation
+
+<InstallTabs>
+
+<InstallTabsListType />
+
+<TabsContent value="cli">
+
+<ComponentCliCommand name="copy-button" />
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies</Step>
+
+<UniversalPackageManagerCommand npmCommand="npm install motion" />
+
+<Step>Add a CN helper function</Step>
+
+<ComponentSourceCode src="/registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSourceCode name="copy-button" title="@components/copy-button.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</InstallTabs>
+
+### Features
+
+- **Animated Feedback** — Smoothly transitions between copy and success states using Motion animations.
+- **Optional Tooltip** — Display a customizable tooltip with automatic "Copied!" feedback.
+- **Highly Customizable** — Customize labels, icon size, reset delay, styling, and copy callbacks.
+
+### Usage
+
+```tsx
+import { CopyButton } from "@/components/copy-button";
+```
+
+```tsx
+<CopyButton value="This is copied"/>
+```
+
+

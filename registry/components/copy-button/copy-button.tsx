@@ -35,7 +35,7 @@ interface BaseCopyButtonProps {
   onCopyError?: () => void;
 }
 
-type CopyButtonProps = BaseCopyButtonProps &
+export type CopyButtonProps = BaseCopyButtonProps &
   (
     | {
         /** Enable the tooltip */
@@ -233,10 +233,22 @@ const CopyButtonUi = React.forwardRef<
                 <motion.span
                   key="copied_text"
                   className="absolute inset-0"
-                  initial={{ y: isLabelWider ? 10 : -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ x: isLabelWider ? 10 : -10, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                  initial={{
+                    y: isLabelWider ? 10 : -10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                  exit={{
+                    x: isLabelWider ? 10 : -10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.5,
+                    ease: [0.65, 0, 0.35, 1],
+                  }}
                   layout
                 >
                   {copiedLabel}
@@ -245,13 +257,22 @@ const CopyButtonUi = React.forwardRef<
                 <motion.span
                   key="copy_text"
                   className="absolute inset-0"
-                  initial={{ y: isLabelWider ? -10 : 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  initial={{
+                    y: isLabelWider ? -10 : 10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   exit={{
                     x: isLabelWider ? -10 : 10,
                     opacity: 0,
+                    filter: "blur(10px)",
                   }}
-                  transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.5,
+                    ease: [0.65, 0, 0.35, 1],
+                  }}
                   layout
                 >
                   {label}
@@ -267,7 +288,11 @@ const CopyButtonUi = React.forwardRef<
 
 CopyButtonUi.displayName = "CopyButtonUi";
 
-export function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
+export function CopyButton({
+  withTooltip,
+  tooltipLabel,
+  ...props
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const { buttonText } = props;
   const formattedTooltipLabel = tooltipLabel ?? buttonText ?? "Copy";

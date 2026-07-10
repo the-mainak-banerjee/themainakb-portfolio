@@ -526,17 +526,19 @@ function ShareMenuCopy({
   children = "Copy link",
   icon,
   closeDelay = 700,
+  showIcon = true,
 }: {
   children?: React.ReactNode;
   icon?: React.ReactNode;
   closeDelay?: number;
+  showIcon?: boolean;
 }) {
   const { copy, copied, setOpen } = useShare();
 
   return (
     <ShareMenuItem
       icon={
-        icon ?? (
+        showIcon ? icon ?? (
           <AnimatePresence mode="wait" initial={false}>
             {copied ? (
               <motion.span
@@ -562,7 +564,7 @@ function ShareMenuCopy({
               </motion.span>
             )}
           </AnimatePresence>
-        )
+        ) : undefined
       }
       onSelect={(e) => {
         e.preventDefault(); // keep menu open so the checkmark is visible
