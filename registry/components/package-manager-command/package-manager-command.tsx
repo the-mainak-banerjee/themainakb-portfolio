@@ -5,7 +5,7 @@ import { atomWithStorage } from "jotai/utils";
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CopyButton from "../copy-button/copy-button";
+import { CopyButton } from "@/registry/components/copy-button";
 
 export type PackageManager = "pnpm" | "yarn" | "npm" | "bun";
 
@@ -166,7 +166,10 @@ export function PackageManagerCommand({
           </TabsList>
         </Tabs>
 
-        <CopyButton value={command} className="bg-transparent border-0 hover:bg-transparent"/>
+        <CopyButton
+          value={command}
+          className="border-0 bg-transparent hover:bg-transparent"
+        />
       </div>
 
       <div className="border-border bg-card overflow-x-auto overscroll-x-contain border-t px-4 py-3.5 [&::-webkit-scrollbar]:hidden">

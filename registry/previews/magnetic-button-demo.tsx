@@ -1,5 +1,5 @@
 import React from "react";
-import { MagneticButton } from "../components/magnetic-button";
+import { MagneticButton } from "@/registry/components/magnetic-button";
 
 function MagneticButtonDemo() {
   return (

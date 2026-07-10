@@ -1,5 +1,3 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 import { getComponentByName } from "@/registry/config";
 import { CodeBlock } from "@/components/global/code-block";
 import { Typography } from "@/components/ui/typography";
@@ -12,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { FileCodeIcon } from "lucide-react";
 import CopyButton from "@/components/global/copy-button";
+import { getComponentSourceCode } from "../data/documents";
 
 type ComponentSourceCodeProps = {
   /** Look up the file path from the registry by component name. */
@@ -51,9 +50,9 @@ export async function ComponentSourceCode({
     );
   }
 
-  let code: string;
+  let code
   try {
-    code = await fs.readFile(path.join(process.cwd(), filePath), "utf-8");
+    code = getComponentSourceCode(filePath)
   } catch {
     return (
       <Typography variant="body-sm">File not found: {filePath}</Typography>
@@ -81,7 +80,7 @@ export async function ComponentSourceCode({
             <span />
           )}
 
-          <div className="flex items-center">
+          <div className="flex items-center z-60">
             {collapsible && (
               <CollapsibleTrigger asChild>
                 <Button
@@ -102,7 +101,7 @@ export async function ComponentSourceCode({
               <div className="h-4 w-0.5 bg-border" aria-hidden="true" />
             )}
             <CopyButton
-              value={code}
+              value={code!}
               className="border-0 bg-transparent hover:bg-transparent"
             />
           </div>

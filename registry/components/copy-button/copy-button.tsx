@@ -267,7 +267,7 @@ const CopyButtonUi = React.forwardRef<
 
 CopyButtonUi.displayName = "CopyButtonUi";
 
-function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
+export function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const { buttonText } = props;
   const formattedTooltipLabel = tooltipLabel ?? buttonText ?? "Copy";
@@ -290,4 +290,3 @@ function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
   );
 }
 
-export default CopyButton;

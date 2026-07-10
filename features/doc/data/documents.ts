@@ -6,12 +6,12 @@ import { getComponentByName } from "@/registry/config";
 import { ComponentDoc } from "../types/document";
 
 const CONTENT_ROOT = path.join(process.cwd(), "features/doc/content");
-const PREVIEW_ROOT = path.join(process.cwd(), "registry/previews")
+const PREVIEW_ROOT = path.join(process.cwd(), "registry/previews");
 const IMPORT_ALIASES = {
-  "../components/": "@/components/",
-  "../hooks/": "@/hooks/",
-  "../lib/": "@/lib/",
-  "../ui/": "@/components/ui/",
+  "@/registry/components/": "@/components/",
+  "@/registry/hooks/": "@/hooks/",
+  "@/registry/lib/": "@/lib/",
+  "@/registry/ui/": "@/components/ui/",
 };
 
 export const getComponentDoc = cache((name: string): ComponentDoc | null => {
@@ -35,12 +35,29 @@ function transformImports(source: string) {
   return source;
 }
 
-export function getPreviewComponentCode(name: string) {
+const getFile = (filePath: string) => {
   try {
-    const filePath = path.join(PREVIEW_ROOT, `${name}-demo.tsx`);
     if (!fs.existsSync(filePath)) return null;
     const source = fs.readFileSync(filePath, "utf8");
     return transformImports(source);
+  } catch (error) {
+    throw new Error(`Failed to read the file: ${filePath}`, { cause: error });
+  }
+};
+
+export function getPreviewComponentCode(name: string) {
+  try {
+    const filePath = path.join(PREVIEW_ROOT, `${name}-demo.tsx`);
+    return getFile(filePath);
+  } catch (error) {
+    throw new Error(`Missing source file: ${name}`, { cause: error });
+  }
+}
+
+export function getComponentSourceCode(filePath: string) {
+  try {
+    const fullFilePath = path.join(process.cwd(), filePath);
+    return getFile(fullFilePath);
   } catch (error) {
     throw new Error(`Missing source file: ${name}`, { cause: error });
   }
