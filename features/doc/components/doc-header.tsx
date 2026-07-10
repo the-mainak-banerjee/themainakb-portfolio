@@ -41,7 +41,7 @@ function DocHeader({
 
   const { previous, next } = getComponentNavigation(categorySlug, itemName);
   return (
-    <SectionContainer>
+    <SectionContainer shouldAnimate={false}>
       <div className="flex items-center justify-between">
         <Link
           href="/components"
