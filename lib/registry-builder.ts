@@ -2,12 +2,14 @@ import fs from "fs";
 import path from "path";
 import { registryItemSchema } from "shadcn/schema";
 import type { RegistryItem } from "shadcn/schema";
-import { getAllComponents, getComponentByName } from "@/registry/config";
+import {
+  getAllComponents,
+  getComponentByName,
+} from "@/registry/config";
 
 const ROOT = process.cwd();
 const REGISTRY_NAME = "themainakb";
-const REGISTRY_HOMEPAGE =
-  "https://develop-themainakb-portfolio.vercel.app/labs";
+const REGISTRY_HOMEPAGE = `${process.env.NEXT_PUBLIC_APP_URL}/labs`;
 
 export class RegistryItemNotFoundError extends Error {
   constructor(name: string) {
@@ -21,7 +23,7 @@ function toRegistryItem(
 ): RegistryItem {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { preview, categorySlug, propTypes, ...item } = entry;
-  return item;
+  return { ...item, author: "themainakb <developer.mainakbanerjee@gmail.com>" };
 }
 
 function withFileContents(item: RegistryItem): RegistryItem {

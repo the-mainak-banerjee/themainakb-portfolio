@@ -8,7 +8,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Typography } from "../ui/typography";
 
 interface BaseCopyButtonProps {
   /** The text that gets copied to the clipboard */
@@ -36,7 +35,7 @@ interface BaseCopyButtonProps {
   onCopyError?: () => void;
 }
 
-type CopyButtonProps = BaseCopyButtonProps &
+export type CopyButtonProps = BaseCopyButtonProps &
   (
     | {
         /** Enable the tooltip */
@@ -54,7 +53,7 @@ type CopyButtonProps = BaseCopyButtonProps &
       }
   );
 
-const CopyButtonSkeleton = React.forwardRef<
+const CopyButtonUi = React.forwardRef<
   HTMLButtonElement,
   Omit<CopyButtonProps, "tooltipLabel" | "withTooltip"> & {
     copied: boolean;
@@ -112,7 +111,7 @@ const CopyButtonSkeleton = React.forwardRef<
         className={cn(
           "relative items-center justify-center overflow-hidden rounded-md",
           "border-border text-muted-foreground border",
-          "hover:text-foreground hover:bg-hover-fill-icon",
+          "hover:text-foreground hover:bg-accent",
           "disabled:cursor-not-allowed",
           buttonText ? "flex gap-2 px-2 py-1" : "inline-flex h-8 w-8",
           className,
@@ -234,10 +233,22 @@ const CopyButtonSkeleton = React.forwardRef<
                 <motion.span
                   key="copied_text"
                   className="absolute inset-0"
-                  initial={{ y: isLabelWider ? 10 : -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ x: isLabelWider ? 10 : -10, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                  initial={{
+                    y: isLabelWider ? 10 : -10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                  exit={{
+                    x: isLabelWider ? 10 : -10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.5,
+                    ease: [0.65, 0, 0.35, 1],
+                  }}
                   layout
                 >
                   {copiedLabel}
@@ -246,13 +257,22 @@ const CopyButtonSkeleton = React.forwardRef<
                 <motion.span
                   key="copy_text"
                   className="absolute inset-0"
-                  initial={{ y: isLabelWider ? -10 : 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  initial={{
+                    y: isLabelWider ? -10 : 10,
+                    opacity: 0,
+                    filter: "blur(10px)",
+                  }}
+                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   exit={{
                     x: isLabelWider ? -10 : 10,
                     opacity: 0,
+                    filter: "blur(10px)",
                   }}
-                  transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.5,
+                    ease: [0.65, 0, 0.35, 1],
+                  }}
                   layout
                 >
                   {label}
@@ -266,29 +286,32 @@ const CopyButtonSkeleton = React.forwardRef<
   },
 );
 
-CopyButtonSkeleton.displayName = "CopyButtonSkeleton";
+CopyButtonUi.displayName = "CopyButtonUi";
 
-function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
+export function CopyButton({
+  withTooltip,
+  tooltipLabel,
+  ...props
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const { buttonText } = props;
   const formattedTooltipLabel = tooltipLabel ?? buttonText ?? "Copy";
   if (!withTooltip)
-    return <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />;
+    return <CopyButtonUi copied={copied} setCopied={setCopied} {...props} />;
 
   return (
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />
+          <CopyButtonUi copied={copied} setCopied={setCopied} {...props} />
         </TooltipTrigger>
         <TooltipContent>
-          <Typography variant="caption" className="text-background">
+          <p className="text-background">
             {copied ? "Copied!" : formattedTooltipLabel}
-          </Typography>
+          </p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
 }
 
-export default CopyButton;

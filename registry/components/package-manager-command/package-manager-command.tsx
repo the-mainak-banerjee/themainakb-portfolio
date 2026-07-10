@@ -3,10 +3,9 @@ import * as React from "react";
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { AnimatePresence, motion, type Variants } from "motion/react";
-import { Check, Copy } from "lucide-react";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CopyButton } from "@/registry/components/copy-button";
 
 export type PackageManager = "pnpm" | "yarn" | "npm" | "bun";
 
@@ -106,11 +105,7 @@ export function PackageManagerCommand({
   axis = "x",
 }: PackageManagerCommandProps) {
   const [pm, setPm] = useAtom(packageManagerAtom);
-  const [copied, setCopied] = React.useState(false);
   const [direction, setDirection] = React.useState(0);
-  const copiedTimeout = React.useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
   const underlineId = React.useId();
 
   const allCommands = commands
@@ -126,28 +121,10 @@ export function PackageManagerCommand({
     setPm(id);
   };
 
-  React.useEffect(() => {
-    return () => {
-      if (copiedTimeout.current) clearTimeout(copiedTimeout.current);
-    };
-  }, []);
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(command);
-      setCopied(true);
-      toast.success("Copied to clipboard");
-      if (copiedTimeout.current) clearTimeout(copiedTimeout.current);
-      copiedTimeout.current = setTimeout(() => setCopied(false), 2000);
-    } catch {
-      toast.error("Couldn't copy the command");
-    }
-  };
-
   return (
     <div
       className={cn(
-        "border-border bg-muted text-card-foreground w-full overflow-hidden rounded-md border not-prose",
+        "border-border bg-muted text-card-foreground not-prose w-full overflow-hidden rounded-md border",
         className,
       )}
     >
@@ -189,38 +166,10 @@ export function PackageManagerCommand({
           </TabsList>
         </Tabs>
 
-        <button
-          type="button"
-          onClick={copy}
-          aria-label="Copy command"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            {copied ? (
-              <motion.span
-                key="check"
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
-                transition={{ duration: 0.12 }}
-                className="flex"
-              >
-                <Check className="size-4 text-emerald-500" />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="copy"
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
-                transition={{ duration: 0.12 }}
-                className="flex"
-              >
-                <Copy className="size-4" />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </button>
+        <CopyButton
+          value={command}
+          className="border-0 bg-transparent hover:bg-transparent"
+        />
       </div>
 
       <div className="border-border bg-card overflow-x-auto overscroll-x-contain border-t px-4 py-3.5 [&::-webkit-scrollbar]:hidden">

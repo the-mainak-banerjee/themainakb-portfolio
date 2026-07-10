@@ -9,25 +9,36 @@ export interface ISectionContainer {
   sectionLabel?: string;
   children: ReactNode;
   className?: string;
+  shouldAnimate?: boolean;
 }
 
-function SectionContainer({
+function SectionContainerSkaleton({
   sectionHeading,
   sectionLabel,
   children,
   className,
-}: ISectionContainer) {
+}: Omit<ISectionContainer, "shouldAnimate">) {
   return (
-    <Reveal>
       <div className={cn("space-y-6", className)}>
         {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
-        {sectionHeading && <Typography variant="h2">
-          {sectionHeading}
-        </Typography>}
+        {sectionHeading && (
+          <Typography variant="h2">{sectionHeading}</Typography>
+        )}
         {children}
       </div>
-    </Reveal>
   );
+}
+
+function SectionContainer({ shouldAnimate = true, ...props }: ISectionContainer) {
+  if (shouldAnimate) {
+    return (
+      <Reveal>
+        <SectionContainerSkaleton {...props} />
+      </Reveal>
+    );
+  }
+  return <SectionContainerSkaleton {...props} />;
+
 }
 
 export default SectionContainer;

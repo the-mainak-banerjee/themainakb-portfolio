@@ -1,0 +1,82 @@
+---
+title: Share Menu
+description: An animated share menu for React and Next.js with social sharing, copy link, native Web Share API support, and customizable animations.
+createdAt: 2026-07-10
+updatedAt: 2026-07-10
+---
+
+<ComponentPreview name="share-menu" />
+
+### Installation
+
+<InstallTabs>
+
+<InstallTabsListType />
+
+<TabsContent value="cli">
+
+<ComponentCliCommand name="share-menu" />
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies</Step>
+
+<UniversalPackageManagerCommand npmCommand="npm install motion jotai sonner lucide-react" />
+
+<Step>Add a CN helper function</Step>
+
+<ComponentSourceCode src="/registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSourceCode name="share-menu" title="@components/share-menu.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</InstallTabs>
+
+### Features
+
+- **Multiple Share Options** — Create share links for social platforms, copy links, or use the native Web Share API.
+- **Built-in Copy Feedback** — Copy URLs with animated success states and toast notifications.
+- **Customizable Animations** — Choose from multiple animation presets or provide your own Motion variants.
+- **Composable API** — Build fully custom share menus using flexible compound components.
+- **Accessible & Responsive** — Built with shadcn/ui and Radix primitives for keyboard accessibility and consistent behavior.
+
+### Usage
+
+```tsx
+import { ShareMenu } from "@/components/share-menu";
+```
+
+```tsx
+<ShareMenu title="Share Menu" url="/components/share-menu">
+  <ShareMenuTrigger className="bg-hover-fill-icon hover:bg-hover-fill-icon flex h-7 w-7 items-center justify-center rounded-md border-0">
+    <Share size={16} />
+  </ShareMenuTrigger>
+  <ShareMenuContent align="end">
+    <ShareMenuCopy />
+    <ShareMenuItem
+      icon={<Icon name="twitter" />}
+      href={`https://x.com/intent/tweet?url=${encodeURIComponent(https://develop-themainakb-portfolio.vercel.app/components/share-menu)}`}
+    >
+      Share on Twitter
+    </ShareMenuItem>
+    <ShareMenuItem
+      icon={<Icon name="linkedin" />}
+      href={`https://www.linkedin.com/sharing/share-offsite?url=${encodeURIComponent(https://develop-themainakb-portfolio.vercel.app/components/share-menu)}`}
+    >
+      Share on Linkedin
+    </ShareMenuItem>
+    <ShareMenuNative icon={<Share />}>Share To</ShareMenuNative>
+  </ShareMenuContent>
+</ShareMenu>
+```

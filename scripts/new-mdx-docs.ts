@@ -54,6 +54,10 @@ updatedAt: ${new Date().toISOString().slice(0, 10)}
 
 <UniversalPackageManagerCommand npmCommand="npm install ${entry.dependencies?.join(" ") ?? ""}" />
 
+<Step>Add a CN helper function</Step>
+
+<ComponentSourceCode src="registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+
 <Step>Copy and paste the following code into your project</Step>
 
 <ComponentSourceCode name="${entry.name}" title="${mainFile?.target}" />
@@ -87,7 +91,10 @@ import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/^@|\
 
 // <AutoTypeTable path="${mainFile?.path}" name="${propType}" />
 
-const outDir = path.join(process.cwd(), `features/doc/content/${entry.categorySlug}`);
+const outDir = path.join(
+  process.cwd(),
+  `features/doc/content/${entry.categorySlug}`,
+);
 fs.mkdirSync(outDir, { recursive: true });
 const outPath = path.join(outDir, `${entry.name}.mdx`);
 

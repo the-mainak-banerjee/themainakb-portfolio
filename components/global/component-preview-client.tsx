@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { AnimatePresence, motion } from "motion/react";
 import { IconButton } from "../ui/button_list";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import CopyButton from "./copy-button";
 
 // 4 directional clip-path variants
 const CLIP_VARIANTS = {
@@ -47,14 +48,15 @@ function getRandomVariantPair(): [VariantKey, VariantKey] {
 export interface ComponentPreviewClientProps {
   name: string;
   children: React.ReactNode;
+  code: string | null;
 }
-
 
 function ComponentPreviewClient({
   children,
   name,
+  code,
 }: ComponentPreviewClientProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
   const [viewSource, setViewSource] = useState<boolean>(false);
   const [variantPair, setVariantPair] = useState<[VariantKey, VariantKey]>(() =>
     getRandomVariantPair(),
@@ -149,12 +151,17 @@ function ComponentPreviewClient({
               >
                 <IconButton
                   label="Close Modal"
-                  className="absolute top-0 right-0"
+                  className="absolute top-2 right-1 z-100"
                   onClick={onClose}
                 >
                   <X size={16} />
                 </IconButton>
-                {/* Todo Add a copy button */}
+                {code && (
+                  <CopyButton
+                    value={code}
+                    className="text-foreground absolute top-2 right-8 h-7 w-8 border-0 z-100"
+                  />
+                )}
                 {children}
               </motion.div>
             </>

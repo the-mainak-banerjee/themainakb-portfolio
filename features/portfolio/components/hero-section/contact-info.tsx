@@ -3,7 +3,7 @@ import { Mail, MapPin } from "lucide-react";
 import React from "react";
 import { USER } from "../../data/user";
 import SocialIcons from "./social-icons";
-import { CopyButton } from "@/components/global/copy-button";
+import CopyButton from "@/components/global/copy-button";
 
 function ContactInfo() {
   return (
@@ -29,8 +29,9 @@ function ContactInfo() {
           </a>
           <CopyButton
             value={USER.email}
-            label="Copy Email"
-            className="h-4 w-4 border-0"
+            tooltipLabel="Copy Email"
+            withTooltip={true}
+            className="h-4 w-4 border-0 rounded-none hover:bg-transparent"
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { getItemDocumentationUrl, getRegistryItemUrl } from "@/lib/registry";
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 import { RegistryItem } from "shadcn/schema";
@@ -9,7 +10,7 @@ export type ComponentPreview = {
 
 export type ComponentEntry = RegistryItem & {
   preview?: ComponentPreview;
-  propTypes?: string[]
+  propTypes?: string[];
 };
 
 export type ComponentEntryWithCategorySlug = ComponentEntry & {
@@ -28,6 +29,12 @@ type ComponentNavigation = {
   next: CategoryEntry["components"][number] | null;
 };
 
+export const registryConfig = {
+  namespaceUrl:
+    process.env.NEXT_PUBLIC_REGISTRY_NAMESPACE_URL ||
+    "https://develop-themainakb-portfolio.vercel.app/r/{name}.json",
+};
+
 export const CATEGORY_NAMES = {
   components: "Components",
 };
@@ -35,7 +42,6 @@ export const CATEGORY_NAMES = {
 export const CATEGORY_SLUGS = {
   components: "components",
 };
-
 
 export const registry: CategoryEntry[] = [
   {
@@ -55,10 +61,86 @@ export const registry: CategoryEntry[] = [
             target: "@components/magnetic-button.tsx",
           },
         ],
-        propTypes:["MagneticButtonProps"],
+        docs: getItemDocumentationUrl(
+          "magnetic-button",
+          CATEGORY_SLUGS.components,
+        ),
+        propTypes: ["MagneticButtonProps"],
         preview: {
           component: dynamic(
             () => import("@/registry/previews/magnetic-button-demo"),
+          ),
+        },
+      },
+      {
+        name: "copy-button",
+        type: "registry:component",
+        title: "Copy Button",
+        description:
+          "A customizable copy-to-clipboard button with animated feedback and optional tooltip support.",
+        dependencies: ["motion"],
+        registryDependencies: ["tooltip"],
+        files: [
+          {
+            path: "registry/components/copy-button/copy-button.tsx",
+            type: "registry:component",
+            target: "@components/copy-button.tsx",
+          },
+        ],
+        docs: getItemDocumentationUrl("copy-button", CATEGORY_SLUGS.components),
+        propTypes: ["CopyButtonProps"],
+        preview: {
+          component: dynamic(
+            () => import("@/registry/previews/copy-button-demo"),
+          ),
+        },
+      },
+      {
+        name: "package-manager-command",
+        type: "registry:ui",
+        title: "Package Manager Command",
+        description:
+          "Display npm, pnpm, Yarn, and Bun install commands with animated switching and one-click copy.",
+        dependencies: ["motion", "jotai"],
+        registryDependencies: ["tabs", getRegistryItemUrl("copy-button")],
+        files: [
+          {
+            path: "registry/components/package-manager-command/package-manager-command.tsx",
+            type: "registry:component",
+            target: "@components/package-manager-command.tsx",
+          },
+        ],
+        docs: getItemDocumentationUrl(
+          "package-manager-command",
+          CATEGORY_SLUGS.components,
+        ),
+        propTypes: ["PackageManagerCommandProps"],
+        preview: {
+          component: dynamic(
+            () => import("@/registry/previews/package-manager-command-demo"),
+          ),
+        },
+      },
+      {
+        name: "share-menu",
+        type: "registry:ui",
+        title: "Share Menu",
+        description:
+          "An animated share menu for React and Next.js with social sharing, copy link, native Web Share API support, and customizable animations.",
+        dependencies: ["motion", "jotai", "sonner", "lucide-react"],
+        registryDependencies: ["dropdown-menu"],
+        files: [
+          {
+            path: "registry/components/share-menu/share-menu.tsx",
+            type: "registry:component",
+            target: "@components/share-menu.tsx",
+          },
+        ],
+        docs: getItemDocumentationUrl("share-menu", CATEGORY_SLUGS.components),
+        propTypes: ["ShareMenuProps"],
+        preview: {
+          component: dynamic(
+            () => import("@/registry/previews/share-menu-demo"),
           ),
         },
       },
@@ -90,7 +172,6 @@ export function getPreviewableComponents() {
     } => !!c.preview,
   );
 }
-
 
 export function getComponentNavigation(
   categorySlug: CategoryEntry["slug"],

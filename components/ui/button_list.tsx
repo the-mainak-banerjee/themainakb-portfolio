@@ -325,15 +325,18 @@ export const IconButtonSkeleton = ({
   className,
   label,
   allowHoverAnimation = true,
+  allowTapAnimation = false,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string;
   allowHoverAnimation?: boolean;
+  allowTapAnimation?: boolean;
 }) => {
   return (
     <button
       className={cn(
         "group relative flex h-7 w-7 items-center justify-center",
+        allowTapAnimation && "active:scale-95 active:transition-all active:ease-out ",
         className,
       )}
       {...props}
@@ -357,6 +360,7 @@ export const IconButton = ({
   with_tooltip?: boolean;
   toolTipContent?: ReactNode;
   allowHoverAnimation?: boolean;
+  allowTapAnimation?: boolean;
 }) => {
   return with_tooltip ? (
     <TooltipProvider>
@@ -365,9 +369,13 @@ export const IconButton = ({
           <IconButtonSkeleton {...props}>{children}</IconButtonSkeleton>
         </TooltipTrigger>
         <TooltipContent>
-          {toolTipContent ? toolTipContent : <Typography variant="caption" className="text-background">
-            {props.label}
-          </Typography>}
+          {toolTipContent ? (
+            toolTipContent
+          ) : (
+            <Typography variant="caption" className="text-background">
+              {props.label}
+            </Typography>
+          )}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
