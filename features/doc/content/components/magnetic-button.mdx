@@ -1,0 +1,66 @@
+---
+title: Magnetic Button
+description: A button with magnet effect on hover
+createdAt: 2026-07-09
+updatedAt: 2026-07-09
+---
+
+<ComponentPreview name="magnetic-button" />
+
+### Installation
+
+<InstallTabs>
+
+<InstallTabsListType />
+
+<TabsContent value="cli">
+
+<ComponentCliCommand name="magnetic-button" />
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies</Step>
+
+<UniversalPackageManagerCommand npmCommand="npm install motion" />
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSourceCode
+  name="magnetic-button"
+  title="@components/magnetic-button.tsx"
+/>
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</InstallTabs>
+
+### Features
+
+- **Magnetic Hover Effect** – Smoothly follows the cursor for a natural, interactive experience.
+- **Customizable Strength** – Adjust the magnetic movement intensity with a single `strength` prop.
+- **Fully Customizable** – Supports all native button props and custom styling via `className`.
+
+
+### Usage
+
+```tsx
+import { MagneticButton } from "@/components/magnetic-button.tsx";
+```
+
+```tsx
+<MagneticButton onClick={() => console.log("Namaste")}>
+  Hover Over Me
+</MagneticButton>
+```
+
+### Credit
+
+- [Manu Arora](https://youtu.be/4soTHg4Ed70?si=3WtopvlYhnz1MF31)

@@ -20,7 +20,7 @@ function toRegistryItem(
   entry: ReturnType<typeof getAllComponents>[number],
 ): RegistryItem {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { preview, categorySlug, ...item } = entry;
+  const { preview, categorySlug, propTypes, ...item } = entry;
   return item;
 }
 

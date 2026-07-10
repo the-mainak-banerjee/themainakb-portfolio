@@ -5,7 +5,7 @@ import { Reveal } from "./reveal";
 import SectionLabel from "./section-label";
 
 export interface ISectionContainer {
-  sectionHeading: string;
+  sectionHeading?: string;
   sectionLabel?: string;
   children: ReactNode;
   className?: string;
@@ -21,9 +21,9 @@ function SectionContainer({
     <Reveal>
       <div className={cn("space-y-6", className)}>
         {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
-        <Typography variant="h5" as="h2">
+        {sectionHeading && <Typography variant="h2">
           {sectionHeading}
-        </Typography>
+        </Typography>}
         {children}
       </div>
     </Reveal>

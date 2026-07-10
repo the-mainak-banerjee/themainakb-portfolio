@@ -15,7 +15,7 @@ function HeroSection() {
           <div className="flex items-center gap-4 md:gap-6">
             <ProfileImage />
             <div className="mb-2">
-              <Typography variant="h4" className="font-bold" as="h1">
+              <Typography variant="h1" className="font-bold">
                 {USER.displayName}
               </Typography>
               <FlipSentences sentences={USER.animatedSentences} />

@@ -1,6 +1,6 @@
 "use client";
 import { MAIN_NAV } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { cn, isActiveNavItem } from "@/lib/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,7 +16,7 @@ function SiteNavDesktop({className}: {className?: string}) {
       >
         {MAIN_NAV.map((item) => {
           const isHoveredItem = hoveredLink === item.title;
-          const isActiveItem = pathName === item.href;
+          const isActiveItem = isActiveNavItem(item.href, pathName);
           return (
             <Link
               key={item.href}
