@@ -44,7 +44,6 @@ function ExperienceCardModal({
       className="bg-accent fixed inset-0 z-70 mx-2 my-auto h-150 max-w-xl overflow-y-auto rounded-xl px-6 py-6 md:mx-auto"
     >
       <motion.div
-        className="space-y-8"
         initial={{ opacity: 0, filter: "blur(10px)", y: 32 }}
         animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
         exit={{ opacity: 0, filter: "blur(8px)", y: 20 }}
@@ -54,121 +53,126 @@ function ExperienceCardModal({
           delay: 0.1,
         }}
       >
-        <IconButton
-          label="Close Modal"
-          className="absolute top-0 right-0"
-          onClick={onClose}
-        >
-          <X size={16} />
-        </IconButton>
+        <div className="sticky top-0 z-100 flex justify-end gap-2">
+          <IconButton
+            label="Close Modal"
+            onClick={onClose}
+          >
+            <X size={16} />
+          </IconButton>
+        </div>
 
-        {/* Company Details Start */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Image
-              src={job_role.company_image.src}
-              alt={job_role.company_image.alt}
-              width={64}
-              height={64}
-              className="rounded-md"
-            />
-            <div className="flex flex-col">
-              <Typography>{job_role.company_name}</Typography>
-              <Typography variant="caption">{job_role.job_role}</Typography>
+        <div className="space-y-8">
+          {/* Company Details Start */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Image
+                src={job_role.company_image.src}
+                alt={job_role.company_image.alt}
+                width={64}
+                height={64}
+                className="rounded-md"
+              />
+              <div className="flex flex-col">
+                <Typography>{job_role.company_name}</Typography>
+                <Typography variant="caption">{job_role.job_role}</Typography>
+              </div>
+            </div>
+
+            {/* Company Location and Job Location Start */}
+            <div className="flex items-center gap-2">
+              <div className="text-muted-foreground flex items-center gap-1">
+                <MapPin size={16} />
+                <Typography variant="caption">
+                  {job_role.company_location},
+                </Typography>
+              </div>
+              <div className="text-muted-foreground flex items-center gap-1">
+                {job_role.job_location === "On Site" ? (
+                  <Building size={16} />
+                ) : (
+                  <Wifi size={16} />
+                )}
+                <Typography variant="caption">
+                  {job_role.job_location}
+                </Typography>
+              </div>
             </div>
           </div>
 
-          {/* Company Location and Job Location Start */}
-          <div className="flex items-center gap-2">
-            <div className="text-muted-foreground flex items-center gap-1">
-              <MapPin size={16} />
+          {/* Company Experience Start */}
+          <div className="divide-border border-border grid grid-cols-3 divide-x border">
+            <div className="px-4 py-3">
+              <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+                <Calendar size={11} /> Start
+              </span>
               <Typography variant="caption">
-                {job_role.company_location},
+                {formatYearMonth(job_role.start_date)}
               </Typography>
             </div>
-            <div className="text-muted-foreground flex items-center gap-1">
-              {job_role.job_location === "On Site" ? (
-                <Building size={16} />
-              ) : (
-                <Wifi size={16} />
-              )}
-              <Typography variant="caption">{job_role.job_location}</Typography>
+            <div className="px-4 py-3">
+              <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+                <Calendar size={11} /> End
+              </span>
+              <Typography variant="caption">
+                {job_role.is_current_company
+                  ? "Currently Working"
+                  : formatYearMonth(job_role.end_date!)}
+              </Typography>
+            </div>
+            <div className="px-4 py-3">
+              <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
+                <Clock size={11} /> Duration
+              </span>
+              <Typography variant="caption" className="text-foreground">
+                {job_role.is_current_company
+                  ? calculateDuration(job_role.start_date)?.formatted
+                  : job_role.duration}
+              </Typography>
             </div>
           </div>
-        </div>
 
-        {/* Company Experience Start */}
-        <div className="divide-border border-border grid grid-cols-3 divide-x border">
-          <div className="px-4 py-3">
-            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
-              <Calendar size={11} /> Start
-            </span>
-            <Typography variant="caption">
-              {formatYearMonth(job_role.start_date)}
-            </Typography>
-          </div>
-          <div className="px-4 py-3">
-            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
-              <Calendar size={11} /> End
-            </span>
-            <Typography variant="caption">
-              {job_role.is_current_company
-                ? "Currently Working"
-                : formatYearMonth(job_role.end_date!)}
-            </Typography>
-          </div>
-          <div className="px-4 py-3">
-            <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
-              <Clock size={11} /> Duration
-            </span>
-            <Typography variant="caption" className="text-foreground">
-              {job_role.is_current_company
-                ? calculateDuration(job_role.start_date)?.formatted
-                : job_role.duration}
-            </Typography>
-          </div>
-        </div>
+          {/* Achievements Start */}
+          {job_role.achievements && (
+            <RecognizationBox achievements={job_role.achievements} />
+          )}
 
-        {/* Achievements Start */}
-        {job_role.achievements && (
-          <RecognizationBox achievements={job_role.achievements} />
-        )}
-
-        <div className="space-y-4">
-          <Typography variant="label" as="p">
-            Tools on board
-          </Typography>
-          <div className="flex flex-wrap gap-2">
-            <LayoutGroup>
-              {job_role.tools.map((tool) => {
-                return (
-                  <motion.a
-                    key={tool.slug}
-                    href={tool.url}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <RevealPill
+          <div className="space-y-4">
+            <Typography variant="label" as="p">
+              Tools on board
+            </Typography>
+            <div className="flex flex-wrap gap-2">
+              <LayoutGroup>
+                {job_role.tools.map((tool) => {
+                  return (
+                    <motion.a
                       key={tool.slug}
-                      icon={tool.icon}
-                      label={tool.name}
-                      expandCard={true}
-                      id={job_role.company_name + tool.name}
-                    />
-                  </motion.a>
-                );
-              })}
-            </LayoutGroup>
+                      href={tool.url}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <RevealPill
+                        key={tool.slug}
+                        icon={tool.icon}
+                        label={tool.name}
+                        expandCard={true}
+                        id={job_role.company_name + tool.name}
+                      />
+                    </motion.a>
+                  );
+                })}
+              </LayoutGroup>
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-4">
-          <Typography variant="label" as="p">
-            What I did?
-          </Typography>
-          <Typography variant="body-sm" className="whitespace-pre-line">
-            {job_role.description}
-          </Typography>
+          <div className="space-y-4">
+            <Typography variant="label" as="p">
+              What I did?
+            </Typography>
+            <Typography variant="body-sm" className="whitespace-pre-line">
+              {job_role.description}
+            </Typography>
+          </div>
         </div>
       </motion.div>
     </motion.div>

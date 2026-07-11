@@ -149,19 +149,22 @@ function ComponentPreviewClient({
                 }}
                 transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
               >
-                <IconButton
-                  label="Close Modal"
-                  className="absolute top-2 right-1 z-100"
-                  onClick={onClose}
-                >
-                  <X size={16} />
-                </IconButton>
-                {code && (
-                  <CopyButton
-                    value={code}
-                    className="text-foreground absolute top-2 right-8 h-7 w-8 border-0 z-100"
-                  />
-                )}
+                <div className="sticky top-0 z-100 flex justify-end gap-2">
+                  {code && (
+                    <CopyButton
+                      value={code}
+                      className="text-foreground h-7 w-8 border-0"
+                    />
+                  )}
+
+                  <IconButton
+                    label="Close Modal"
+                    className="h-7 w-8"
+                    onClick={onClose}
+                  >
+                    <X size={16} />
+                  </IconButton>
+                </div>
                 {children}
               </motion.div>
             </>

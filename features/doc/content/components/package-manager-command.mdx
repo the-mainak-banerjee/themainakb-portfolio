@@ -2,7 +2,7 @@
 title: Package Manager Command
 description: Display npm, pnpm, Yarn, and Bun install commands with animated switching and one-click copy.
 createdAt: 2026-07-10
-updatedAt: 2026-07-10
+updatedAt: 2026-07-11
 ---
 
 <ComponentPreview name="package-manager-command" />
@@ -29,7 +29,15 @@ updatedAt: 2026-07-10
 
 <Step>Add a CN helper function</Step>
 
-<ComponentSourceCode src="/registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+<ComponentSourceCode src="registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+
+
+<Step>Install the required components</Step>
+
+- [Tabs](https://ui.shadcn.com/docs/components/radix/tabs)
+- [CopyButton](https://develop-themainakb-portfolio.vercel.app/components/copy-button)
+
+
 
 <Step>Copy and paste the following code into your project</Step>
 
@@ -45,12 +53,7 @@ updatedAt: 2026-07-10
 
 ### Features
 
-* **Automatic Command Conversion** — Generate equivalent commands for pnpm, Yarn, npm, and Bun from a single npm command.
-* **Custom Command Support** — Provide your own commands for each package manager when automatic conversion isn't enough.
-* **Persistent Preference** — Remembers the selected package manager across page reloads using local storage.
-* **Animated Transitions** — Smoothly animates command changes when switching between package managers.
-* **Built-in Copy Button** — Copy the displayed command to the clipboard with a single click.
-
+- TODO
 
 ### Usage
 
@@ -59,7 +62,7 @@ import { PackageManagerCommand } from "@/components/package-manager-command";
 ```
 
 ```tsx
-<PackageManagerCommand npmCommand="npm install motion"/>
+<PackageManagerCommand />
 ```
 
 

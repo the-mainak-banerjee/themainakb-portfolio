@@ -108,11 +108,38 @@ export function PackageManagerCommand({
   const [direction, setDirection] = React.useState(0);
   const underlineId = React.useId();
 
-  const allCommands = commands
-    ? commands
-    : getPackageManagerCommands(npmCommand);
+  let allCommands: PackageManagerCommandsList | null = null;
+  let error: Error | null = null;
+
+  try {
+    allCommands = commands ?? getPackageManagerCommands(npmCommand);
+  } catch (err) {
+    error =
+      err instanceof Error
+        ? err
+        : new Error("Invalid package manager command.");
+  }
+
+  if (error || !allCommands) {
+    return (
+      <div className="text-sm">
+        <p className="text-destructive font-medium">
+          Error in &lt;PackageManagerCommand /&gt;
+        </p>
+        <p className="font-medium">
+          Couldn&apos;t generate package manager commands.
+        </p>
+        <p className="text-muted-foreground mt-1">
+          This command can&apos;t be converted automatically. Use the{" "}
+          <code className="font-mono">commands</code> prop to provide commands
+          for each package manager.
+        </p>
+      </div>
+    );
+  }
 
   const command = allCommands[pm];
+
   const activeIndex = packageManagers.findIndex((p) => p.id === pm);
 
   const selectTab = (id: PackageManager) => {
@@ -154,9 +181,8 @@ export function PackageManagerCommand({
                       layoutId={`${underlineId}-install-command-underline`}
                       className="bg-foreground absolute right-0 -bottom-2.75 left-0 h-px w-full"
                       transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 25,
+                        duration: 0.22,
+                        ease: [0.22, 1, 0.36, 1],
                       }}
                     />
                   )}
@@ -246,7 +272,7 @@ export function getPackageManagerCommands(
     };
   }
 
-  // npm run
+  // // npm run
   match = command.match(/^npm\s+run\s+(.+)$/);
 
   if (match) {
