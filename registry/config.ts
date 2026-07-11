@@ -49,11 +49,6 @@ type ComponentNavigation = {
   next: CategoryEntry["components"][number] | null;
 };
 
-export const registryConfig = {
-  namespaceUrl:
-    process.env.NEXT_PUBLIC_REGISTRY_NAMESPACE_URL ||
-    "https://develop-themainakb-portfolio.vercel.app/r/{name}.json",
-};
 
 export const CATEGORY_NAMES = {
   components: "Components",

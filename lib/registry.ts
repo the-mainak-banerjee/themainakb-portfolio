@@ -2,11 +2,13 @@ import {
   ComponentEntry,
   getAllComponents,
   getComponentsByCategory,
-  registryConfig,
 } from "@/registry/config";
 
 export function getRegistryItemUrl(item: string) {
-  return registryConfig.namespaceUrl.replace("{name}", item);
+  const namespaceUrl =
+    process.env.NEXT_PUBLIC_REGISTRY_NAMESPACE_URL ||
+    "https://develop-themainakb-portfolio.vercel.app/r/{name}.json";
+  return namespaceUrl?.replace("{name}", item);
 }
 
 export function getItemDocumentationUrl(name: string, categorySlug: string) {

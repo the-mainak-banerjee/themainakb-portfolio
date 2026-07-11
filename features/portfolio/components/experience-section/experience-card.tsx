@@ -267,7 +267,7 @@ function ExperienceCard({
         </motion.div>
         {is_hovered && (
           <motion.div
-            className="bg-border/40 absolute inset-0 z-10"
+            className="bg-accent/40 absolute inset-0 z-10"
             layout
             layoutId="hover_bg"
             // variants={{

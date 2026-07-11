@@ -13,7 +13,7 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
     notFound();
   }
   return (
-    <div className="space-y-10">
+    <>
       <div>
         <Typography variant="h1" className="font-geist-sans">
           {doc.title}
@@ -25,7 +25,7 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
       <Prose className="[&>*+*:not(h2):not(h3)]:mt-6">
         <DocContent source={doc.content} />
       </Prose>
-    </div>
+    </>
   );
 }
 
