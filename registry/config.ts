@@ -1,7 +1,22 @@
 import { getItemDocumentationUrl, getRegistryItemUrl } from "@/lib/registry";
+import { Copy, LucideIcon, Magnet, Share2, Terminal } from "lucide-react";
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 import { RegistryItem } from "shadcn/schema";
+
+
+export const COMPONENT_SUB_CATEGORIES = {
+  button: "Button",
+  navigation: "Navigation",
+  overlay: "Overlay",
+  form: "Form",
+  feedback: "Feedback",
+  layout: "Layout",
+  utility: "Utility",
+} as const;
+
+export type ComponentSubCategory =
+  (typeof COMPONENT_SUB_CATEGORIES)[keyof typeof COMPONENT_SUB_CATEGORIES];
 
 export type ComponentPreview = {
   component: ComponentType;
@@ -9,8 +24,13 @@ export type ComponentPreview = {
 };
 
 export type ComponentEntry = RegistryItem & {
-  preview?: ComponentPreview;
-  propTypes?: string[];
+  catalog: {
+    preview?: ComponentPreview;
+    propTypes?: string[];
+    publishedAt: Date;
+    subCategory: ComponentSubCategory;
+    icon: LucideIcon
+  };
 };
 
 export type ComponentEntryWithCategorySlug = ComponentEntry & {
@@ -65,11 +85,16 @@ export const registry: CategoryEntry[] = [
           "magnetic-button",
           CATEGORY_SLUGS.components,
         ),
-        propTypes: ["MagneticButtonProps"],
-        preview: {
-          component: dynamic(
-            () => import("@/registry/previews/magnetic-button-demo"),
-          ),
+        catalog: {
+          publishedAt: new Date("2026-07-04"),
+          subCategory: COMPONENT_SUB_CATEGORIES.button,
+          propTypes: ["MagneticButtonProps"],
+          icon: Magnet,
+          preview: {
+            component: dynamic(
+              () => import("@/registry/previews/magnetic-button-demo"),
+            ),
+          },
         },
       },
       {
@@ -88,11 +113,16 @@ export const registry: CategoryEntry[] = [
           },
         ],
         docs: getItemDocumentationUrl("copy-button", CATEGORY_SLUGS.components),
-        propTypes: ["CopyButtonProps"],
-        preview: {
-          component: dynamic(
-            () => import("@/registry/previews/copy-button-demo"),
-          ),
+        catalog: {
+          publishedAt: new Date("2026-07-10"),
+          subCategory: COMPONENT_SUB_CATEGORIES.button,
+          propTypes: ["CopyButtonProps"],
+          icon: Copy,
+          preview: {
+            component: dynamic(
+              () => import("@/registry/previews/copy-button-demo"),
+            ),
+          },
         },
       },
       {
@@ -114,11 +144,16 @@ export const registry: CategoryEntry[] = [
           "package-manager-command",
           CATEGORY_SLUGS.components,
         ),
-        propTypes: ["PackageManagerCommandProps"],
-        preview: {
-          component: dynamic(
-            () => import("@/registry/previews/package-manager-command-demo"),
-          ),
+        catalog: {
+          publishedAt: new Date("2026-07-10"),
+          subCategory: COMPONENT_SUB_CATEGORIES.utility,
+          propTypes: ["PackageManagerCommandProps"],
+          icon: Terminal,
+          preview: {
+            component: dynamic(
+              () => import("@/registry/previews/package-manager-command-demo"),
+            ),
+          },
         },
       },
       {
@@ -137,11 +172,16 @@ export const registry: CategoryEntry[] = [
           },
         ],
         docs: getItemDocumentationUrl("share-menu", CATEGORY_SLUGS.components),
-        propTypes: ["ShareMenuProps"],
-        preview: {
-          component: dynamic(
-            () => import("@/registry/previews/share-menu-demo"),
-          ),
+        catalog: {
+          publishedAt: new Date("2026-07-10"),
+          subCategory: COMPONENT_SUB_CATEGORIES.navigation,
+          propTypes: ["ShareMenuProps"],
+          icon: Share2,
+          preview: {
+            component: dynamic(
+              () => import("@/registry/previews/share-menu-demo"),
+            ),
+          },
         },
       },
     ],
@@ -157,6 +197,11 @@ export function getAllComponents(): ComponentEntryWithCategorySlug[] {
   );
 }
 
+/** All components belonging to a single category, by slug. */
+export function getComponentsByCategory(categorySlug: string): ComponentEntry[] {
+  return registry.find((c) => c.slug === categorySlug)?.components ?? [];
+}
+
 /** Look up a single entry by name, across all categories. */
 export function getComponentByName(name: string) {
   return getAllComponents().find((c) => c.name === name);
@@ -169,7 +214,7 @@ export function getPreviewableComponents() {
       c,
     ): c is ComponentEntryWithCategorySlug & {
       preview: ComponentPreview;
-    } => !!c.preview,
+    } => !!c.catalog.preview,
   );
 }
 

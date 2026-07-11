@@ -57,7 +57,7 @@ ${items.join("\n")}
 const mdx = `---
 title: ${entry.title}
 description: ${entry.description}
-createdAt: ${new Date().toISOString().slice(0, 10)}
+createdAt: ${entry.catalog.publishedAt.toISOString().slice(0, 10)}
 updatedAt: ${new Date().toISOString().slice(0, 10)}
 ---
 
