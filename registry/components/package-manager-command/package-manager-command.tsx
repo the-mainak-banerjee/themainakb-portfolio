@@ -181,9 +181,8 @@ export function PackageManagerCommand({
                       layoutId={`${underlineId}-install-command-underline`}
                       className="bg-foreground absolute right-0 -bottom-2.75 left-0 h-px w-full"
                       transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 25,
+                        duration: 0.22,
+                        ease: [0.22, 1, 0.36, 1],
                       }}
                     />
                   )}
