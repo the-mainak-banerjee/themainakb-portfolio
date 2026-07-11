@@ -7,11 +7,13 @@ import { LayoutGroup } from "motion/react";
 function TechStackSection() {
   return (
     <SectionContainer sectionHeading="Tech Stack" sectionLabel="Toolbox">
-      <LayoutGroup>
-        {USER_STACK.map((item) => {
-          return <TechStackCard stackGroup={item} key={item.id} />;
-        })}
-      </LayoutGroup>
+      <div className="space-y-4">
+        <LayoutGroup>
+          {USER_STACK.map((item) => {
+            return <TechStackCard stackGroup={item} key={item.id} />;
+          })}
+        </LayoutGroup>
+      </div>
     </SectionContainer>
   );
 }

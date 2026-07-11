@@ -1,7 +1,6 @@
 "use client";
 import { EntryCard } from "@/components/global/entry-card";
 import SectionContainer from "@/components/global/section-container";
-import { Typography } from "@/components/ui/typography";
 import { getComponentsListPageData } from "@/lib/registry";
 import React from "react";
 
@@ -9,12 +8,9 @@ function ComponentListSection({ categorySlug }: { categorySlug: string }) {
   const { newComponents, olderComponents } =
     getComponentsListPageData(categorySlug);
   return (
-    <SectionContainer shouldAnimate={false}>
-      <div className="space-y-4">
-        <Typography variant="label" as="p">
-          New {categorySlug}
-        </Typography>
-        <div className="grid grid-cols-1 items-start gap-2">
+    <>
+      <SectionContainer shouldAnimate={false} sectionLabel={`New ${categorySlug}`}>
+        <div className="grid grid-cols-1 items-start gap-3.5">
           {newComponents.map((item) => {
             return (
               <EntryCard
@@ -26,12 +22,9 @@ function ComponentListSection({ categorySlug }: { categorySlug: string }) {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4">
-        <Typography variant="label" as="p">
-          All {categorySlug}
-        </Typography>
-        <div>
+      </SectionContainer>
+      <SectionContainer shouldAnimate={false} sectionLabel={`All ${categorySlug}`}>
+        <div className="grid grid-cols-1 items-start gap-6">
           {olderComponents.map((item) => {
             return (
               <EntryCard
@@ -42,8 +35,8 @@ function ComponentListSection({ categorySlug }: { categorySlug: string }) {
             );
           })}
         </div>
-      </div>
-    </SectionContainer>
+      </SectionContainer>
+    </>
   );
 }
 

@@ -26,7 +26,7 @@ function TechStackCard({ stackGroup }: ITechStackCard) {
       key={stackGroup.id}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={"border-border relative flex flex-col gap-4 border px-6 py-4"}
+      className={"border-border rounded-lg relative flex flex-col gap-4 border px-6 py-4"}
       initial={REVEAL_VARIANTS_NAME.initial}
       whileHover="hover"
       whileInView={REVEAL_VARIANTS_NAME.whileInView}

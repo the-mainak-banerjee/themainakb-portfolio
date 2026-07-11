@@ -33,6 +33,10 @@ export type ComponentEntry = RegistryItem & {
   };
 };
 
+export type ComponentWithStatus = ComponentEntry & {
+  isNew: boolean;
+};
+
 export type ComponentEntryWithCategorySlug = ComponentEntry & {
   categorySlug: string;
 };

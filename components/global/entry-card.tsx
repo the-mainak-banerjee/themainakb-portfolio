@@ -15,11 +15,13 @@ function EntryCardTopSection({
   hovered,
   isNew,
   docUrl,
+  miniVersion = false,
 }: {
   entry: ComponentEntry;
   hovered: boolean;
   isNew?: boolean;
   docUrl: string;
+  miniVersion?: boolean;
 }) {
   const isMobile = useIsMobile();
 
@@ -49,12 +51,14 @@ function EntryCardTopSection({
         </motion.span>
       </div>
 
-      <Typography
-        variant="body-sm"
-        className="text-muted-foreground text-xs leading-relaxed"
-      >
-        {entry.description}
-      </Typography>
+      {!miniVersion && (
+        <Typography
+          variant="body-sm"
+          className="text-muted-foreground text-xs leading-relaxed"
+        >
+          {entry.description}
+        </Typography>
+      )}
 
       {isMobile && (
         <Link
@@ -73,10 +77,14 @@ export function EntryCard({
   entry,
   categorySlug,
   isNew,
+  miniVersion = false,
+  className,
 }: {
   entry: ComponentEntry;
   categorySlug: string;
   isNew?: boolean;
+  miniVersion?: boolean;
+  className?: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const isMobile = useIsMobile();
@@ -85,7 +93,10 @@ export function EntryCard({
     <motion.div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group border-border bg-card hover:bg-accent/40 flex flex-col rounded-lg border"
+      className={cn(
+        "group border-border bg-card hover:bg-accent/40 flex flex-col rounded-lg border",
+        className,
+      )}
     >
       {isMobile ? (
         <div className="p-5 lg:hidden">
@@ -94,6 +105,7 @@ export function EntryCard({
             hovered={hovered}
             isNew={isNew}
             docUrl={docUrl}
+            miniVersion={miniVersion}
           />
         </div>
       ) : (
@@ -111,13 +123,14 @@ export function EntryCard({
               hovered={hovered}
               isNew={isNew}
               docUrl={docUrl}
+              miniVersion={miniVersion}
             />
           </Link>
 
           <div
             className={cn(
               "grid transition-[grid-template-rows] duration-300 ease-out",
-              hovered ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+              hovered && !miniVersion ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
             )}
           >
             <div className="overflow-hidden">
