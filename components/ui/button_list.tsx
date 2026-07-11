@@ -336,7 +336,7 @@ export const IconButtonSkeleton = ({
     <button
       className={cn(
         "group relative flex h-7 w-7 items-center justify-center",
-        allowTapAnimation && "active:scale-95 active:transition-all active:ease-out ",
+        allowTapAnimation && "active:scale-95 transition-all ease-out ",
         className,
       )}
       {...props}

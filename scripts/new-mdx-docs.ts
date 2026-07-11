@@ -3,6 +3,9 @@ import path from "node:path";
 import { getComponentByName } from "../registry/config";
 
 const name = process.argv[2];
+const appUrl =
+  process.env.NEXT_PUBLIC_APP_URL ??
+  "https://develop-themainakb-portfolio.vercel.app";
 
 if (!name) {
   console.error("Usage: npx tsx scripts/new-doc.ts <component-name>");
@@ -23,6 +26,32 @@ const mainFile = entry.files?.[0];
 
 function toPascalCase(s: string) {
   return s.replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
+}
+
+function getRequiredComponents(registryDependencies: string[] = []): string {
+  if (registryDependencies.length === 0) {
+    return "";
+  }
+
+  const items = registryDependencies.map((dep) => {
+    // Custom registry URL
+    if (dep.startsWith("http")) {
+      const name = dep.split("/").pop()?.replace(".json", "") ?? dep;
+      const title = toPascalCase(name);
+
+      return `- [${title}](${appUrl}/components/${name})`;
+    }
+
+    // shadcn/ui component
+    return `- [${toPascalCase(dep)}](https://ui.shadcn.com/docs/components/radix/${dep})`;
+  });
+
+  return `
+<Step>Install the required components</Step>
+
+${items.join("\n")}
+
+`;
 }
 
 const mdx = `---
@@ -57,6 +86,8 @@ updatedAt: ${new Date().toISOString().slice(0, 10)}
 <Step>Add a CN helper function</Step>
 
 <ComponentSourceCode src="registry/lib/utils.ts" title="lib/utils.ts" collapsible="false" />
+
+${getRequiredComponents(entry.registryDependencies)}
 
 <Step>Copy and paste the following code into your project</Step>
 

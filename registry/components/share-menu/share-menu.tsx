@@ -534,6 +534,15 @@ function ShareMenuCopy({
   showIcon?: boolean;
 }) {
   const { copy, copied, setOpen } = useShare();
+   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+   React.useEffect(() => {
+     return () => {
+       if (timeoutRef.current) {
+         clearTimeout(timeoutRef.current);
+       }
+     };
+   }, []);
 
   return (
     <ShareMenuItem
@@ -568,8 +577,16 @@ function ShareMenuCopy({
       }
       onSelect={(e) => {
         e.preventDefault(); // keep menu open so the checkmark is visible
+        // Clear any pending close timer.
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+
         void copy().then(() => {
-          setTimeout(() => setOpen(false), closeDelay);
+          timeoutRef.current = setTimeout(() => {
+            setOpen(false);
+            timeoutRef.current = null;
+          }, closeDelay);
         });
       }}
     >
