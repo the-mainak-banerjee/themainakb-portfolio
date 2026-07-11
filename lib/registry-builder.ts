@@ -22,7 +22,7 @@ function toRegistryItem(
   entry: ReturnType<typeof getAllComponents>[number],
 ): RegistryItem {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { preview, categorySlug, propTypes, ...item } = entry;
+  const { catalog, categorySlug, ...item } = entry;
   return { ...item, author: "themainakb <developer.mainakbanerjee@gmail.com>" };
 }
 

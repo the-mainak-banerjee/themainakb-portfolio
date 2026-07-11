@@ -101,7 +101,7 @@ function ExperienceCardModal({
           </div>
 
           {/* Company Experience Start */}
-          <div className="divide-border border-border grid grid-cols-3 divide-x border">
+          <div className="divide-border border-border rounded-lg grid grid-cols-3 divide-x border">
             <div className="px-4 py-3">
               <span className="text-muted-foreground flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
                 <Calendar size={11} /> Start
@@ -213,7 +213,7 @@ function ExperienceCard({
       </AnimatePresence>
 
       <motion.button
-        className="border-border bg-card relative flex w-full cursor-pointer flex-col items-start justify-between gap-4 border px-4 py-2 text-left md:flex-row"
+        className="border-border rounded-lg bg-card relative flex w-full cursor-pointer flex-col items-start justify-between gap-4 border px-4 py-2 text-left md:flex-row"
         onClick={onClick}
         initial="initial"
         whileHover="hover"
@@ -267,7 +267,7 @@ function ExperienceCard({
         </motion.div>
         {is_hovered && (
           <motion.div
-            className="bg-border/40 absolute inset-0 z-10"
+            className="bg-accent/40 absolute inset-0 z-10"
             layout
             layoutId="hover_bg"
             // variants={{

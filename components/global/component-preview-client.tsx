@@ -72,7 +72,7 @@ function ComponentPreviewClient({
     );
   }
 
-  const Preview = componentDetails?.preview?.component;
+  const Preview = componentDetails?.catalog?.preview?.component;
 
   const onOpen = () => {
     setVariantPair(getRandomVariantPair());
