@@ -14,11 +14,15 @@ function EntryCardTopSection({
   entry,
   hovered,
   isNew,
+  docUrl,
 }: {
   entry: ComponentEntry;
   hovered: boolean;
   isNew?: boolean;
+  docUrl: string;
 }) {
+  const isMobile = useIsMobile();
+
   return (
     <div className="relative flex flex-col gap-2">
       <div className="flex items-center justify-between">
@@ -52,13 +56,15 @@ function EntryCardTopSection({
         {entry.description}
       </Typography>
 
-      <Link
-        href={"localhost:3000"}
-        className="border-border bg-secondary font-geist-sans mt-4 flex w-full items-center justify-center gap-2 rounded-lg border py-2 text-sm lg:hidden"
-      >
-        <BookOpenText className="size-4" />
-        Read Docs
-      </Link>
+      {isMobile && (
+        <Link
+          href={docUrl}
+          className="border-border bg-secondary font-geist-sans mt-4 flex w-full items-center justify-center gap-2 rounded-lg border py-2 text-sm lg:hidden"
+        >
+          <BookOpenText className="size-4" />
+          Read Docs
+        </Link>
+      )}
     </div>
   );
 }
@@ -74,7 +80,7 @@ export function EntryCard({
 }) {
   const [hovered, setHovered] = useState(false);
   const isMobile = useIsMobile();
-
+  const docUrl = `/${categorySlug}/${entry.name}`;
   return (
     <motion.div
       onMouseEnter={() => setHovered(true)}
@@ -83,12 +89,17 @@ export function EntryCard({
     >
       {isMobile ? (
         <div className="p-5 lg:hidden">
-          <EntryCardTopSection entry={entry} hovered={hovered} isNew={isNew} />
+          <EntryCardTopSection
+            entry={entry}
+            hovered={hovered}
+            isNew={isNew}
+            docUrl={docUrl}
+          />
         </div>
       ) : (
         <>
           <Link
-            href={`/${categorySlug}/${entry.name}`}
+            href={docUrl}
             className={cn(
               "relative hidden flex-1 rounded-b-lg p-5 lg:block",
               hovered ? "" : "rounded-t-lg",
@@ -99,6 +110,7 @@ export function EntryCard({
               entry={entry}
               hovered={hovered}
               isNew={isNew}
+              docUrl={docUrl}
             />
           </Link>
 
