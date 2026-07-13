@@ -22,7 +22,7 @@ function SectionContainerSkaleton({
       <div className={cn("space-y-6", className)}>
         {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
         {sectionHeading && (
-          <Typography variant="h2">{sectionHeading}</Typography>
+          <Typography variant="h2" id={sectionHeading.toLowerCase()}>{sectionHeading}</Typography>
         )}
         {children}
       </div>

@@ -92,7 +92,7 @@ function ComponentPreviewClient({
         <span>Live Preview</span>
       </div>
       <div
-        className="bg-card relative flex min-h-125 flex-col rounded-md"
+        className="bg-card relative flex min-h-125 flex-col rounded-b-md"
         ref={containerRef}
       >
         <div className="mt-2 flex justify-end">
