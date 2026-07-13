@@ -1,3 +1,4 @@
+import { MainContainer } from "@/components/global/containers";
 import ListPageHeader from "@/components/global/list-page-header";
 import SectionListContainer from "@/components/global/section-list-container";
 import ComponentListSection from "@/features/doc/components/component-list-section";
@@ -7,13 +8,15 @@ import React from "react";
 function ComponentsPage() {
  
   return (
-    <SectionListContainer>
-      <ListPageHeader
-        title="Components"
-        description="Animated React components built with Motion, shadcn/ui, and Tailwind CSS for smooth, modern user interfaces."
-      />
-      <ComponentListSection categorySlug={CATEGORY_SLUGS.components} />
-    </SectionListContainer>
+    <MainContainer>
+      <SectionListContainer>
+        <ListPageHeader
+          title="Components"
+          description="Animated React components built with Motion, shadcn/ui, and Tailwind CSS for smooth, modern user interfaces."
+        />
+        <ComponentListSection categorySlug={CATEGORY_SLUGS.components} />
+      </SectionListContainer>
+    </MainContainer>
   );
 }
 
