@@ -140,7 +140,7 @@ export function Typography<T extends ElementType = "p">({
       {isHeading && id ? (
         <a
           href={`#${id}`}
-          className="group inline-flex scroll-mt-24 items-center gap-2 hover:underline hover:underline-offset-2"
+          className="group inline-flex scroll-mt-24 items-center gap-2 hover:underline hover:underline-offset-4"
         >
           <span>{children}</span>
 
