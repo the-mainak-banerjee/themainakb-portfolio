@@ -9,7 +9,7 @@ function ComponentListSection({ categorySlug }: { categorySlug: string }) {
     getComponentsListPageData(categorySlug);
   return (
     <>
-      <SectionContainer shouldAnimate={false} sectionLabel={`New ${categorySlug}`}>
+      {newComponents.length > 0 && <SectionContainer shouldAnimate={false} sectionLabel={`New ${categorySlug}`}>
         <div className="grid grid-cols-1 items-start gap-3.5">
           {newComponents.map((item) => {
             return (
@@ -22,7 +22,7 @@ function ComponentListSection({ categorySlug }: { categorySlug: string }) {
             );
           })}
         </div>
-      </SectionContainer>
+      </SectionContainer>}
       <SectionContainer shouldAnimate={false} sectionLabel={`All ${categorySlug}`}>
         <div className="grid grid-cols-1 items-start gap-6">
           {olderComponents.map((item) => {

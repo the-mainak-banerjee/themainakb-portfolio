@@ -23,7 +23,11 @@ const mdxComponents: MDXRemoteProps["components"] = {
     <Typography variant="h1" {...props} className="font-geist-sans" />
   ),
   h2: (props: React.ComponentProps<"h2">) => (
-    <Typography variant="h2" {...props} className="font-geist-sans" />
+    <Typography
+      variant="h2"
+      {...props}
+      className="font-geist-sans mt-10 mb-6"
+    />
   ),
   h3: (props: React.ComponentProps<"h3">) => (
     <Typography

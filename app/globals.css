@@ -3,7 +3,6 @@
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -186,15 +185,27 @@
   padding-inline: 1rem; /*16px */
 }
 
+.doc-container {
+  width: 100%;
+  padding-inline: 1rem; /*16px */
+}
+
 @media (min-width: 768px) {
-  .container {
+  .container,
+  .doc-container {
     padding-inline: 2rem; /*32px */
   }
 }
 
 @media (min-width: 1024px) {
-  .container {
+  .container,
+  .doc-container {
     padding-inline: 0;
+  }
+
+  .doc-container {
+    display: grid;
+    grid-template-columns: 1fr 768px 1fr;
   }
 }
 
