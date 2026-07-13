@@ -1,6 +1,7 @@
 import { DocContainer } from "@/components/global/containers";
 import { DocContent } from "@/components/global/doc-content";
 import SectionListContainer from "@/components/global/section-list-container";
+import TocInline from "@/components/global/toc-inline";
 import TocSidebar from "@/components/global/toc-sidebar";
 import Prose from "@/components/ui/prose";
 import { Typography } from "@/components/ui/typography";
@@ -34,11 +35,12 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
             {doc.description}
           </Typography>
         </div>
+        <TocInline content={doc.content} />
         <Prose className="[&>*+*:not(h2):not(h3)]:mt-6">
           <DocContent source={doc.content} />
         </Prose>
       </SectionListContainer>
-      <aside className="max-lg:hidden relative">
+      <aside className="relative max-lg:hidden">
         <TocSidebar content={doc.content} />
       </aside>
     </DocContainer>
