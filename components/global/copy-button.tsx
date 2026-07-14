@@ -123,7 +123,7 @@ const CopyButtonSkeleton = React.forwardRef<
         {...rest}
         onClick={handleCopy}
       >
-        <motion.span className="min-w-4.5" layout>
+        <motion.span className="shrink-0" layout>
           <AnimatePresence mode="wait" initial={false}>
             {copied ? (
               <svg
