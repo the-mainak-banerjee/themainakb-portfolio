@@ -20,13 +20,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { NAV_LINKS } from "@/config/site";
 
 export interface BlogPostNav {
   slug: string;
   title: string;
 }
 
-export interface BlogHeaderProps {
+export interface IBlogHeaderProps {
   index?: string; // e.g. "04" — omit if you don't want the numbered rail
   category: string;
   title: string;
@@ -62,7 +63,7 @@ function BlogHeader({
   slug,
   previous,
   next,
-}: BlogHeaderProps) {
+}: IBlogHeaderProps) {
   const absoluteUrl =
     typeof window !== "undefined"
       ? new URL(slug, window.location.origin).toString()
@@ -75,7 +76,7 @@ function BlogHeader({
     <div className="border-border max-w-full border-b pb-10">
       <div className="mb-8 flex items-center justify-between">
         <Link
-          href="/blog"
+          href={NAV_LINKS.blog}
           className={cn(
             "group flex items-center gap-1.5",
             "hover:text-foreground text-muted-foreground",
@@ -102,7 +103,7 @@ function BlogHeader({
           <ShareMenu title={title} url={slug}>
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <ShareMenuTrigger className="bg-hover-fill-icon hover:bg-hover-fill-icon flex h-7 w-7 items-center justify-center rounded-md border-0">
                     <Share size={16} />
                   </ShareMenuTrigger>

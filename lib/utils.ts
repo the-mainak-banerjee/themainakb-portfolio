@@ -66,3 +66,14 @@ export function calculateDuration(
     formatted,
   };
 }
+
+export function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+export function padZero(value: number): string {
+  return value.toString().padStart(2, "0");
+}

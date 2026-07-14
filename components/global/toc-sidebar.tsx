@@ -75,7 +75,7 @@ function TocSidebar({ content }: { content: string }) {
       <motion.div
         ref={viewRef}
         className={cn(
-          "fixed top-48 right-0 flex flex-col overflow-hidden py-2 pl-8",
+          "fixed top-48 right-0 flex flex-col overflow-hidden py-2 pl-8 z-100",
           hovered
             ? "max-h-96 w-fit overflow-y-auto rounded-l-md border-r-0 [&::-webkit-scrollbar]:hidden"
             : "",
@@ -85,7 +85,8 @@ function TocSidebar({ content }: { content: string }) {
           borderTopWidth: hovered ? 1 : 0,
           borderBottomWidth: hovered ? 1 : 0,
           borderLeftWidth: hovered ? 1 : 0,
-          borderColor: hovered ? "var(--border)" : "var(--background)"
+          borderColor: hovered ? "var(--border)" : "var(--background)",
+          backgroundColor: hovered ? "var(--accent)" : "var(--background)",
         }}
         transition={{
           borderWidth: { duration: 0.15, ease: [0.22, 1, 0.36, 1] },

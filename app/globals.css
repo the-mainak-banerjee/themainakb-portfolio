@@ -214,6 +214,7 @@
 
 @utility prose-doc {
   @apply prose-a:text-muted-foreground prose-a:decoration-1 prose-a:underline-offset-4 prose-a:hover:text-foreground;
+  @apply prose-code:text-foreground;
 }
 
 .dark .shiki,

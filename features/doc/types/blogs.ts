@@ -5,6 +5,7 @@ export interface BlogFrontmatter {
   updatedAt?: string;
   category: string;
   tags: string[];
+  excerpt: string
 }
 
 export type BlogPostDoc = {

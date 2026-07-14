@@ -8,27 +8,33 @@ import {
 } from "lucide-react";
 import { Route } from "next";
 
+export const NAV_LINKS = {
+  components: "/components",
+  templates: "/templates",
+  blog: "/blog",
+  contact: "/contact"
+};
+
 export const MAIN_NAV: NavItem<Route>[] = [
   {
     title: "Components",
     icon: Component,
-    href: "/components",
+    href: NAV_LINKS.components,
   },
   {
     title: "Templates",
     icon: LayoutPanelTop,
-    href: "/templates",
+    href: NAV_LINKS.templates,
   },
   {
     title: "Blog",
     icon: NotebookPen,
-    href: "/blog",
+    href: NAV_LINKS.blog,
   },
-
   {
     title: "Contact",
     icon: Mail,
-    href: "/contact",
+    href: NAV_LINKS.contact,
   },
 ];
 

@@ -40,7 +40,7 @@ const mdxComponents: MDXRemoteProps["components"] = {
     <Typography variant="h4" {...props} className="font-geist-sans" />
   ),
   p: (props: React.ComponentProps<"p">) => (
-    <Typography variant="body" {...props} />
+    <Typography variant="body" allowProse={true} {...props} />
   ),
   pre: Pre,
   ComponentPreview,
