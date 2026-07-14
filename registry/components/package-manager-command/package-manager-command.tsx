@@ -198,7 +198,7 @@ export function PackageManagerCommand({
         />
       </div>
 
-      <div className="border-border bg-card overflow-x-auto overscroll-x-contain border-t px-4 py-3.5 [&::-webkit-scrollbar]:hidden">
+      <div className="border-border bg-card overflow-x-auto overscroll-x-contain border-t px-4 py-3.5 no-scrollbar">
         <AnimatePresence
           mode="wait"
           initial={false}

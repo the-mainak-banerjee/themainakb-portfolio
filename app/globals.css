@@ -174,10 +174,30 @@
   }
   html {
     @apply font-geist-sans;
+    /* Prevent layout shift when the vertical scrollbar appears or disappears. */
+    scrollbar-gutter: stable;
   }
   button {
     cursor: pointer;
     font-family: var(--font-mono);
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
 }
 
@@ -209,6 +229,16 @@
   .doc-container {
     display: grid;
     grid-template-columns: 1fr 768px 1fr;
+  }
+}
+
+/* No scrollbar utility. Thanks @shadcn-ui */
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 

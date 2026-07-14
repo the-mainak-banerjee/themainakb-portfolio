@@ -140,7 +140,7 @@ function ComponentPreviewClient({
               />
               <motion.div
                 ref={ref}
-                className="bg-muted absolute inset-0 z-70 m-auto max-h-[80%] max-w-[80%] overflow-y-auto rounded-md p-3 [&::-webkit-scrollbar]:hidden"
+                className="bg-muted absolute inset-0 z-70 m-auto max-h-[80%] max-w-[80%] overflow-y-auto rounded-md p-3 no-scrollbar"
                 initial={CLIP_VARIANTS[modalVariant].initial}
                 animate={CLIP_VARIANTS[modalVariant].animate}
                 exit={{
