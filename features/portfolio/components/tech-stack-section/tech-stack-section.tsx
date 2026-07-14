@@ -6,7 +6,10 @@ import { LayoutGroup } from "motion/react";
 
 function TechStackSection() {
   return (
-    <SectionContainer sectionHeading="Tech Stack" sectionLabel="Toolbox">
+    <SectionContainer
+      sectionHeading="Tech Stack"
+      sectionLabel="Arsenal"
+    >
       <div className="space-y-4">
         <LayoutGroup>
           {USER_STACK.map((item) => {

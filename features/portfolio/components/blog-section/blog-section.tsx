@@ -3,13 +3,13 @@ import SectionContainer from "@/components/global/section-container";
 import { getAllBlogPosts } from "@/features/doc/data/blogs";
 
 
-function HomeBlogSection() {
+function BlogSection() {
     const posts = getAllBlogPosts().slice(0,3)
 
   return (
     <SectionContainer
-      sectionHeading="From the blog"
-      sectionLabel="writing"
+      sectionHeading="Blogs"
+      sectionLabel="Journal"
       action={{ label: "View all blogs", href: "/blog" }}
     >
       <div>
@@ -28,4 +28,4 @@ function HomeBlogSection() {
   );
 }
 
-export default HomeBlogSection;
+export default BlogSection;

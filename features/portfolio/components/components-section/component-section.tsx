@@ -9,7 +9,11 @@ function ComponentSection() {
   const components = getComponentsWithStatus(CATEGORY_SLUGS.components);
 
   return (
-    <SectionContainer sectionHeading="Components" sectionLabel="Labs" action={{href: "/components", label: "View all components"}}>
+    <SectionContainer
+      sectionHeading="Components"
+      sectionLabel="Workshop"
+      action={{ href: "/components", label: "View all components" }}
+    >
       <div className="grid gap-6 lg:grid-cols-2">
         {components.slice(0, 6).map((item) => {
           const { isNew, ...rest } = item;

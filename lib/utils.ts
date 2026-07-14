@@ -73,3 +73,7 @@ export function formatDate(iso: string) {
     day: "numeric",
   });
 }
+
+export function padZero(value: number): string {
+  return value.toString().padStart(2, "0");
+}

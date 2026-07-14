@@ -1,3 +1,4 @@
+import { padZero } from "@/lib/utils";
 import { Typography } from "../ui/typography";
 import AccentHeading from "./accent-heading";
 
@@ -24,7 +25,7 @@ function ListPageHeader({
         {count && (
           <div className="text-right">
             <Typography className="text-text-accent text-xl font-medium">
-              {count}
+              {padZero(count)}
             </Typography>
             <Typography
               variant="caption"

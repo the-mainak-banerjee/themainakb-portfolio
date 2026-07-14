@@ -16,7 +16,7 @@ function ExperienceSection() {
     null,
   );
   return (
-    <SectionContainer sectionHeading="Experience" sectionLabel="Career">
+    <SectionContainer sectionHeading="Experience" sectionLabel="Journey">
       <motion.div
         className="flex flex-col"
         initial={REVEAL_VARIANTS_NAME.initial}
