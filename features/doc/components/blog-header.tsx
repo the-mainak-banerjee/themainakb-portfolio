@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { NAV_LINKS } from "@/config/site";
 
 export interface BlogPostNav {
   slug: string;
@@ -75,7 +76,7 @@ function BlogHeader({
     <div className="border-border max-w-full border-b pb-10">
       <div className="mb-8 flex items-center justify-between">
         <Link
-          href="/blog"
+          href={NAV_LINKS.blog}
           className={cn(
             "group flex items-center gap-1.5",
             "hover:text-foreground text-muted-foreground",

@@ -5,6 +5,7 @@ import TocInline from "@/components/global/toc-inline";
 import TocSidebar from "@/components/global/toc-sidebar";
 import Prose from "@/components/ui/prose";
 import { Typography } from "@/components/ui/typography";
+import { NAV_LINKS } from "@/config/site";
 import DocHeader from "@/features/doc/components/doc-header";
 import { getComponentDoc } from "@/features/doc/data/documents";
 import { notFound } from "next/navigation";
@@ -25,7 +26,7 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
           categorySlug={doc.categorySlug}
           itemTitle={doc.title}
           itemName={doc.name}
-          slug={`/components/${slug}`}
+          slug={`/${NAV_LINKS.components}/${slug}`}
         />
         <div>
           <Typography variant="h1" className="font-geist-sans">
