@@ -25,7 +25,7 @@ export async function CodeBlock({
     <div className="group relative">
       <div
         className={cn(
-          "bg-card not-prose overflow-x-auto rounded-md border text-sm [&_pre]:bg-transparent! [&::-webkit-scrollbar]:hidden [&>pre]:p-4",
+          "bg-card not-prose overflow-x-auto rounded-md border text-sm [&_pre]:bg-transparent! no-scrollbar [&>pre]:p-4",
           className,
         )}
         dangerouslySetInnerHTML={{ __html: html }}

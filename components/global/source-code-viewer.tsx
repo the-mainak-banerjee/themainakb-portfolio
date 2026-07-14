@@ -80,7 +80,7 @@ export function SourceCodeViewer({
           "relative overflow-hidden max-h-150",
           collapsible && "data-[state=closed]:max-h-80",
           "data-[state=closed]:overflow-y-hidden",
-          "overflow-y-auto [&::-webkit-scrollbar]:hidden",
+          "overflow-y-auto no-scrollbar",
         )}
         forceMount
       >

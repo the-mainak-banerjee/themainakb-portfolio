@@ -15,7 +15,7 @@ function CollapsibleBlock({
   return (
     <Collapsible
       className={cn(
-        "group/collapsible relative max-h-125 overflow-y-auto [&::-webkit-scrollbar]:hidden",
+        "group/collapsible relative max-h-125 overflow-y-auto no-scrollbar",
         className,
           )}
       {...props}

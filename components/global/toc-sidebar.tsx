@@ -77,7 +77,7 @@ function TocSidebar({ content }: { content: string }) {
         className={cn(
           "fixed top-48 right-0 flex flex-col overflow-hidden py-2 pl-8 z-100",
           hovered
-            ? "max-h-96 w-fit overflow-y-auto rounded-l-md border-r-0 [&::-webkit-scrollbar]:hidden"
+            ? "max-h-96 w-fit overflow-y-auto rounded-l-md border-r-0 no-scrollbar"
             : "",
         )}
         initial={false}
