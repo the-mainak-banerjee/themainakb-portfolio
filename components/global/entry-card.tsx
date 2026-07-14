@@ -94,7 +94,7 @@ export function EntryCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={cn(
-        "group border-border bg-card hover:bg-accent/40 flex flex-col rounded-lg border",
+        "group border-border bg-card hover:bg-accent active:bg-card flex flex-col rounded-lg border",
         className,
       )}
     >
