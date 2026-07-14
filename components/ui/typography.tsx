@@ -20,6 +20,7 @@ type TypographyProps<T extends ElementType = "p"> = {
   as?: T;
   children?: ReactNode;
   className?: string;
+  allowProse?: boolean
 } & React.ComponentPropsWithoutRef<T>;
 
 const variants: Record<TypographyVariant, string> = {
@@ -114,6 +115,7 @@ export function Typography<T extends ElementType = "p">({
   variant = "body",
   as,
   className,
+  allowProse,
   children,
   ...props
 }: TypographyProps<T>) {
@@ -136,7 +138,14 @@ export function Typography<T extends ElementType = "p">({
   const isHeading = ["h1", "h2", "h3", "h4"].includes(variant);
 
   return (
-    <Component className={cn(variants[variant], className, "not-prose")} {...props}>
+    <Component
+      className={cn(
+        variants[variant],
+        className,
+        allowProse ? "" : "not-prose",
+      )}
+      {...props}
+    >
       {isHeading && id ? (
         <a
           href={`#${id}`}

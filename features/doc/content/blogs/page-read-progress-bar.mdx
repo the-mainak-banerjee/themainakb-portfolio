@@ -1,0 +1,115 @@
+---
+title: Building a Page Scroll Progress Bar with Motion
+description: A step-by-step journal on creating a scroll-driven progress bar using Motion's useScroll hook, without needing useTransform.
+createdAt: 2026-07-14
+updatedAt: 2026-07-14
+category: design-engineering
+tags: ["motion", "framer-motion", "scroll-animation", "react-hooks"]
+---
+I have just started learning motion hooks and one of the first components I have created is an animated progress bar. In todays journal I am going to explain step by step how to do it.
+
+Without a further ado lets start.
+
+## What is a scroll progress bar?
+
+Its that thin bar you see stuck to the top of a lot of blogs (Medium, dev.to, this very site) that fills up left to right as you scroll down the page. Its a small thing but it gives the reader a sense of how much of the article is left, and it looks pretty slick when done right.
+
+## How to create it?
+
+### useScroll: The Hero of the story
+
+Now the first and most important thing we need is the progress. But progress of what?
+
+In this example we will use the progress of scroll of the whole page.
+
+In motion if you ever need to work with scroll you have to go to the `useScroll` hook.
+
+Lets understand the syntax
+
+```tsx
+const { scrollX, scrollY, scrollYProgress, scrollXProgress } = useScroll();
+```
+
+Here is what each of these actually give you:
+
+- `scrollX` / `scrollY` — motion values holding the raw pixel offset of how much you have scrolled horizontally or vertically.
+- `scrollYProgress` / `scrollXProgress` — motion values holding that same scroll, but normalised between `0` and `1`. `0` means top of the page, `1` means you have hit the bottom.
+
+For a progress bar, `scrollYProgress` is exactly what we want, since it already comes to us as a nice 0 to 1 range.
+
+But all these values are in comparison to the document by default. So if you want to track the whole page scroll, that default behaviour is fine and thats what we will use here.
+
+That said, `useScroll` doesn't only track the document. It also accepts `container`, `target` and `offset` if you want to track scroll of a specific element instead of the entire page:
+
+- `target` — a ref to the element whose scroll progress you actually want to track, instead of the full document. Handy if you want the bar tied to just one article section and not the whole page.
+- `container` — a ref to the scrollable container itself, in case you have your own scrollable div and its not the window that scrolls.
+- `offset` — an array of two strings that describe when tracking should start and end, based on where the target intersects the container. Something like `["start start", "end end"]`, which reads as "start tracking when the start of target meets the start of container, stop when the end of target meets the end of container."
+
+An example of tracking a specific section instead of the page:
+
+```tsx
+const targetRef = useRef(null);
+
+const { scrollYProgress } = useScroll({
+  target: targetRef,
+  offset: ["start start", "end end"],
+});
+```
+
+But since we want a page wide progress bar, we dont need any of this. A plain `useScroll()` with no options already tracks the whole document for us, which is perfect.
+
+### Skipping useTransform
+
+Normally after getting `scrollYProgress` you would run it through `useTransform` to map it into whatever range you need, like mapping 0-1 into a `scaleX` value.
+
+But here `scrollYProgress` already comes to us as a value between 0 and 1, and thats exactly the range `scaleX` expects too. So we dont even need `useTransform` in this case, we can just plug `scrollYProgress` directly into `scaleX`.
+
+### Building the bar
+
+Now create the div which is the progress bar track, with a bg colour.
+
+Above it add another div which we will actually animate, this is the fill.
+
+```tsx
+"use client";
+
+import { motion, useScroll } from "motion/react";
+
+export function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+
+  return (
+    <div className="fixed top-0 left-0 z-50 h-1 w-full bg-muted">
+      <motion.div
+        className="h-full origin-left bg-primary"
+        style={{ scaleX: scrollYProgress }}
+      />
+    </div>
+  );
+}
+```
+
+The outer div is just the track, fixed to the top, full width, with a background colour so you can see the empty part of the bar.
+
+The inner `motion.div` is the actual fill. We add the `scaleX` style and bind it directly to `scrollYProgress`. As you scroll, `scrollYProgress` goes from 0 to 1, and `scaleX` scales the div horizontally from nothing to its full width.
+
+But by default a div scales from its center, so as you scroll it would grow out from the middle in both directions instead of filling left to right. To fix that we add `origin-left`, which sets `transform-origin: left` so the scale always grows from the left edge instead.
+
+Hooray its done!
+
+### A small note on useSpring
+
+One thing I found right after finishing this: binding `scaleX` straight to `scrollYProgress` makes the bar snap exactly to your scroll position every single frame, which can feel a bit mechanical.
+
+If you want it to feel smoother instead of tracking scroll 1:1, wrap it with `useSpring`:
+
+```tsx
+const { scrollYProgress } = useScroll();
+const scaleX = useSpring(scrollYProgress, {
+  stiffness: 100,
+  damping: 30,
+  restDelta: 0.001,
+});
+```
+
+Then just swap `scrollYProgress` for `scaleX` in the style. It adds a bit of spring physics on top so the bar eases into position instead of snapping, small change but it makes a real difference in feel.
