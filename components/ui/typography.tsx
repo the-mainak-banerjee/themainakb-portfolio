@@ -15,7 +15,7 @@ type TypographyVariant =
   | "caption-sm"
   | "label";
 
-type TypographyProps<T extends ElementType = "p"> = {
+export type TypographyProps<T extends ElementType = "p"> = {
   variant?: TypographyVariant;
   as?: T;
   children?: ReactNode;

@@ -12,7 +12,7 @@ function BlogFooterNav({ previous, next }: BlogFooterNavProps) {
   if (!previous && !next) return null;
 
   return (
-    <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {previous ? (
         <BlogNavCard
           direction="previous"

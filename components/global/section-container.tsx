@@ -1,8 +1,6 @@
 import React, { ReactNode } from "react";
-import { Typography } from "../ui/typography";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./reveal";
-import SectionLabel from "./section-label";
 
 export interface ISectionContainer {
   sectionHeading?: string;
@@ -10,26 +8,52 @@ export interface ISectionContainer {
   children: ReactNode;
   className?: string;
   shouldAnimate?: boolean;
+  action?: {
+    label: string;
+    href: string;
+  };
 }
 
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import AccentHeading from "./accent-heading";
+
 function SectionContainerSkaleton({
-  sectionHeading,
   sectionLabel,
-  children,
+  sectionHeading,
+  action,
   className,
+  children,
 }: Omit<ISectionContainer, "shouldAnimate">) {
   return (
-      <div className={cn("space-y-6", className)}>
-        {sectionLabel && <SectionLabel sectionLabel={sectionLabel} />}
-        {sectionHeading && (
-          <Typography variant="h2" id={sectionHeading.toLowerCase()}>{sectionHeading}</Typography>
+    <section className={cn("space-y-6", className)}>
+      <div className="flex items-end justify-between gap-6">
+        <AccentHeading
+          label={sectionLabel}
+          heading={sectionHeading}
+          headingId={sectionHeading?.toLowerCase()}
+        />
+
+        {action && (
+          <Link
+            href={action.href}
+            className="text-muted-foreground hover:text-foreground flex shrink-0 items-center gap-1.5 pb-1 text-[13px] transition-colors"
+          >
+            <span>{action.label}</span>
+            <ArrowRight size={14} />
+          </Link>
         )}
-        {children}
       </div>
+
+      {children}
+    </section>
   );
 }
 
-function SectionContainer({ shouldAnimate = true, ...props }: ISectionContainer) {
+function SectionContainer({
+  shouldAnimate = true,
+  ...props
+}: ISectionContainer) {
   if (shouldAnimate) {
     return (
       <Reveal>
@@ -38,7 +62,6 @@ function SectionContainer({ shouldAnimate = true, ...props }: ISectionContainer)
     );
   }
   return <SectionContainerSkaleton {...props} />;
-
 }
 
 export default SectionContainer;
