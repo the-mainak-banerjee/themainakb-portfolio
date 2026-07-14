@@ -27,7 +27,7 @@ export interface BlogPostNav {
   title: string;
 }
 
-export interface BlogHeaderProps {
+export interface IBlogHeaderProps {
   index?: string; // e.g. "04" — omit if you don't want the numbered rail
   category: string;
   title: string;
@@ -63,7 +63,7 @@ function BlogHeader({
   slug,
   previous,
   next,
-}: BlogHeaderProps) {
+}: IBlogHeaderProps) {
   const absoluteUrl =
     typeof window !== "undefined"
       ? new URL(slug, window.location.origin).toString()
