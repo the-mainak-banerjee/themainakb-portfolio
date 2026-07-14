@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { ComponentEntry } from "@/registry/config";
 import { ComponentCliCommand } from "@/features/doc/components/component-cli-command";
 import { Typography } from "../ui/typography";
-import { useIsMobile } from "@/hooks/useMobile";
+import { TABLET_OR_BELOW_QUERY, useMediaQuery } from "@/hooks/useMobile";
 
 function EntryCardTopSection({
   entry,
@@ -23,7 +23,7 @@ function EntryCardTopSection({
   docUrl: string;
   miniVersion?: boolean;
 }) {
-  const isMobile = useIsMobile();
+  const isTabletOrLess = useMediaQuery(TABLET_OR_BELOW_QUERY);
 
   return (
     <div className="relative flex flex-col gap-2">
@@ -60,7 +60,7 @@ function EntryCardTopSection({
         </Typography>
       )}
 
-      {isMobile && (
+      {isTabletOrLess && (
         <Link
           href={docUrl}
           className="border-border bg-secondary font-geist-sans mt-4 flex w-full items-center justify-center gap-2 rounded-lg border py-2 text-sm lg:hidden"
@@ -87,7 +87,7 @@ export function EntryCard({
   className?: string;
 }) {
   const [hovered, setHovered] = useState(false);
-  const isMobile = useIsMobile();
+  const isTabletOrLess = useMediaQuery(TABLET_OR_BELOW_QUERY);
   const docUrl = `/${categorySlug}/${entry.name}`;
   return (
     <motion.div
@@ -98,8 +98,8 @@ export function EntryCard({
         className,
       )}
     >
-      {isMobile ? (
-        <div className="p-5 lg:hidden">
+      {isTabletOrLess ? (
+        <div className="p-5">
           <EntryCardTopSection
             entry={entry}
             hovered={hovered}

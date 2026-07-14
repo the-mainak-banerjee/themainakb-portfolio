@@ -11,14 +11,14 @@ import {
   REVEAL_VARIANTS_NAME,
 } from "@/lib/motion_utils";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/useMobile";
+import { useMediaQuery } from "@/hooks/useMobile";
 
 export interface ITechStackCard {
   stackGroup: User_Stack;
 }
 
 function TechStackCard({ stackGroup }: ITechStackCard) {
-  const isMobile = useIsMobile();
+  const isMobile = useMediaQuery();
   const [hovered, setHovered] = useState(false);
   return (
     <motion.div

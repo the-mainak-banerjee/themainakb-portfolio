@@ -29,8 +29,11 @@ export function getReadingTime(content: string, wordsPerMinute = 200): string {
   return `${minutes} min read`;
 }
 
-export function getBlogPostBySlug(slug: string): BlogPostDoc {
-  const raw = fs.readFileSync(path.join(BLOG_DIR, `${slug}.mdx`), "utf8");
+export function getBlogPostBySlug(slug: string): BlogPostDoc | null {
+  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+  if (!fs.existsSync(filePath)) return null;
+
+  const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
   return {
     content,
