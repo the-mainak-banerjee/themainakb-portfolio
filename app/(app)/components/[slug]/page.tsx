@@ -8,7 +8,17 @@ import { Typography } from "@/components/ui/typography";
 import { NAV_LINKS } from "@/config/site";
 import DocHeader from "@/features/doc/components/doc-header";
 import { getComponentDoc } from "@/features/doc/data/documents";
+import { getAllComponents } from "@/registry/config";
 import { notFound } from "next/navigation";
+
+export const revalidate = false;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const comps = getAllComponents();
+  return comps.map((comp) => ({ slug: comp.name }));
+}
 
 async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
   const slug = (await params).slug;

@@ -8,8 +8,17 @@ import Prose from "@/components/ui/prose";
 import { NAV_LINKS } from "@/config/site";
 import BlogFooterNav from "@/features/doc/components/blog-footer-nav";
 import BlogHeader from "@/features/doc/components/blog-header";
-import { getAdjacentPosts, getBlogPostBySlug } from "@/features/doc/data/blogs";
+import { getAdjacentPosts, getAllBlogPosts, getBlogPostBySlug } from "@/features/doc/data/blogs";
 import { notFound } from "next/navigation";
+
+export const revalidate = false;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const blogs = getAllBlogPosts();
+  return blogs.map((blog) => ({ slug: blog.slug }));
+}
 
 async function BlogContentPage({ params }: PageProps<"/components/[slug]">) {
   const slug = (await params).slug;
