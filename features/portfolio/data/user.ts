@@ -203,11 +203,12 @@ export const USER: User = {
   jobTitle: "React Developer",
   jobRoles: USER_JOB_ROLES,
   about: `I'm Mainak, a React developer who ships fast without shipping sloppy.
-  
+
 Over the last 3 years, I've shipped 7+ production frontends across SaaS, e-commerce, and B2C products.
 
 I work best with founders and teams who need an MVP delivered fast, but still expect the kind of thoughtful interactions and interface details that make a product feel finished.
-`,
+
+Currently open to full-time roles and freelance projects — happy to talk either way.`,
   timeZone: "Asia/Kolkata",
   keywords: [
     "mainak banerjee",

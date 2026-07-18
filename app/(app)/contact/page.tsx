@@ -106,8 +106,8 @@ function ContactPage() {
         </div>
 
         <a
-          href="/resume.pdf"
-          download
+          href="/Mainak_Banerjee.pdf"
+          target="_blank"
           className="border-border bg-card hover:border-foreground/30 flex w-fit items-center gap-2 rounded-lg border px-4 py-2 transition-colors duration-200"
         >
           <Download size={16} />

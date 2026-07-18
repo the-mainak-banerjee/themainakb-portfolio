@@ -24,16 +24,19 @@ function FlipSentences({ sentences }: IFlipSentencesProps) {
           initial={{
             opacity: 0,
             scale: 0.98,
+            filter: "blur(3px)",
             color: "var(--muted-foreground)",
           }}
           animate={{
-            opacity: 0.7,
+            opacity: 0.8,
             scale: 1,
+            filter: "blur(0px)",
             color: "var(--foreground)",
           }}
           exit={{
             opacity: 0,
             scale: 1.02,
+            filter: "blur(3px)",
             color: "var(--muted-foreground)",
             transition: {
               duration: 0.4,
@@ -41,13 +44,16 @@ function FlipSentences({ sentences }: IFlipSentencesProps) {
             },
           }}
           transition={{
-            duration: 0.45,
+            // duration: 0.45,
+            type: "spring",
+            stiffness: 500,
+            damping: 50
           }}
         >
           {sentences[index]}
         </motion.p>
       </AnimatePresence>
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         <motion.p
           key={sentences[index] + "-highlight"}
           className="absolute inset-0"
@@ -68,7 +74,7 @@ function FlipSentences({ sentences }: IFlipSentencesProps) {
         >
           {sentences[index]}
         </motion.p>
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 }
