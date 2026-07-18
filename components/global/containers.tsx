@@ -9,7 +9,7 @@ export function MainContainer({
   className?: string;
 }) {
   return (
-    <main className={cn("container pt-4 pb-24 md:pt-8", className)}>
+    <main className={cn("container pt-4 pb-8 md:pb-24 md:pt-8", className)}>
       {children}
     </main>
   );
