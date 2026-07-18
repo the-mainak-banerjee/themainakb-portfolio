@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: isProduction ? "/" : "",
       disallow: isProduction ? [] : "/",
     },
-    sitemap: isProduction ? SITE_URL : undefined,
+    sitemap: isProduction ? `${SITE_URL}/sitemap.xml` : undefined,
   };
 }
