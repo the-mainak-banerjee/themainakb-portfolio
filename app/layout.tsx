@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { getBaseUrl, isProd } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +23,20 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Mainak Banerjee",
-  description: "Personal portfolio of Mainak Banerjee",
+  metadataBase: new URL(getBaseUrl()),
+  title: {
+    default: "Mainak Banerjee - Design Engineer",
+    template: "%s | Mainak Banerjee",
+  },
+  description:
+    "Frontend developer turned design engineer. I design and build interactive UI components with production-grade motion, from concept to shipped code.",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: isProd(),
+    follow: isProd(),
+  },
 };
 
 export default function RootLayout({

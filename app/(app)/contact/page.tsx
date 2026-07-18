@@ -1,10 +1,21 @@
 import { MainContainer } from "@/components/global/containers";
 import CopyButton from "@/components/global/copy-button";
 import { Typography } from "@/components/ui/typography";
+import { NAV_LINKS } from "@/config/site";
 import SocialIcons from "@/features/portfolio/components/hero-section/social-icons";
 import { USER } from "@/features/portfolio/data/user";
 import { ArrowRight, Download, Mail, Send } from "lucide-react";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch — I'm a frontend developer and design engineer specializing in motion, interaction design, and React/Next.js. Open to roles and freelance work",
+  alternates: {
+    canonical: `${NAV_LINKS.contact}`,
+  },
+};
 
 function ContactPage() {
   return (
@@ -95,8 +106,8 @@ function ContactPage() {
         </div>
 
         <a
-          href="/resume.pdf"
-          download
+          href="/Mainak_Banerjee.pdf"
+          target="_blank"
           className="border-border bg-card hover:border-foreground/30 flex w-fit items-center gap-2 rounded-lg border px-4 py-2 transition-colors duration-200"
         >
           <Download size={16} />

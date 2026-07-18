@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Typography } from "../ui/typography";
+import { VisuallyHidden } from "./visually-hidden";
 
 interface BaseCopyButtonProps {
   /** The text that gets copied to the clipboard */
@@ -261,6 +262,7 @@ const CopyButtonSkeleton = React.forwardRef<
             </AnimatePresence>
           </motion.span>
         )}
+        <VisuallyHidden>{copied ? "Copied to clipboard" : "Copy"}</VisuallyHidden>
       </motion.button>
     );
   },
@@ -273,13 +275,19 @@ function CopyButton({ withTooltip, tooltipLabel, ...props }: CopyButtonProps) {
   const { buttonText } = props;
   const formattedTooltipLabel = tooltipLabel ?? buttonText ?? "Copy";
   if (!withTooltip)
-    return <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />;
+    return (
+      <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />
+    );
 
   return (
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <CopyButtonSkeleton copied={copied} setCopied={setCopied} {...props} />
+          <CopyButtonSkeleton
+            copied={copied}
+            setCopied={setCopied}
+            {...props}
+          />
         </TooltipTrigger>
         <TooltipContent>
           <Typography variant="caption" className="text-background">
