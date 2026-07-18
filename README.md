@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/header/gradient.svg?title=themainakb.com&amp;subtitle=A+personal+portfolio+with+shadcn%2Fui+registry.&amp;logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADEAAAAaCAYAAAAe97TpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAwZJREFUeAHFWNFx2zAMJSmnd%2F1IImWBcoN6gygTNBvUnqDewOkEcSdIvUEzQd0N3AmifuUnjuR%2B9iyzj450JSGKkmvJeXc%2BSyAAASQeIYr%2FTlPF%2FMjOoihq0GHwk%2BIv9OnAD18%2FPyec83dsTyDIjDO2zPN8zoJggZCScky0sA8Rn%2FQpFOPeBA4Ff%2FEfB0Fwh6C%2Fp6vVpBxrkwQLGBt6FfLcP94xkJAMhLgtE6kkgWVb6p8l225jn1PBOU0ioT76ABKZogrCAR3QdYeg10yIf4FxLn3OuBCX5j3s75leftNHgTecx%2BX1n%2B12AttPli1jnxFDQmQhV%2BoacVwSd6GAj0oSu6CUsmaRV40prGAR2AKJXLsU3xqEXK9WGR1HaSxOo2jhMJ1Bf0aTRnBDJydysJ%2BIasntInVOZrIrbIW4oTJNeGcSxfZlzVItuaukzmDfCx%2FgN3PJfbtTK3JXSK3UT9YTsOqViVQo%2FdokELQdTA25K6QmfOoKumwR7B2Vo8RmgzqjPchdITU7ANiJpuj%2BH4lYQj7khHt6J9OlX5uEJndgi3bkNtt9T6SOXUJu3ya4H58Vu1htObUi92YjiVlvpDaQYKKuzG246bWDklua90KI2NLukdQGJCbzYZ2m01Iw8GlrcnMz0JduOzPurZXphNRK3eOXGc%2FQ5RrSbo1yugF3JEpq7E3CQe73toJ9fyipi2fMTi8uFlSu%2BYcVuMWl%2BSYwgnzuLSdH55b6hatwGuq3SUu%2Fp06toTkK%2F2MqF0pNRJMhq5I73l1sNkfr1EY8GUr2lynT1dHmPOEk9yuRWgd9TmWNSTg6d1z8d0%2FqBqRPT5oPVl9CSWeDJsNacvdAag2V5zJ9fJSWMAhCcXLyAVeTij4qpTEJR%2BfW5Jb%2FS%2BrGDwU4Q%2BMczdoCccwby6mG3A9E7RidugKswhfduVt9KGBN5%2BUjkdp6JFbgPIrcHwqcBpTcdPwIpC6Q4WE%2FUEJXSGBUCgdaYGptHLVdvLN%2Fq3HMciGWNTZfqRyHqBHbE3oHQgln5vncxF99oULPSFHPjQAAAABJRU5ErkJggg%3D%3D&amp;mode=dark" /><img alt="header" src="https://shieldcn.dev/header/gradient.svg?title=themainakb.com&amp;subtitle=A+personal+portfolio+with+shadcn%2Fui+registry.&amp;logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADEAAAAaCAYAAAAe97TpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAwZJREFUeAHFWNFx2zAMJSmnd%2F1IImWBcoN6gygTNBvUnqDewOkEcSdIvUEzQd0N3AmifuUnjuR%2B9iyzj450JSGKkmvJeXc%2BSyAAASQeIYr%2FTlPF%2FMjOoihq0GHwk%2BIv9OnAD18%2FPyec83dsTyDIjDO2zPN8zoJggZCScky0sA8Rn%2FQpFOPeBA4Ff%2FEfB0Fwh6C%2Fp6vVpBxrkwQLGBt6FfLcP94xkJAMhLgtE6kkgWVb6p8l225jn1PBOU0ioT76ABKZogrCAR3QdYeg10yIf4FxLn3OuBCX5j3s75leftNHgTecx%2BX1n%2B12AttPli1jnxFDQmQhV%2BoacVwSd6GAj0oSu6CUsmaRV40prGAR2AKJXLsU3xqEXK9WGR1HaSxOo2jhMJ1Bf0aTRnBDJydysJ%2BIasntInVOZrIrbIW4oTJNeGcSxfZlzVItuaukzmDfCx%2FgN3PJfbtTK3JXSK3UT9YTsOqViVQo%2FdokELQdTA25K6QmfOoKumwR7B2Vo8RmgzqjPchdITU7ANiJpuj%2BH4lYQj7khHt6J9OlX5uEJndgi3bkNtt9T6SOXUJu3ya4H58Vu1htObUi92YjiVlvpDaQYKKuzG246bWDklua90KI2NLukdQGJCbzYZ2m01Iw8GlrcnMz0JduOzPurZXphNRK3eOXGc%2FQ5RrSbo1yugF3JEpq7E3CQe73toJ9fyipi2fMTi8uFlSu%2BYcVuMWl%2BSYwgnzuLSdH55b6hatwGuq3SUu%2Fp06toTkK%2F2MqF0pNRJMhq5I73l1sNkfr1EY8GUr2lynT1dHmPOEk9yuRWgd9TmWNSTg6d1z8d0%2FqBqRPT5oPVl9CSWeDJsNacvdAag2V5zJ9fJSWMAhCcXLyAVeTij4qpTEJR%2BfW5Jb%2FS%2BrGDwU4Q%2BMczdoCccwby6mG3A9E7RidugKswhfduVt9KGBN5%2BUjkdp6JFbgPIrcHwqcBpTcdPwIpC6Q4WE%2FUEJXSGBUCgdaYGptHLVdvLN%2Fq3HMciGWNTZfqRyHqBHbE3oHQgln5vncxF99oULPSFHPjQAAAABJRU5ErkJggg%3D%3D&amp;mode=light" /></picture>
+</p>
 
-## Getting Started
+Live site: [themainakb.com](https://themainakb.com)
 
-First, run the development server:
+# Portfolio
+
+A personal portfolio showcasing my frontend work, technical writing, and a custom Motion-powered shadcn/ui registry. I'm currently transitioning into design engineering and documenting the journey through projects and reusable UI components.
+
+![Preview](./public/og-image.png)
+
+## Overview
+
+This repository powers my personal portfolio, where I share my work as a Frontend Developer. It includes featured projects, technical blogs, a component registry, and experiments in interaction design and motion.
+
+The project is built with performance, accessibility, and developer experience in mind, while also serving as a playground for exploring design engineering concepts.
+
+---
+
+## Features
+
+- ✨ Modern, responsive portfolio
+- 📝 MDX-powered technical blog
+- 🧩 Custom shadcn/ui registry
+- 🎬 Motion-powered UI components
+- 🌙 Dark & light theme support
+- 🔍 SEO optimized
+- 📱 Fully responsive
+- ⚡ Fast performance with Next.js App Router
+- 📖 Component documentation with live previews
+
+---
+
+## Tech Stack
+
+### Framework
+
+- Next.js
+- React
+- TypeScript
+
+### Styling
+
+- Tailwind CSS
+- shadcn/ui
+
+### Animation
+
+- Motion
+
+### Content
+
+- MDX
+
+### Tooling
+
+- ESLint
+- Prettier
+- pnpm
+
+---
+
+## Component Registry
+
+This portfolio also hosts a custom **shadcn/ui Registry** containing reusable, production-ready components.
+
+### Install a component
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx shadcn@latest add <component-url>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Browse the registry from the Components section of the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the MIT License.
