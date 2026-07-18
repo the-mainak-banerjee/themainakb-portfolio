@@ -8,7 +8,7 @@ import { Typography } from "@/components/ui/typography";
 import { NAV_LINKS } from "@/config/site";
 import DocHeader from "@/features/doc/components/doc-header";
 import { getComponentDoc } from "@/features/doc/data/documents";
-import { getAllComponents } from "@/registry/config";
+import { CATEGORY_NAMES, getComponentsByCategory } from "@/registry/config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -17,7 +17,7 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const comps = getAllComponents();
+  const comps = getComponentsByCategory(CATEGORY_NAMES.components);
   return comps.map((comp) => ({ slug: comp.name }));
 }
 

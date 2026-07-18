@@ -1,0 +1,15 @@
+import { isProd, PROD_URL } from "@/config/site";
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  const isProduction = isProd();
+
+  return {
+    rules: {
+      userAgent: "*",
+      allow: isProduction ? "/" : "",
+      disallow: isProduction ? [] : "/",
+    },
+    sitemap: isProduction ? PROD_URL : undefined,
+  };
+}
