@@ -6,10 +6,11 @@ import {
   getAllComponents,
   getComponentByName,
 } from "@/registry/config";
+import { SITE_URL } from "@/config/site";
 
 const ROOT = process.cwd();
 const REGISTRY_NAME = "themainakb";
-const REGISTRY_HOMEPAGE = `${process.env.NEXT_PUBLIC_APP_URL}/labs`;
+const REGISTRY_HOMEPAGE = `${SITE_URL}/components`;
 
 export class RegistryItemNotFoundError extends Error {
   constructor(name: string) {
