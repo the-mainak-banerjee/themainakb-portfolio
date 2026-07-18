@@ -4,6 +4,9 @@
 
 Live site: [themainakb.com](https://themainakb.com)
 
+[![Portfolio Preview](./public/preview_image_dark.png#gh-dark-mode-only)](https://themainakd.com)
+[![Portfolio Preview](./public/preview_image_light.png#gh-light-mode-only)](https://themainakb.com)
+
 # Portfolio
 
 A personal portfolio showcasing my frontend work, technical writing, and a custom Motion-powered shadcn/ui registry. I'm currently transitioning into design engineering and documenting the journey through projects and reusable UI components.
