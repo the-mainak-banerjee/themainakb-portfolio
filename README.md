@@ -4,8 +4,8 @@
 
 Live site: [themainakb.com](https://themainakb.com)
 
-[![Portfolio Preview](./public/preview_image_dark.png#gh-dark-mode-only)](https://themainakd.com)
-[![Portfolio Preview](./public/preview_image_light.png#gh-light-mode-only)](https://themainakb.com)
+[![Portfolio Preview](./public/preview_image_dark.png#gh-dark-mode-only)](https://themainakb.com#gh-dark-mode-only)
+[![Portfolio Preview](./public/preview_image_light.png#gh-light-mode-only)](https://themainakb.com#gh-light-mode-only)
 
 # Portfolio
 
