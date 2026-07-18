@@ -8,7 +8,12 @@ import Prose from "@/components/ui/prose";
 import { NAV_LINKS } from "@/config/site";
 import BlogFooterNav from "@/features/doc/components/blog-footer-nav";
 import BlogHeader from "@/features/doc/components/blog-header";
-import { getAdjacentPosts, getAllBlogPosts, getBlogPostBySlug } from "@/features/doc/data/blogs";
+import {
+  getAdjacentPosts,
+  getAllBlogPosts,
+  getBlogPostBySlug,
+} from "@/features/doc/data/blogs";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const revalidate = false;
@@ -20,14 +25,34 @@ export async function generateStaticParams() {
   return blogs.map((blog) => ({ slug: blog.slug }));
 }
 
-async function BlogContentPage({ params }: PageProps<"/components/[slug]">) {
+export async function generateMetadata({
+  params,
+}: PageProps<"/blog/[slug]">): Promise<Metadata> {
+  const slug = (await params).slug;
+  const doc = getBlogPostBySlug(slug);
+
+  if (!doc) {
+    return notFound();
+  }
+
+  const { title, description } = doc.data;
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${NAV_LINKS.blog}/${slug}`,
+    },
+  };
+}
+
+async function BlogContentPage({ params }: PageProps<"/blog/[slug]">) {
   const slug = (await params).slug;
 
   const doc = getBlogPostBySlug(slug);
   const { previous, next } = getAdjacentPosts(slug);
 
   if (!doc) {
-    notFound();
+    return notFound();
   }
   return (
     <DocContainer>

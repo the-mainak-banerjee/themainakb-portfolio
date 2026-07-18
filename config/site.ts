@@ -2,7 +2,6 @@ import { NavItem } from "@/types/nav";
 import {
   Component,
   House,
-  LayoutPanelTop,
   Mail,
   NotebookPen,
 } from "lucide-react";
@@ -20,11 +19,6 @@ export const MAIN_NAV: NavItem<Route>[] = [
     title: "Components",
     icon: Component,
     href: NAV_LINKS.components,
-  },
-  {
-    title: "Templates",
-    icon: LayoutPanelTop,
-    href: NAV_LINKS.templates,
   },
   {
     title: "Blog",
