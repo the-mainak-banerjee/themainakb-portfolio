@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    images: ["/opengraph-image"],
+  },
   robots: {
     index: isProd(),
     follow: isProd(),
