@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/config/site";
 import {
   ComponentEntry,
   ComponentWithStatus,
@@ -8,12 +9,12 @@ import {
 export function getRegistryItemUrl(item: string) {
   const namespaceUrl =
     process.env.NEXT_PUBLIC_REGISTRY_NAMESPACE_URL ||
-    "https://develop-themainakb-portfolio.vercel.app/r/{name}.json";
+    `${SITE_URL}/r/{name}.json`;
   return namespaceUrl?.replace("{name}", item);
 }
 
 export function getItemDocumentationUrl(name: string, categorySlug: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}/${categorySlug}/${name}`;
+  return `${SITE_URL}/${categorySlug}/${name}`;
 }
 
 const NEW_THRESHOLD_DAYS = 2;

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Route } from "next";
 
-export const PROD_URL = process.env.NEXT_PUBLIC_APP_URL || "https://themainakb.com";
+export const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://themainakb.com";
 
 export const NAV_LINKS = {
   components: "/components",
