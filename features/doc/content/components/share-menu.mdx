@@ -70,13 +70,13 @@ import { ShareMenu } from "@/components/share-menu";
     <ShareMenuCopy />
     <ShareMenuItem
       icon={<Icon name="twitter" />}
-      href={`https://x.com/intent/tweet?url=${encodeURIComponent(https://develop-themainakb-portfolio.vercel.app/components/share-menu)}`}
+      href={`https://x.com/intent/tweet?url=${encodeURIComponent(https://themainakb.com/components/share-menu)}`}
     >
       Share on Twitter
     </ShareMenuItem>
     <ShareMenuItem
       icon={<Icon name="linkedin" />}
-      href={`https://www.linkedin.com/sharing/share-offsite?url=${encodeURIComponent(https://develop-themainakb-portfolio.vercel.app/components/share-menu)}`}
+      href={`https://www.linkedin.com/sharing/share-offsite?url=${encodeURIComponent(https://themainakb.com/components/share-menu)}`}
     >
       Share on Linkedin
     </ShareMenuItem>
@@ -84,3 +84,8 @@ import { ShareMenu } from "@/components/share-menu";
   </ShareMenuContent>
 </ShareMenu>
 ```
+
+## Compatibility Note
+
+Some components are currently built using **shadcn/ui (Radix)** primitives and may not work with **shadcn/ui (Base UI)** yet. I'm actively working on making every component compatible with both **Radix** and **Base UI** variants of shadcn/ui. Compatibility will continue to improve with future updates.
+

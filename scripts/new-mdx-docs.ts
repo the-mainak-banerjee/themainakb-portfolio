@@ -5,7 +5,7 @@ import { getComponentByName } from "../registry/config";
 const name = process.argv[2];
 const appUrl =
   process.env.NEXT_PUBLIC_APP_URL ??
-  "https://develop-themainakb-portfolio.vercel.app";
+  "https://themainakb.com";
 
 if (!name) {
   console.error("Usage: npx tsx scripts/new-doc.ts <component-name>");

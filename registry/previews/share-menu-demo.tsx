@@ -33,7 +33,7 @@ export default function ShareMenuDemo() {
     React.useState<(typeof animations)[number]>("ellipse");
 
   const url =
-    "https://develop-themainakb-portfolio.vercel.app/components/share-menu";
+    "https://themainakb.com/components/share-menu";
   const encodedUrl = encodeURIComponent(url);
   const title = "Check out this Share Menu component!";
 
