@@ -5,14 +5,22 @@ import { USER } from "@/features/portfolio/data/user";
 import { Typography } from "../ui/typography";
 import PrimaryLogo from "../primary-logo";
 import AnimatedWatermark from "./animated-watermark";
+import { USER_SOCIAL_MEDIA_LINKS } from "@/features/portfolio/data/user-social-media";
+
+const INSPIRED_BY = [
+  { name: "shadcn", href: "https://ui.shadcn.com" },
+  { name: "Motion", href: "https://motion.dev" },
+  { name: "Chánh Đại", href: "https://chanhdai.com" },
+  { name: "Manu Arora", href: "https://manuarora.in" },
+];
 
 export function Footer() {
   return (
     <footer className="bg-card mx-auto w-full overflow-hidden rounded-xl px-8 pt-10 max-lg:pb-25">
       {/* Top row: signature mark + status/contact */}
       <div className="mb-8 flex flex-wrap items-start justify-between gap-6">
-              {/* <MonogramMB className="text-foreground h-10 w-14" /> */}
-              <PrimaryLogo />
+        {/* <MonogramMB className="text-foreground h-10 w-14" /> */}
+        <PrimaryLogo />
 
         <div className="flex flex-col items-end gap-1.5">
           <div className="text-muted-foreground flex items-center gap-2 text-sm">
@@ -21,9 +29,7 @@ export function Footer() {
 
               <span className="bg-text-accent size-1.5 rounded-full" />
             </span>
-            <Typography variant="caption-sm">
-              Open to opportunities
-            </Typography>
+            <Typography variant="caption-sm">Open to opportunities</Typography>
           </div>
           <div className="flex items-center text-sm">
             <CopyButton
@@ -58,13 +64,41 @@ export function Footer() {
       </nav>
 
       {/* Credits row */}
-      <div className="border-border text-muted-foreground flex flex-wrap justify-between gap-2 border-t py-5 text-xs">
-        <span>v0.1 made with Next.js,Motion and shadcn</span>
-        <span>© {new Date().getFullYear()}, built from scratch</span>
+      <div className="border-border flex flex-wrap items-start justify-between gap-2 border-t py-5 text-xs">
+        <div className="flex flex-col gap-1">
+          <span className="text-foreground/80">
+            Crafted by{" "}
+            <a
+              href={USER_SOCIAL_MEDIA_LINKS.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground font-medium underline underline-offset-2"
+            >
+              @themainakb
+            </a>{" "}
+            · v0.1
+          </span>
+          <span className="text-muted-foreground">
+            Inspired by{" "}
+            {INSPIRED_BY.map((item, i) => (
+              <span key={item.name}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="decoration-muted-foreground/40 hover:text-foreground underline underline-offset-2"
+                >
+                  {item.name}
+                </a>
+                {i < INSPIRED_BY.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </span>
+        </div>
       </div>
 
       {/* Closing wordmark */}
-      <AnimatedWatermark/>
+      <AnimatedWatermark />
     </footer>
   );
 }
