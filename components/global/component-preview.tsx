@@ -1,5 +1,4 @@
 import React from "react";
-import { type ComponentPreview } from "@/registry/config";
 import { getPreviewComponentCode } from "@/features/doc/data/documents";
 import { CodeBlock } from "./code-block";
 import ComponentPreviewClient from "./component-preview-client";

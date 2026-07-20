@@ -1,6 +1,6 @@
-import { ComponentEntryWithCategorySlug } from "@/registry/config";
+import { RegistryItemEntryWithRegistryTypeSlug } from "@/registry/config";
 
-export type ComponentDoc = ComponentEntryWithCategorySlug & {
+export type ComponentDoc = RegistryItemEntryWithRegistryTypeSlug & {
   content: string;
   frontmatter: Record<string, unknown>;
 };

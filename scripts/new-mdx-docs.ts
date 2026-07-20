@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getComponentByName } from "../registry/config";
+import { getRegistryItemByName } from "../registry/config";
 
 const name = process.argv[2];
 const appUrl =
@@ -12,7 +12,7 @@ if (!name) {
   process.exit(1);
 }
 
-const entry = getComponentByName(name);
+const entry = getRegistryItemByName(name);
 
 if (!entry) {
   console.error(
@@ -124,7 +124,7 @@ import { ${toPascalCase(entry.name)} } from "@/${mainFile?.target?.replace(/^@|\
 
 const outDir = path.join(
   process.cwd(),
-  `features/doc/content/${entry.categorySlug}`,
+  `features/doc/content/${entry.registryTypeSlug}`,
 );
 fs.mkdirSync(outDir, { recursive: true });
 const outPath = path.join(outDir, `${entry.name}.mdx`);

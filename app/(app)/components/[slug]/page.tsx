@@ -8,7 +8,7 @@ import { Typography } from "@/components/ui/typography";
 import { NAV_LINKS } from "@/config/site";
 import DocHeader from "@/features/doc/components/doc-header";
 import { getComponentDoc } from "@/features/doc/data/documents";
-import { CATEGORY_SLUGS, getComponentsByCategory } from "@/registry/config";
+import { REGISTRY_TYPE_SLUGS, getRegistryItemByRegistryType } from "@/registry/config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -17,7 +17,7 @@ export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const comps = getComponentsByCategory(CATEGORY_SLUGS.components);
+  const comps = getRegistryItemByRegistryType(REGISTRY_TYPE_SLUGS.components);
   return comps.map((comp) => ({ slug: comp.name }));
 }
 
@@ -54,7 +54,7 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
       <aside className="max-lg:hidden"></aside>
       <SectionListContainer className="mx-auto w-full md:max-w-3xl">
         <DocHeader
-          categorySlug={doc.categorySlug}
+          registryTypeSlug={doc.registryTypeSlug}
           itemTitle={doc.title}
           itemName={doc.name}
           slug={`/${NAV_LINKS.components}/${slug}`}

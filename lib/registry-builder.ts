@@ -3,8 +3,8 @@ import path from "path";
 import { registryItemSchema } from "shadcn/schema";
 import type { RegistryItem } from "shadcn/schema";
 import {
-  getAllComponents,
-  getComponentByName,
+  getAllRegistryItems,
+  getRegistryItemByName,
 } from "@/registry/config";
 import { SITE_URL } from "@/config/site";
 
@@ -20,10 +20,10 @@ export class RegistryItemNotFoundError extends Error {
 }
 
 function toRegistryItem(
-  entry: ReturnType<typeof getAllComponents>[number],
+  entry: ReturnType<typeof getAllRegistryItems>[number],
 ): RegistryItem {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { catalog, categorySlug, ...item } = entry;
+  const { catalog, registryTypeSlug, ...item } = entry;
   return { ...item, author: "themainakb <developer.mainakbanerjee@gmail.com>" };
 }
 
@@ -50,7 +50,7 @@ function assertValid(item: RegistryItem, context: string) {
 }
 
 export function buildRegistry() {
-  const items = getAllComponents().map(toRegistryItem);
+  const items = getAllRegistryItems().map(toRegistryItem);
   items.forEach((item) => assertValid(item, item.name));
 
   return {
@@ -62,7 +62,7 @@ export function buildRegistry() {
 }
 
 export function buildRegistryItem(name: string): RegistryItem {
-  const entry = getComponentByName(name);
+  const entry = getRegistryItemByName(name);
   if (!entry) {
     throw new RegistryItemNotFoundError(name);
   }
