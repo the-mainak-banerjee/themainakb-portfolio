@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { BookOpenText } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ComponentEntry } from "@/registry/config";
+import { RegistryItemEntry } from "@/registry/config";
 import { ComponentCliCommand } from "@/features/doc/components/component-cli-command";
 import { Typography } from "../ui/typography";
 import { TABLET_OR_BELOW_QUERY, useMediaQuery } from "@/hooks/useMobile";
@@ -17,7 +17,7 @@ function EntryCardTopSection({
   docUrl,
   miniVersion = false,
 }: {
-  entry: ComponentEntry;
+  entry: RegistryItemEntry;
   hovered: boolean;
   isNew?: boolean;
   docUrl: string;
@@ -75,20 +75,20 @@ function EntryCardTopSection({
 
 export function EntryCard({
   entry,
-  categorySlug,
+  registryTypeSlug,
   isNew,
   miniVersion = false,
   className,
 }: {
-  entry: ComponentEntry;
-  categorySlug: string;
+  entry: RegistryItemEntry;
+  registryTypeSlug: string;
   isNew?: boolean;
   miniVersion?: boolean;
   className?: string;
 }) {
   const [hovered, setHovered] = useState(false);
   const isTabletOrLess = useMediaQuery(TABLET_OR_BELOW_QUERY);
-  const docUrl = `/${categorySlug}/${entry.name}`;
+  const docUrl = `/${registryTypeSlug}/${entry.name}`;
   return (
     <motion.div
       onMouseEnter={() => setHovered(true)}

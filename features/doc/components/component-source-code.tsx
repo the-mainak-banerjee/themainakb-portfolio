@@ -1,4 +1,4 @@
-import { getComponentByName } from "@/registry/config";
+import { getRegistryItemByName } from "@/registry/config";
 import { Typography } from "@/components/ui/typography";
 import { getComponentSourceCode } from "../data/documents";
 import SourceCodeViewer from "@/components/global/source-code-viewer";
@@ -31,7 +31,7 @@ export async function ComponentSourceCode({
     );
   }
 
-  const filePath = src ?? getComponentByName(name ?? "")?.files?.[0]?.path;
+  const filePath = src ?? getRegistryItemByName(name ?? "")?.files?.[0]?.path;
 
   if (!filePath) {
     return (
