@@ -3,40 +3,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   REGISTRY_ITEM_CATEGORY,
-  REGISTRY_ITEM_CATEGORY_DISPLAY,
 } from "@/registry/config";
 import { motion } from "motion/react";
-
-const CATEGORIES: {
-  label: string;
-  value?: keyof typeof REGISTRY_ITEM_CATEGORY;
-}[] = [
-  { label: "All" },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.reveal,
-    value: REGISTRY_ITEM_CATEGORY.reveal,
-  },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.text,
-    value: REGISTRY_ITEM_CATEGORY.text,
-  },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.layout,
-    value: REGISTRY_ITEM_CATEGORY.layout,
-  },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.svg,
-    value: REGISTRY_ITEM_CATEGORY.svg,
-  },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.scroll,
-    value: REGISTRY_ITEM_CATEGORY.scroll,
-  },
-  {
-    label: REGISTRY_ITEM_CATEGORY_DISPLAY.utility,
-    value: REGISTRY_ITEM_CATEGORY.utility,
-  },
-];
+import { CATEGORIES } from "../data/categories";
 
 interface CategoryTabsProps {
   active?: keyof typeof REGISTRY_ITEM_CATEGORY;
