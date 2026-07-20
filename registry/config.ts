@@ -4,6 +4,25 @@ import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 import { RegistryItem } from "shadcn/schema";
 
+export const REGISTRY_ITEM_CATEGORY = {
+  reveal: "reveal",
+  text: "text",
+  layout: "layout",
+  svg: "svg",
+  scroll: "scroll",
+  utility: "utility",
+} as const;
+
+export const REGISTRY_ITEM_CATEGORY_DISPLAY = {
+  reveal: "Reveal",
+  text: "Text",
+  layout: "Layout",
+  svg: "SVG",
+  scroll: "Scroll",
+  utility: "Utility",
+} as const;
+
+export type RegistryItemCategory = keyof typeof REGISTRY_ITEM_CATEGORY;
 
 export const REGISTRY_ITEM_SUB_CATEGORIES = {
   button: "Button",
@@ -28,8 +47,9 @@ export type RegistryItemEntry = RegistryItem & {
     preview?: RegistryItemPreview;
     propTypes?: string[];
     publishedAt: Date;
+    category: RegistryItemCategory[];
     subCategory: RegistryItemSubCategory;
-    icon: LucideIcon
+    icon: LucideIcon;
   };
 };
 
@@ -52,7 +72,6 @@ type RegistryItemNavigation = {
   previous: RegistryTypeEntry["components"][number] | null;
   next: RegistryTypeEntry["components"][number] | null;
 };
-
 
 export const REGISTRY_TYPES = {
   components: "Components",
@@ -86,6 +105,7 @@ export const registry: RegistryTypeEntry[] = [
         ),
         catalog: {
           publishedAt: new Date("2026-07-04"),
+          category: [REGISTRY_ITEM_CATEGORY.utility],
           subCategory: REGISTRY_ITEM_SUB_CATEGORIES.button,
           propTypes: ["MagneticButtonProps"],
           icon: Magnet,
@@ -111,9 +131,13 @@ export const registry: RegistryTypeEntry[] = [
             target: "@components/copy-button.tsx",
           },
         ],
-        docs: getItemDocumentationUrl("copy-button", REGISTRY_TYPE_SLUGS.components),
+        docs: getItemDocumentationUrl(
+          "copy-button",
+          REGISTRY_TYPE_SLUGS.components,
+        ),
         catalog: {
           publishedAt: new Date("2026-07-10"),
+          category: [REGISTRY_ITEM_CATEGORY.svg, REGISTRY_ITEM_CATEGORY.layout],
           subCategory: REGISTRY_ITEM_SUB_CATEGORIES.button,
           propTypes: ["CopyButtonProps"],
           icon: Copy,
@@ -145,6 +169,7 @@ export const registry: RegistryTypeEntry[] = [
         ),
         catalog: {
           publishedAt: new Date("2026-07-10"),
+          category: [REGISTRY_ITEM_CATEGORY.layout],
           subCategory: REGISTRY_ITEM_SUB_CATEGORIES.utility,
           propTypes: ["PackageManagerCommandProps"],
           icon: Terminal,
@@ -170,9 +195,13 @@ export const registry: RegistryTypeEntry[] = [
             target: "@components/share-menu.tsx",
           },
         ],
-        docs: getItemDocumentationUrl("share-menu", REGISTRY_TYPE_SLUGS.components),
+        docs: getItemDocumentationUrl(
+          "share-menu",
+          REGISTRY_TYPE_SLUGS.components,
+        ),
         catalog: {
           publishedAt: new Date("2026-07-10"),
+          category: [REGISTRY_ITEM_CATEGORY.reveal],
           subCategory: REGISTRY_ITEM_SUB_CATEGORIES.navigation,
           propTypes: ["ShareMenuProps"],
           icon: Share2,
@@ -197,7 +226,9 @@ export function getAllRegistryItems(): RegistryItemEntryWithRegistryTypeSlug[] {
 }
 
 /** All registry items belonging to a single registry type, by slug. */
-export function getRegistryItemByRegistryType(registryTypeSlug: string): RegistryItemEntry[] {
+export function getRegistryItemByRegistryType(
+  registryTypeSlug: string,
+): RegistryItemEntry[] {
   return registry.find((c) => c.slug === registryTypeSlug)?.components ?? [];
 }
 
@@ -221,7 +252,9 @@ export function getRegistryItemNavigation(
   registryTypeSlug: RegistryTypeEntry["slug"],
   itemName: string,
 ): RegistryItemNavigation {
-  const category = registry.find((category) => category.slug === registryTypeSlug);
+  const category = registry.find(
+    (category) => category.slug === registryTypeSlug,
+  );
 
   if (!category) {
     return {
