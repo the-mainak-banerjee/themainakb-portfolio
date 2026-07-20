@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { CATEGORY_SLUGS, getComponentsByCategory } from "@/registry/config";
+import { REGISTRY_TYPE_SLUGS, getRegistryItemByRegistryType } from "@/registry/config";
 import { MOBILE_NAV, NAV_LINKS, SITE_URL } from "@/config/site";
 import { getAllBlogPosts } from "@/features/doc/data/blogs";
 
@@ -7,7 +7,7 @@ export const revalidate = false;
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const components = getComponentsByCategory(CATEGORY_SLUGS.components).map(
+  const components = getRegistryItemByRegistryType(REGISTRY_TYPE_SLUGS.components).map(
     (component) => {
       return {
         url: `${SITE_URL}${NAV_LINKS.components}/${component.name}`,

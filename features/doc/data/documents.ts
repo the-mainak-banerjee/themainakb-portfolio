@@ -2,7 +2,7 @@ import { cache } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { getComponentByName } from "@/registry/config";
+import { getRegistryItemByName } from "@/registry/config";
 import { ComponentDoc } from "../types/document";
 
 const CONTENT_ROOT = path.join(process.cwd(), "features/doc/content");
@@ -15,10 +15,10 @@ const IMPORT_ALIASES = {
 };
 
 export const getComponentDoc = cache((name: string): ComponentDoc | null => {
-  const entry = getComponentByName(name);
+  const entry = getRegistryItemByName(name);
   if (!entry) return null;
 
-  const filePath = path.join(CONTENT_ROOT, entry.categorySlug, `${name}.mdx`);
+  const filePath = path.join(CONTENT_ROOT, entry.registryTypeSlug, `${name}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, "utf-8");
