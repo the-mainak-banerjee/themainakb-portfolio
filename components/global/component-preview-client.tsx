@@ -1,5 +1,5 @@
 "use client";
-import { getComponentByName } from "@/registry/config";
+import { getRegistryItemByName } from "@/registry/config";
 import React, { useRef, useState } from "react";
 import { Code, CodeXml, X } from "lucide-react";
 import { Button } from "../ui/button";
@@ -61,7 +61,7 @@ function ComponentPreviewClient({
   const [variantPair, setVariantPair] = useState<[VariantKey, VariantKey]>(() =>
     getRandomVariantPair(),
   );
-  const componentDetails = getComponentByName(name);
+  const componentDetails = getRegistryItemByName(name);
   const ref = useOutsideClick(onClose, containerRef);
 
   if (!componentDetails) {

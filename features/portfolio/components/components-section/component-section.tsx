@@ -2,12 +2,12 @@
 import { EntryCard } from "@/components/global/entry-card";
 import SectionContainer from "@/components/global/section-container";
 import { NAV_LINKS } from "@/config/site";
-import { getComponentsWithStatus } from "@/lib/registry";
-import { CATEGORY_SLUGS } from "@/registry/config";
+import { getRegistryItemsWithStatus } from "@/lib/registry";
+import { REGISTRY_TYPE_SLUGS } from "@/registry/config";
 import React from "react";
 
 function ComponentSection() {
-  const components = getComponentsWithStatus(CATEGORY_SLUGS.components);
+  const components = getRegistryItemsWithStatus(REGISTRY_TYPE_SLUGS.components);
 
   return (
     <SectionContainer
@@ -22,7 +22,7 @@ function ComponentSection() {
             <EntryCard
               key={item.name}
               entry={rest}
-              categorySlug={CATEGORY_SLUGS.components}
+              registryTypeSlug={REGISTRY_TYPE_SLUGS.components}
               miniVersion={true}
               isNew={isNew}
             />

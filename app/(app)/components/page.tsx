@@ -3,7 +3,7 @@ import ListPageHeader from "@/components/global/list-page-header";
 import SectionListContainer from "@/components/global/section-list-container";
 import { NAV_LINKS } from "@/config/site";
 import ComponentListSection from "@/features/doc/components/component-list-section";
-import { CATEGORY_SLUGS, getComponentsByCategory } from "@/registry/config";
+import { REGISTRY_TYPE_SLUGS, getRegistryItemByRegistryType } from "@/registry/config";
 import { Metadata } from "next";
 import React from "react";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 function ComponentsPage() {
-  const components = getComponentsByCategory(CATEGORY_SLUGS.components);
+  const components = getRegistryItemByRegistryType(REGISTRY_TYPE_SLUGS.components);
 
   return (
     <MainContainer>
@@ -29,7 +29,7 @@ function ComponentsPage() {
           count={components.length}
           countLabel="components"
         />
-        <ComponentListSection categorySlug={CATEGORY_SLUGS.components} />
+        <ComponentListSection registryTypeSlug={REGISTRY_TYPE_SLUGS.components} />
       </SectionListContainer>
     </MainContainer>
   );

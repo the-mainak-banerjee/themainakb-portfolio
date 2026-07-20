@@ -5,7 +5,7 @@ import { ComponentType } from "react";
 import { RegistryItem } from "shadcn/schema";
 
 
-export const COMPONENT_SUB_CATEGORIES = {
+export const REGISTRY_ITEM_SUB_CATEGORIES = {
   button: "Button",
   navigation: "Navigation",
   overlay: "Overlay",
@@ -15,57 +15,57 @@ export const COMPONENT_SUB_CATEGORIES = {
   utility: "Utility",
 } as const;
 
-export type ComponentSubCategory =
-  (typeof COMPONENT_SUB_CATEGORIES)[keyof typeof COMPONENT_SUB_CATEGORIES];
+export type RegistryItemSubCategory =
+  (typeof REGISTRY_ITEM_SUB_CATEGORIES)[keyof typeof REGISTRY_ITEM_SUB_CATEGORIES];
 
-export type ComponentPreview = {
+export type RegistryItemPreview = {
   component: ComponentType;
   description?: string;
 };
 
-export type ComponentEntry = RegistryItem & {
+export type RegistryItemEntry = RegistryItem & {
   catalog: {
-    preview?: ComponentPreview;
+    preview?: RegistryItemPreview;
     propTypes?: string[];
     publishedAt: Date;
-    subCategory: ComponentSubCategory;
+    subCategory: RegistryItemSubCategory;
     icon: LucideIcon
   };
 };
 
-export type ComponentWithStatus = ComponentEntry & {
+export type RegistryItemWithStatus = RegistryItemEntry & {
   isNew: boolean;
 };
 
-export type ComponentEntryWithCategorySlug = ComponentEntry & {
-  categorySlug: string;
+export type RegistryItemEntryWithRegistryTypeSlug = RegistryItemEntry & {
+  registryTypeSlug: string;
 };
 
-export type CategoryEntry = {
+export type RegistryTypeEntry = {
   slug: string;
   name: string;
   description?: string;
-  components: ComponentEntry[];
+  components: RegistryItemEntry[];
 };
 
-type ComponentNavigation = {
-  previous: CategoryEntry["components"][number] | null;
-  next: CategoryEntry["components"][number] | null;
+type RegistryItemNavigation = {
+  previous: RegistryTypeEntry["components"][number] | null;
+  next: RegistryTypeEntry["components"][number] | null;
 };
 
 
-export const CATEGORY_NAMES = {
+export const REGISTRY_TYPES = {
   components: "Components",
 };
 
-export const CATEGORY_SLUGS = {
+export const REGISTRY_TYPE_SLUGS = {
   components: "components",
 };
 
-export const registry: CategoryEntry[] = [
+export const registry: RegistryTypeEntry[] = [
   {
-    name: CATEGORY_NAMES.components,
-    slug: CATEGORY_SLUGS.components,
+    name: REGISTRY_TYPES.components,
+    slug: REGISTRY_TYPE_SLUGS.components,
     components: [
       {
         name: "magnetic-button",
@@ -82,11 +82,11 @@ export const registry: CategoryEntry[] = [
         ],
         docs: getItemDocumentationUrl(
           "magnetic-button",
-          CATEGORY_SLUGS.components,
+          REGISTRY_TYPE_SLUGS.components,
         ),
         catalog: {
           publishedAt: new Date("2026-07-04"),
-          subCategory: COMPONENT_SUB_CATEGORIES.button,
+          subCategory: REGISTRY_ITEM_SUB_CATEGORIES.button,
           propTypes: ["MagneticButtonProps"],
           icon: Magnet,
           preview: {
@@ -111,10 +111,10 @@ export const registry: CategoryEntry[] = [
             target: "@components/copy-button.tsx",
           },
         ],
-        docs: getItemDocumentationUrl("copy-button", CATEGORY_SLUGS.components),
+        docs: getItemDocumentationUrl("copy-button", REGISTRY_TYPE_SLUGS.components),
         catalog: {
           publishedAt: new Date("2026-07-10"),
-          subCategory: COMPONENT_SUB_CATEGORIES.button,
+          subCategory: REGISTRY_ITEM_SUB_CATEGORIES.button,
           propTypes: ["CopyButtonProps"],
           icon: Copy,
           preview: {
@@ -141,11 +141,11 @@ export const registry: CategoryEntry[] = [
         ],
         docs: getItemDocumentationUrl(
           "package-manager-command",
-          CATEGORY_SLUGS.components,
+          REGISTRY_TYPE_SLUGS.components,
         ),
         catalog: {
           publishedAt: new Date("2026-07-10"),
-          subCategory: COMPONENT_SUB_CATEGORIES.utility,
+          subCategory: REGISTRY_ITEM_SUB_CATEGORIES.utility,
           propTypes: ["PackageManagerCommandProps"],
           icon: Terminal,
           preview: {
@@ -170,10 +170,10 @@ export const registry: CategoryEntry[] = [
             target: "@components/share-menu.tsx",
           },
         ],
-        docs: getItemDocumentationUrl("share-menu", CATEGORY_SLUGS.components),
+        docs: getItemDocumentationUrl("share-menu", REGISTRY_TYPE_SLUGS.components),
         catalog: {
           publishedAt: new Date("2026-07-10"),
-          subCategory: COMPONENT_SUB_CATEGORIES.navigation,
+          subCategory: REGISTRY_ITEM_SUB_CATEGORIES.navigation,
           propTypes: ["ShareMenuProps"],
           icon: Share2,
           preview: {
@@ -189,39 +189,39 @@ export const registry: CategoryEntry[] = [
 
 // ---- Derived helpers ----
 
-/** Flat list of every component across all categories — for registry generation, search, lookups. */
-export function getAllComponents(): ComponentEntryWithCategorySlug[] {
+/** Flat list of every registry item across all categories — for registry generation, search, lookups. */
+export function getAllRegistryItems(): RegistryItemEntryWithRegistryTypeSlug[] {
   return registry.flatMap((cat) =>
-    cat.components.map((c) => ({ ...c, categorySlug: cat.slug })),
+    cat.components.map((c) => ({ ...c, registryTypeSlug: cat.slug })),
   );
 }
 
-/** All components belonging to a single category, by slug. */
-export function getComponentsByCategory(categorySlug: string): ComponentEntry[] {
-  return registry.find((c) => c.slug === categorySlug)?.components ?? [];
+/** All registry items belonging to a single registry type, by slug. */
+export function getRegistryItemByRegistryType(registryTypeSlug: string): RegistryItemEntry[] {
+  return registry.find((c) => c.slug === registryTypeSlug)?.components ?? [];
 }
 
 /** Look up a single entry by name, across all categories. */
-export function getComponentByName(name: string) {
-  return getAllComponents().find((c) => c.name === name);
+export function getRegistryItemByName(name: string) {
+  return getAllRegistryItems().find((c) => c.name === name);
 }
 
 /** All entries that have a preview defined. */
-export function getPreviewableComponents() {
-  return getAllComponents().filter(
+export function getPreviewableRegistryItems() {
+  return getAllRegistryItems().filter(
     (
       c,
-    ): c is ComponentEntryWithCategorySlug & {
-      preview: ComponentPreview;
+    ): c is RegistryItemEntryWithRegistryTypeSlug & {
+      preview: RegistryItemPreview;
     } => !!c.catalog.preview,
   );
 }
 
-export function getComponentNavigation(
-  categorySlug: CategoryEntry["slug"],
-  componentName: string,
-): ComponentNavigation {
-  const category = registry.find((category) => category.slug === categorySlug);
+export function getRegistryItemNavigation(
+  registryTypeSlug: RegistryTypeEntry["slug"],
+  itemName: string,
+): RegistryItemNavigation {
+  const category = registry.find((category) => category.slug === registryTypeSlug);
 
   if (!category) {
     return {
@@ -231,7 +231,7 @@ export function getComponentNavigation(
   }
 
   const index = category.components.findIndex(
-    (component) => component.name === componentName,
+    (component) => component.name === itemName,
   );
 
   if (index === -1) {

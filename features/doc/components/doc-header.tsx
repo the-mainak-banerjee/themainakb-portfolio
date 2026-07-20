@@ -1,7 +1,7 @@
 "use client";
 import { ChevronLeft, ChevronRight, Share } from "lucide-react";
 import { ComponentDoc } from "../types/document";
-import { CATEGORY_NAMES, getComponentNavigation } from "@/registry/config";
+import { REGISTRY_TYPES, getRegistryItemNavigation } from "@/registry/config";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconButton } from "@/components/ui/button_list";
@@ -18,14 +18,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Typography } from "@/components/ui/typography";
 
 export interface DocHeaderProps {
-  categorySlug: ComponentDoc["categorySlug"];
+  registryTypeSlug: ComponentDoc["registryTypeSlug"];
   itemTitle: ComponentDoc["title"];
   itemName: ComponentDoc["name"];
   slug: string;
 }
 
 function DocHeader({
-  categorySlug,
+  registryTypeSlug,
   itemTitle,
   itemName,
   slug,
@@ -37,13 +37,17 @@ function DocHeader({
       : slug;
   const urlEncoded = encodeURIComponent(absoluteUrl);
 
-  const category = CATEGORY_NAMES[categorySlug as keyof typeof CATEGORY_NAMES];
+  const category =
+    REGISTRY_TYPES[registryTypeSlug as keyof typeof REGISTRY_TYPES];
 
-  const { previous, next } = getComponentNavigation(categorySlug, itemName);
+  const { previous, next } = getRegistryItemNavigation(
+    registryTypeSlug,
+    itemName,
+  );
   return (
     <div className="flex items-center justify-between">
       <Link
-        href={`/${categorySlug}`}
+        href={`/${registryTypeSlug}`}
         className={cn(
           "group flex items-center gap-1.5",
           "hover:text-foreground text-muted-foreground",
@@ -55,7 +59,7 @@ function DocHeader({
 
       <div className="flex items-center gap-2">
         {previous && (
-          <Link href={`/${categorySlug}/${previous.name}`}>
+          <Link href={`/${registryTypeSlug}/${previous.name}`}>
             <IconButton
               with_tooltip={true}
               label={`Previous ${category}`}
@@ -100,7 +104,7 @@ function DocHeader({
           </ShareMenuContent>
         </ShareMenu>
         {next && (
-          <Link href={`/${categorySlug}/${next.name}`}>
+          <Link href={`/${registryTypeSlug}/${next.name}`}>
             <IconButton
               with_tooltip={true}
               label={`Next ${category}`}
