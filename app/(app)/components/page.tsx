@@ -30,7 +30,6 @@ async function ComponentsPage({ searchParams }: IComponentsPageProps) {
   const activeCategory = category as keyof typeof REGISTRY_ITEM_CATEGORY | undefined;
 
   const counts = getRegistryItemCategoryCounts(REGISTRY_TYPE_SLUGS.components);
-  console.log(counts)
 
   return (
     <MainContainer>
