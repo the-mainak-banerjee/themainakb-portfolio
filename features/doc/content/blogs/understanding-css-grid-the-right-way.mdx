@@ -3,15 +3,13 @@ title: Understanding CSS Grid the Right Way
 slug: understanding-css-grid-the-right-way
 description: A practical, use-case-driven walkthrough of CSS Grid — from grid-template-columns and fr units to grid-area layouts and responsive grids without media queries.
 excerpt: Learning CSS Grid by building real layouts instead of memorizing properties.
-createdAt: 2026-07-23
-updatedAt: 2026-07-23
+createdAt: 2026-07-22
+updatedAt: 2026-07-22
 category: design-engineering
 tags: ["css", "css-grid", "layout", "frontend"]
 ---
 
-Let's understand CSS grid.
-
-As a frontend developer, my most common enemy was CSS grid, as it has lots and lots of properties, so remembering all of them was a nightmare for me. So I used to ignore grids and, most of the time, react to my friend FLEX box. Until I finally challenged myself to come out of my comfort zone and understand grid.
+As a frontend developer, my most common enemy was CSS grid, as it has lots and lots of properties, so remembering all of them was a nightmare for me. So I used to ignore grids and, most of the time, reach for my friend FLEX box. Until I finally challenged myself to come out of my comfort zone and understand grid.
 
 Now, to understand grid properly, we need to first understand how not to learn grid.
 
@@ -19,13 +17,15 @@ The answer is simple: do not try to memorize all the properties, rather break do
 
 So take a cup of coffee or tea or a diet coke and let's dive into it.
 
-### When to use grid?
-
-When to use grid?
+## When to use grid?
 
 Okay before we jump into the properties, let's answer the real question first: when do you even reach for grid instead of flex?
 
-Here is the simple way I think about it now. Flexbox is one-dimensional, it's great when you are laying things out in a single row or a single column. But the moment you start thinking in both rows AND columns at the same time, that's your signal to use grid.
+Here is the simple way I think about it now. 
+
+Flexbox is one-dimensional, it's great when you are laying things out in a single row or a single column. 
+
+But the moment you start thinking in both rows AND columns at the same time, that's your signal to use grid.
 
 A few real examples:
 
@@ -34,11 +34,14 @@ A few real examples:
 - A photo gallery or a bento layout where items span multiple rows and columns? Grid, no question.
 - Centering one single item inside a box? Flex is honestly less code.
 
-So the rule of thumb I follow now is: if I am arranging things in a line, flex. If I am arranging things like a table or a magazine layout, grid. That's it, that's the whole decision tree, don't make it harder than that.
+So the rule of thumb I follow now is: if I am arranging things in a line, flex. 
+If I am arranging things like a table or a magazine layout, grid. 
+
+That's it, that's the whole decision tree, don't make it harder than that.
 
 Now let's get our hands dirty and actually build stuff.
 
-### Grid Basics
+## Grid Basics
 
 Let's imagine we have multiple cards with the same width and height, and we need to display them in a grid container.
 
@@ -88,9 +91,13 @@ Visually this will not do anything. But it made your container a grid.
 }
 ```
 
-Now you can see there is a gap of 8px between each item. We are cooking now. Let's now go into the inner workings of grid.
+Now you can see there is a gap of 8px between each item. We are cooking now. 
+
+Let's now go into the inner workings of grid.
 
 How many columns and rows do we need to represent the layout?
+
+### Grid Template Columns
 
 Let's first define the columns. Take an example of 3 columns, each with 200px width.
 
@@ -102,9 +109,11 @@ Let's first define the columns. Take an example of 3 columns, each with 200px wi
 }
 ```
 
-This will do the job for us. Now you can see in the first row we have 3 columns, so three items sit there. But what about the other items? You can see they automatically created 2 new rows and shifted the other items there. So technically we don't need to define rows here. I will come back to rows later in this blog.
+This will do the job for us. Now you can see in the first row we have 3 columns, so 3 items sit there. But what about the other items? 
 
-Okay, let's move on. Now my container is only 600px wide, but I want to make them take up the full screen width, so how do we do that? It's pretty simple, use `fr` instead of px.
+You can see they automatically created 2 new rows and shifted the other items there. So technically we don't need to define rows here. I will come back to rows later in this blog.
+
+Okay, let's move on. Now I want to make my container take up the full screen width as per the image, so how do we do that? It's pretty simple, use `fr` instead of px.
 
 ```txt
 .container {
@@ -116,7 +125,7 @@ Okay, let's move on. Now my container is only 600px wide, but I want to make the
 
 
 
-What does `fr` do? It's like a law, it sees everyone with the same eyes.
+What does `1fr` do? Think of it like a fair judge of court:it treats everyone as equal.
 
 "Take whatever free space is left after subtracting fixed sizes, gaps, padding, borders, etc., then divide it according to these ratios."
 
@@ -152,14 +161,14 @@ Column 2 = 2/4
 Column 3 = 1/4
 ```
 
-Okay, now let's get back to our example. This works, but I am lazy, I don't want to write 1fr 1fr 1fr three times. So what is the solution?
+Okay, now let's get back to our example. This works, but I am lazy, I don't want to write 1fr three times. So what is the solution?
 
-CSS provides us with something known as `repeat()`
+CSS provides us with a function called `repeat()`.
 
-Now this takes 2 parameters:
+It takes two arguments:
 
-1. How many times do we want to repeat it?
-2. The second argument can be a single value or a whole pattern of multiple values, and it repeats the *entire pattern* that many times.
+1.The first argument tells CSS how many times to repeat the pattern.
+2. The second argument can be a single value or a pattern of multiple values. CSS repeats the entire pattern, not each value individually.
 
 ```txt
 .container {
@@ -169,7 +178,7 @@ Now this takes 2 parameters:
 }
 ```
 
-This will do the exact same layout.
+This will create the exact same layout.
 
 ### Explicit vs implicit grid:
 
@@ -192,7 +201,7 @@ Let's say we are rendering a list of search results in this layout. Now, till no
 
 ![Grid-basics-demo-2](/images/blogs/css-grid/css-grid-2.png)
 
-Snap! You can see there is a new row created, but the height is not matching the other rows, because in our repeat function we only defined 3 rows with 150px height each. If the browser needs to create more rows, it will give them the height auto.
+Snap! You can see there is a new row created, but the height is not matching with the other rows, because in our repeat function we only defined 3 rows with 150px height each. If the browser needs to create more rows, it will give them the height auto.
 
 Now how do we fix this?
 
@@ -207,11 +216,13 @@ Here comes another property: `grid-auto-rows`.
 }
 ```
 
-This will tell the browser that whatever rows you are going to create should have the same height of 150px.
+This will tell the browser that whatever extra rows you are going to create should have the same height of 150px.
 
 Notice in the code that I have removed the `grid-template-rows: repeat(3, 150px) `line completely, as we don't need it because of this new `grid-auto-rows` property.
 
-Let's take a pause here to learn another property. You can see I am saying throughout the blog that if there is an extra item, the browser will create a new row and shift the extra items there. But the browser doesn't do it automatically, this is also handled by a property called `grid-auto-flow`. By default the value of it is `row`, that's why the browser creates a new row. If we change it to `column`, then you can see everything is set in an extra column.
+Let's take a pause here to learn another property. You can see I am saying throughout the blog that if there is an extra item, the browser will create a new row and shift the extra items there. 
+
+But the browser doesn't do it automatically, this is also handled by a property called `grid-auto-flow`. By default the value of it is `row`, that's why the browser creates a new row. If we change it to `column`, then you can see everything is set in an extra column.
 
 ```txt
 .container {
@@ -225,11 +236,11 @@ Let's take a pause here to learn another property. You can see I am saying throu
 
 Where should we use it? We can use it if we want to create a carousel of images with horizontal scrolling.
 
-### Grid Advance
+## Grid Advance
 
-Okay, we have covered most of the basic useful properties of grid. Now let's get into some deeper concepts. Now for this we want to create a beautiful bento grid.
+Okay, we have covered most of the basic useful properties of grid. Now let's get into some deeper concepts. For this section we want to create a beautiful bento grid.
 
-Here we will also look at how we can make it responsive as well. For this I want to use the example from this very beautiful video by [Kevin Powell](https://youtu.be/rg7Fvvl3taU?si=YwwFh7C_6UrWuCBi).
+Here we will also look at how we can make it responsive as well. For this I want to use the example from this indepth video of [Kevin Powell](https://youtu.be/rg7Fvvl3taU?si=YwwFh7C_6UrWuCBi).
 
 Here is what we are going to build.
 
@@ -385,7 +396,7 @@ This will create 4 columns and place 4 testimonials side by side and keep the la
 
 ![Grid-basics-demo-4](/images/blogs/css-grid/css-grid-4.png)
 
-Now let's design the first item. As per the design it is taking 2 columns. So how do we do it? Here comes a new property again, `grid-column`.
+Now let's design the first item. As per the design it should take 2 columns. So how do we do it? Here comes a new property again, `grid-column`.
 
 ```txt
 .testimonial:nth-child(1){
@@ -418,17 +429,17 @@ You can see in the main image there is another item, i.e. Patrick's testimonial,
   }
 ```
 
-You can see we have created a new class called `grid-col-span-2` and we will use it in both the first testimonial and Patrick's testimonial.
+We’ve created a new class called grid-col-span-2, which we'll apply to both the first testimonial and Patrick's testimonial.
 
-But the important part is the value of `grid-column`, which means span this item to 2 columns. Which two, that the browser will decide for us as per its surrounding items.
+The important part is the value of `grid-column: span 2;`. It tells the browser to make this item span 2 columns. It doesn't specify which two columns—that's up to the browser, which determines the placement based on the surrounding grid items and the available space.
 
 Now let's do the final part. The testimonial of Kira should be stretched 2 rows at the end of the container, which is the 4th column. So for column we will do `grid-column-start-4`, this places the item in the 4th column.
 
-Now, for stretching it to 2 rows similar to above, can we do `grid-row:span 2` right?
+Now, for stretching it to 2 rows similar to above, can we do `grid-row:span 2`?
 
-If you say yes, then you made the same mistake as I did while learning this. You are on the right path, man.
+If you say yes, then you made the same mistake as I did while learning this.
 
-Because this is wrong and this will not give us the expected result. Because the value `span 2` will span this item to 2 rows from the row it is already placed, that is, the second row. So it will start at Row 2 and end at Row 4.
+Because this is wrong and this will not give us the expected result. As the value `span 2` will span this item to 2 rows from the row it is already placed, that is, the second row. So it will start at line 2 and end at line 4.
 
 So we need to fix it, and it's pretty simple.
 
@@ -451,15 +462,21 @@ Or we can also use the shorthand property like this:
 }
 ```
 
-Hooray, we finally completed the layout.
+Hooray! We finally completed the layout.
 
-### The Area Weapon
+Now let's move on to the most exciting part—the technique that makes creating bento grids and other complex layouts much easier.
+
+## The Area Weapon
 
 For this we will use a different layout example.
 
 ![Grid-basics-demo-5](/images/blogs/css-grid/css-grid-5.png)
 
-From the image we can see our layout needs to have 3 columns, as in the second row there are 3 items. But one thing to notice here, the 3 items in the second row are of different widths. So let's do that:
+From the image, we can see that our layout needs **3 columns**, as the second row contains three items.
+
+One important thing to notice is that these three items have **different widths**. The second item is wider than the first, and the first is wider than the third.
+
+Let's create that using CSS Grid:
 
 ```txt
 .layout {
@@ -518,15 +535,22 @@ Now we just need to tell the parent container that, in each row, which area shou
 }
 ```
 
-Boom, our layout is ready. If I break it down clearly, it's like we are telling the browser:
+Boom, our layout is ready!
 
-In the first row, in all the columns, add the header. In the second row, the first column should be for the sidebar, the second column should be for the content, and the third one should be for the ads. Finally, in the last row, add the footer in all the columns.
+If we break it down, we're simply telling the browser:
 
-### Responsive grid without media queries
+* In the first row, place the **header** across all the columns.
+* In the second row, place the **sidebar** in the first column, the **content** in the second, and the **ads** in the third.
+* Finally, in the last row, place the **footer** across all the columns.
+
+
+## Responsive grid without media queries
 
 Till now I used media queries to make things responsive, but there is a way we can achieve responsiveness without using media queries in grid.
 
-How? Let's understand that. We are going to build this:
+How? Let's understand that. 
+
+We are going to build this:
 
 ![Grid-basics-demo-6](/images/blogs/css-grid/css-grid-6.png)
 
@@ -553,9 +577,16 @@ Now let's first build the desktop version.
 ```
 
 
-We decided not to use media queries, so I added this `grid-template-columns: repeat(5,200px)` directly in the products class, outside of any media query. This will beautifully create 5 columns of the same width of 200px. But on small screens it will overflow. So what is the solution?
+We decided not to use media queries, so I added `grid-template-columns: repeat(5, 200px)` directly to the `.products` class, outside of any media query.
 
-To fix this we just change the value of `grid-template-columns` to `repeat(auto-fit,200px)`, this will automatically check how many items of 200px we can repeat based on the available space.
+This creates **5 columns**, each **200px** wide, which looks great on larger screens.
+
+But on smaller screens, the grid will overflow because there isn't enough horizontal space.
+
+So, how do we solve this?
+
+To fix this, we simply change the value of `grid-template-columns` to `repeat(auto-fit, 200px)`.
+
 
 ```txt
 .products {
@@ -567,7 +598,18 @@ To fix this we just change the value of `grid-template-columns` to `repeat(auto-
 
 ```
 
-Okay, this will make it responsive, but it creates one more problem. Let's say for a screen size of 768px, it can repeat 3 items of 200px, which takes up a space of almost 600px. And if we add the gap, then it will become 632px \[this is just a minimum calculation, you can visualize it better once you do it in code and see it in the browser]. But the rest of the space will stay empty, which will not look good at all. So to fix it we can use something called `minmax`
+Now, instead of always creating **5 columns**, the browser automatically figures out how many **200px** columns can fit in the available space and creates only that many.
+
+Okay, this makes the layout responsive, but it introduces another problem.
+
+Let's say the viewport is **768px** wide. At that size, the browser can fit **3 columns** of **200px** each, which takes up about **600px**. After adding the gaps, the total width becomes roughly **632px**. *(This is just an approximation—you'll understand it much better once you try it in the browser.)*
+
+That leaves a chunk of unused space on the right, making the layout look awkward.
+
+So, how do we fix this?
+
+That's where `minmax()` comes in.
+
 
 ```txt
 .products {
@@ -577,22 +619,32 @@ Okay, this will make it responsive, but it creates one more problem. Let's say f
   grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
 }
 ```
+As you can see, `minmax(min, max)` takes two values. It tells the browser, **"Never make this column smaller than `min` or larger than `max`."**
 
-As you can see, `minmax(min,max)` takes two values, which say "never shrink below `min`, never grow beyond `max`." So in our case, our card will never shrink below 200, but if there is leftover space, then to fill it, all cards will grow synchronously.
+In our case, each column will never shrink below **200px**. If there's extra space available, the columns will grow together to fill it, up to the maximum value we specify. 
 
-There is another value called `auto-fill`, which will do the exact same thing as `auto-fit`, but there is one small difference.
+And that's it! Our layout is now fully responsive without using a single media query.
 
-Let's take a screen size of 900px, **how many 200px columns could fit** (900px / 200px ≈ 4 columns), so both will create 4 columns.
+But before I say goodbye, there's one more keyword you should know about: `auto-fill`. It behaves almost the same as `auto-fit`, but with one important difference.
 
-But let's say we only have 2 items. Here they will work differently.
+Let's say the viewport is **900px** wide. How many **200px** columns can fit? 
 
-* Auto fit will collapse the remaining 2 columns and stretch our existing two columns to fill up the space.
-* Auto fill will keep the remaining empty 2 columns as they are and keep our 2 items with the width provided as the min value in minmax.
+Roughly **4 columns** (900 ÷ 200 ≈ 4). So both `auto-fit` and `auto-fill` will create **4 columns**.
 
-This is it. I think I have covered most of the important things about grid. But there are still a few things remaining, like subgrid and alignment, which I will cover in the next blog.
+Now imagine we only have **2 grid items**. This is where they behave differently:
 
-Till then, practice these, and byeee!!!!
+* **`auto-fit`** collapses the two unused columns and stretches the existing two columns to fill the available space.
+* **`auto-fill`** keeps all four columns, even though only two contain items. The two empty columns remain in the grid, so the existing items don't stretch to fill the extra space.
 
-### Resources I used to learn:
+
+This is it! I think we've covered most of the important concepts in CSS Grid.
+
+There are still a few topics left—like **subgrid** and **alignment**—which I'll cover in the next blog.
+
+Until then, play around with the examples, build a few layouts on your own, and most importantly, practice.
+
+See you in the next one. Byeee! 👋
+
+## Resources I used to learn:
 - [Learn CSS Grid the easy way by Kevin Powell](https://youtu.be/rg7Fvvl3taU?si=upAayDUl-R4VQO0B)
 - [CSS Grid Course - The Only Grid Tutorial You'll Ever Need! by coding2go](https://youtu.be/JYfiaSKeYhE?si=qVatyVHFyxJW-ZjI)

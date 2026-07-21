@@ -31,6 +31,7 @@ export interface IBlogHeaderProps {
   index?: string; // e.g. "04" — omit if you don't want the numbered rail
   category: string;
   title: string;
+  description: string;
   authorName: string;
   authorInitials: string;
   publishDate: string; // ISO string, e.g. "2026-07-13"
@@ -54,6 +55,7 @@ function BlogHeader({
   index,
   category,
   title,
+  description,
   authorName,
   authorInitials,
   publishDate,
@@ -164,12 +166,17 @@ function BlogHeader({
             {category}
           </span>
 
-          <Typography
-            variant="h1"
-            className="my-3 text-3xl leading-tight font-medium text-balance"
-          >
-            {title}
-          </Typography>
+          <div className="my-3">
+            <Typography
+              variant="h1"
+              className="mb-1 text-3xl leading-tight font-medium text-balance"
+            >
+              {title}
+            </Typography>
+            <Typography variant="body-sm">
+              {description}
+            </Typography>
+          </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <div className="bg-secondary text-secondary-foreground flex h-6.5 w-6.5 items-center justify-center rounded-full text-[11px] font-medium">

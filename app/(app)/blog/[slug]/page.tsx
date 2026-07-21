@@ -61,6 +61,7 @@ async function BlogContentPage({ params }: PageProps<"/blog/[slug]">) {
         <BlogHeader
           category={doc.data.category}
           title={doc.data.title}
+          description={doc.data.description}
           authorName="Mainak"
           authorInitials="MB"
           publishDate={doc.data.createdAt}
