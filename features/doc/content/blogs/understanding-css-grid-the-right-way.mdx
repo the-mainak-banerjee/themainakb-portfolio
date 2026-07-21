@@ -1,0 +1,598 @@
+---
+title: Understanding CSS Grid the Right Way
+slug: understanding-css-grid-the-right-way
+description: A practical, use-case-driven walkthrough of CSS Grid — from grid-template-columns and fr units to grid-area layouts and responsive grids without media queries.
+excerpt: Learning CSS Grid by building real layouts instead of memorizing properties.
+createdAt: 2026-07-23
+updatedAt: 2026-07-23
+category: design-engineering
+tags: ["css", "css-grid", "layout", "frontend"]
+---
+
+Let's understand CSS grid.
+
+As a frontend developer, my most common enemy was CSS grid, as it has lots and lots of properties, so remembering all of them was a nightmare for me. So I used to ignore grids and, most of the time, react to my friend FLEX box. Until I finally challenged myself to come out of my comfort zone and understand grid.
+
+Now, to understand grid properly, we need to first understand how not to learn grid.
+
+The answer is simple: do not try to memorize all the properties, rather break down each thing based on the use case. This is the same thing we will do in this blog post. We will create a few use cases and then try to create those layouts by using grid. Doing this, we will learn the most important elements of grid and also understand grid properly.
+
+So take a cup of coffee or tea or a diet coke and let's dive into it.
+
+### When to use grid?
+
+When to use grid?
+
+Okay before we jump into the properties, let's answer the real question first: when do you even reach for grid instead of flex?
+
+Here is the simple way I think about it now. Flexbox is one-dimensional, it's great when you are laying things out in a single row or a single column. But the moment you start thinking in both rows AND columns at the same time, that's your signal to use grid.
+
+A few real examples:
+
+- Building a dashboard with cards of different sizes? Grid.
+- A simple navbar with logo on the left and links on the right? Flex, don't overthink it.
+- A photo gallery or a bento layout where items span multiple rows and columns? Grid, no question.
+- Centering one single item inside a box? Flex is honestly less code.
+
+So the rule of thumb I follow now is: if I am arranging things in a line, flex. If I am arranging things like a table or a magazine layout, grid. That's it, that's the whole decision tree, don't make it harder than that.
+
+Now let's get our hands dirty and actually build stuff.
+
+### Grid Basics
+
+Let's imagine we have multiple cards with the same width and height, and we need to display them in a grid container.
+
+![Grid-basics-demo-1](/images/blogs/css-grid/css-grid-1.png)
+
+First, let's build the basics:
+
+```css
+<div class="container">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+  <div class="item">Item 4</div>
+  <div class="item">Item 5</div>
+  <div class="item">Item 6</div>
+  <div class="item">Item 7</div>
+  <div class="item">Item 8</div>
+  <div class="item">Item 9</div>
+</div>
+
+
+.item {
+  padding: 2rem;
+  background-color: rgb(46, 46, 198);
+  color: wheat;
+  text-align: center;
+  border-radius: 16px;
+}
+```
+
+
+
+Now let's make them grid.
+
+```txt
+.container {
+  display: grid;
+}
+```
+
+Visually this will not do anything. But it made your container a grid.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+}
+```
+
+Now you can see there is a gap of 8px between each item. We are cooking now. Let's now go into the inner workings of grid.
+
+How many columns and rows do we need to represent the layout?
+
+Let's first define the columns. Take an example of 3 columns, each with 200px width.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 200px 200px 200px;
+}
+```
+
+This will do the job for us. Now you can see in the first row we have 3 columns, so three items sit there. But what about the other items? You can see they automatically created 2 new rows and shifted the other items there. So technically we don't need to define rows here. I will come back to rows later in this blog.
+
+Okay, let's move on. Now my container is only 600px wide, but I want to make them take up the full screen width, so how do we do that? It's pretty simple, use `fr` instead of px.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+```
+
+
+
+What does `fr` do? It's like a law, it sees everyone with the same eyes.
+
+"Take whatever free space is left after subtracting fixed sizes, gaps, padding, borders, etc., then divide it according to these ratios."
+
+Let's go off track for a minute. Let's say I want the middle card to take up more space than the other two. So we can simply do this:
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+```
+
+
+
+What it does is:
+
+Divides the available space into **4 equal fractions**, then distributes them according to the ratio.
+
+#### Step 1: Add all the fractions
+
+```
+1fr + 2fr + 1fr = 4fr
+```
+
+So the container is split into **4 equal parts**.
+
+#### Step 2: Assign the parts
+
+```
+Column 1 = 1/4
+Column 2 = 2/4
+Column 3 = 1/4
+```
+
+Okay, now let's get back to our example. This works, but I am lazy, I don't want to write 1fr 1fr 1fr three times. So what is the solution?
+
+CSS provides us with something known as `repeat()`
+
+Now this takes 2 parameters:
+
+1. How many times do we want to repeat it?
+2. The second argument can be a single value or a whole pattern of multiple values, and it repeats the *entire pattern* that many times.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr)
+}
+```
+
+This will do the exact same layout.
+
+### Explicit vs implicit grid:
+
+We will come back to `repeat` in a minute. Now let's understand what explicit vs implicit grid is with rows.
+
+Let us now define 3 rows with 150px height each.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 150px)
+}
+```
+
+Okay, this will work fine, but let's take a real-life example.
+
+Let's say we are rendering a list of search results in this layout. Now, till now we have had a constant number of items. But in search results we don't know how many items we will have. Let's add 2 more items to our HTML,
+
+![Grid-basics-demo-2](/images/blogs/css-grid/css-grid-2.png)
+
+Snap! You can see there is a new row created, but the height is not matching the other rows, because in our repeat function we only defined 3 rows with 150px height each. If the browser needs to create more rows, it will give them the height auto.
+
+Now how do we fix this?
+
+Here comes another property: `grid-auto-rows`.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 150px;
+}
+```
+
+This will tell the browser that whatever rows you are going to create should have the same height of 150px.
+
+Notice in the code that I have removed the `grid-template-rows: repeat(3, 150px) `line completely, as we don't need it because of this new `grid-auto-rows` property.
+
+Let's take a pause here to learn another property. You can see I am saying throughout the blog that if there is an extra item, the browser will create a new row and shift the extra items there. But the browser doesn't do it automatically, this is also handled by a property called `grid-auto-flow`. By default the value of it is `row`, that's why the browser creates a new row. If we change it to `column`, then you can see everything is set in an extra column.
+
+```txt
+.container {
+  display: grid;
+  gap: 8px;
+  grid-auto-columns: 150px;
+  grid-auto-flow: column;
+  overflow-x: auto;
+}
+```
+
+Where should we use it? We can use it if we want to create a carousel of images with horizontal scrolling.
+
+### Grid Advance
+
+Okay, we have covered most of the basic useful properties of grid. Now let's get into some deeper concepts. Now for this we want to create a beautiful bento grid.
+
+Here we will also look at how we can make it responsive as well. For this I want to use the example from this very beautiful video by [Kevin Powell](https://youtu.be/rg7Fvvl3taU?si=YwwFh7C_6UrWuCBi).
+
+Here is what we are going to build.
+
+![Grid-basics-demo-3](/images/blogs/css-grid/css-grid-3.png)
+
+This is the full HTML code.
+
+```txt
+<main class="testimonial-grid">
+      <article
+        class="testimonial grid-col-span-2 flow bg-primary-400 quote text-neutral-100"
+      >
+        <div class="flex">
+          <div>
+            <img src="./images/image-daniel.jpg" alt="daniel clifford" />
+          </div>
+          <div>
+            <h2 class="name">Daniel Clifford</h2>
+            <p class="position">Verified Graduate</p>
+          </div>
+        </div>
+        <p>
+          I received a job offer mid-course, and the subjects I learned were
+          current, if not more so, in the company I joined. I honestly feel I
+          got every penny’s worth.
+        </p>
+        <p>
+          “ I was an EMT for many years before I joined the bootcamp. I’ve been
+          looking to make a transition and have heard some people who had an
+          amazing experience here. I signed up for the free intro course and
+          found it incredibly fun! I enrolled shortly thereafter. The next 12
+          weeks was the best - and most grueling - time of my life. Since
+          completing the course, I’ve successfully switched careers, working as
+          a Software Engineer at a VR startup. ”
+        </p>
+      </article>
+      <article class="testimonial flow bg-secondary-400 text-neutral-100">
+        <div class="flex">
+          <div>
+            <img src="./images/image-jonathan.jpg" alt="Jonathan Walters" />
+          </div>
+          <div>
+            <h2 class="name">Jonathan Walters</h2>
+            <p class="position">Verified Graduate</p>
+          </div>
+        </div>
+        <p>The team was very supportive and kept me motivated</p>
+        <p>
+          “ I started as a total newbie with virtually no coding skills. I now
+          work as a mobile engineer for a big company. This was one of the best
+          investments I’ve made in myself. ”
+        </p>
+      </article>
+      <article class="testimonial flow bg-neutral-100 text-secondary-400">
+        <div class="flex">
+          <div>
+            <img src="./images/image-jeanette.jpg" alt="Jeanette Harmon" />
+          </div>
+          <div>
+            <h2 class="name">Jeanette Harmon</h2>
+            <p class="position">Verified Graduate</p>
+          </div>
+        </div>
+        <p>An overall wonderful and rewarding experience</p>
+        <p>
+          “ Thank you for the wonderful experience! I now have a job I really
+          enjoy, and make a good living while doing something I love. ”
+        </p>
+      </article>
+      <article
+        class="testimonial grid-col-span-2 flow bg-secondary-500 text-neutral-100"
+      >
+        <div class="flex">
+          <div>
+            <img
+              class="border-primary-400"
+              src="./images/image-patrick.jpg"
+              alt="Patrick Abrams"
+            />
+          </div>
+          <div>
+            <h2 class="name">Patrick Abrams</h2>
+            <p class="position">Verified Graduate</p>
+          </div>
+        </div>
+        <p>
+          Awesome teaching support from TAs who did the bootcamp themselves.
+          Getting guidance from them and learning from their experiences was
+          easy.
+        </p>
+        <p>
+          “ The staff seem genuinely concerned about my progress which I find
+          really refreshing. The program gave me the confidence necessary to be
+          able to go out in the world and present myself as a capable junior
+          developer. The standard is above the rest. You will get the personal
+          attention you need from an incredible community of smart and amazing
+          people. ”
+        </p>
+      </article>
+      <article class="testimonial flow bg-neutral-100 text-secondary-400">
+        <div class="flex">
+          <div>
+            <img src="./images/image-kira.jpg" alt="Kira Whittle" />
+          </div>
+          <div>
+            <h2 class="name">Kira Whittle</h2>
+            <p class="position">Verified Graduate</p>
+          </div>
+        </div>
+        <p>Such a life-changing experience. Highly recommended!</p>
+        <p>
+          “ Before joining the bootcamp, I’ve never written a line of code. I
+          needed some structure from professionals who can help me learn
+          programming step by step. I was encouraged to enroll by a former
+          student of theirs who can only say wonderful things about the program.
+          The entire curriculum and staff did not disappoint. They were very
+          hands-on and I never had to wait long for assistance. The agile team
+          project, in particular, was outstanding. It took my learning to the
+          next level in a way that no tutorial could ever have. In fact, I’ve
+          often referred to it during interviews as an example of my development
+          experience. It certainly helped me land a job as a full-stack
+          developer after receiving multiple offers. 100% recommend! ”
+        </p>
+      </article>
+    </main>
+```
+
+Now let's start styling it.
+
+```txt
+.testimonial-grid {
+  padding-block: 2rem;
+  width: min(95%, 70rem);
+  margin-inline: auto;
+  display: grid;
+  gap: 16px
+}
+```
+
+If we only do this, then it will work properly on mobile, we don't need to do anything else.
+
+But now let's design it for desktop screens:
+
+```txt
+@media (min-width: 1024px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+```
+
+This will create 4 columns and place 4 testimonials side by side and keep the last one on the second row.
+
+![Grid-basics-demo-4](/images/blogs/css-grid/css-grid-4.png)
+
+Now let's design the first item. As per the design it is taking 2 columns. So how do we do it? Here comes a new property again, `grid-column`.
+
+```txt
+.testimonial:nth-child(1){
+  grid-column: 1/3;
+}
+```
+
+What is this property? This is a shorthand property of the below properties.
+
+```txt
+.testimonial:nth-child(1){
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+```
+
+This means this item will start from the 1st column and end at the 3rd column.
+
+You might think it is taking 2 columns, so why are we giving the end value as 3?
+
+`grid-column: 1 / 3` doesn't mean "columns 1 through 3" — it means "start at **line** 1, stop at **line** 3," which spans exactly 2 column tracks (the space between lines 1-2, and 2-3). So in these properties we are not actually mentioning the column number but the line number.
+
+Okay, this works perfectly fine. But can we improve it?
+
+You can see in the main image there is another item, i.e. Patrick's testimonial, that is also stretching two columns. Now if we want to style it, we need to find out the exact column number for it and then design it, which is kind of a bad approach, so there is a better approach.
+
+```txt
+ .grid-col-span-2 {
+    grid-column: span 2;
+  }
+```
+
+You can see we have created a new class called `grid-col-span-2` and we will use it in both the first testimonial and Patrick's testimonial.
+
+But the important part is the value of `grid-column`, which means span this item to 2 columns. Which two, that the browser will decide for us as per its surrounding items.
+
+Now let's do the final part. The testimonial of Kira should be stretched 2 rows at the end of the container, which is the 4th column. So for column we will do `grid-column-start-4`, this places the item in the 4th column.
+
+Now, for stretching it to 2 rows similar to above, can we do `grid-row:span 2` right?
+
+If you say yes, then you made the same mistake as I did while learning this. You are on the right path, man.
+
+Because this is wrong and this will not give us the expected result. Because the value `span 2` will span this item to 2 rows from the row it is already placed, that is, the second row. So it will start at Row 2 and end at Row 4.
+
+So we need to fix it, and it's pretty simple.
+
+```txt
+.testimonial:last-child{
+  grid-column-start: 4;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+}
+```
+
+See, here we have added the value 1 in `grid-row-start` and shifted the value `span 2` from `grid-row` to `grid-row-end`. We can also give the end value as 3 and it will work exactly the same.
+
+Or we can also use the shorthand property like this:
+
+```txt
+.testimonial:last-child{
+  grid-column-start: 4;
+  grid-row:1/span 2;
+}
+```
+
+Hooray, we finally completed the layout.
+
+### The Area Weapon
+
+For this we will use a different layout example.
+
+![Grid-basics-demo-5](/images/blogs/css-grid/css-grid-5.png)
+
+From the image we can see our layout needs to have 3 columns, as in the second row there are 3 items. But one thing to notice here, the 3 items in the second row are of different widths. So let's do that:
+
+```txt
+.layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 2fr 3fr 1fr;
+}
+```
+
+Okay, our basic layout is ready, but now let's see how we can spread the header and footer across all 3 columns.
+
+For this we need to treat each item as a separate area and give each of them a separate, recognizable name, by using a simple grid property called `grid-area`
+
+
+
+```txt
+.header {
+  background: #2d8cff;
+  grid-area: header;
+}
+
+.sidebar {
+  background: #2467b5;
+  grid-area: sidebar;
+}
+
+.content {
+  background: #1e5799;
+  grid-area: content;
+}
+
+.ads {
+  background: #163f73;
+  grid-area: ads;
+}
+
+.footer {
+  background: #0d2b50;
+  grid-area: footer;
+}
+```
+
+Now we just need to tell the parent container that, in each row, which area should be placed in which column.
+
+
+
+```txt
+.layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 2fr 3fr 1fr;
+  grid-template-areas: 
+  "header header header"
+  "sidebar content ads"
+  "footer footer footer";
+}
+```
+
+Boom, our layout is ready. If I break it down clearly, it's like we are telling the browser:
+
+In the first row, in all the columns, add the header. In the second row, the first column should be for the sidebar, the second column should be for the content, and the third one should be for the ads. Finally, in the last row, add the footer in all the columns.
+
+### Responsive grid without media queries
+
+Till now I used media queries to make things responsive, but there is a way we can achieve responsiveness without using media queries in grid.
+
+How? Let's understand that. We are going to build this:
+
+![Grid-basics-demo-6](/images/blogs/css-grid/css-grid-6.png)
+
+Okay, let's give the main container a class name `products` and make it a grid.
+
+```txt
+.products {
+  padding: 1rem;
+  display: grid;
+  gap: 16px;
+}
+```
+
+Now let's first build the desktop version.
+
+```txt
+.products {
+  padding: 1rem;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5,200px);
+}
+
+```
+
+
+We decided not to use media queries, so I added this `grid-template-columns: repeat(5,200px)` directly in the products class, outside of any media query. This will beautifully create 5 columns of the same width of 200px. But on small screens it will overflow. So what is the solution?
+
+To fix this we just change the value of `grid-template-columns` to `repeat(auto-fit,200px)`, this will automatically check how many items of 200px we can repeat based on the available space.
+
+```txt
+.products {
+  padding: 1rem;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit,200px);
+}
+
+```
+
+Okay, this will make it responsive, but it creates one more problem. Let's say for a screen size of 768px, it can repeat 3 items of 200px, which takes up a space of almost 600px. And if we add the gap, then it will become 632px \[this is just a minimum calculation, you can visualize it better once you do it in code and see it in the browser]. But the rest of the space will stay empty, which will not look good at all. So to fix it we can use something called `minmax`
+
+```txt
+.products {
+  padding: 1rem;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+}
+```
+
+As you can see, `minmax(min,max)` takes two values, which say "never shrink below `min`, never grow beyond `max`." So in our case, our card will never shrink below 200, but if there is leftover space, then to fill it, all cards will grow synchronously.
+
+There is another value called `auto-fill`, which will do the exact same thing as `auto-fit`, but there is one small difference.
+
+Let's take a screen size of 900px, **how many 200px columns could fit** (900px / 200px ≈ 4 columns), so both will create 4 columns.
+
+But let's say we only have 2 items. Here they will work differently.
+
+* Auto fit will collapse the remaining 2 columns and stretch our existing two columns to fill up the space.
+* Auto fill will keep the remaining empty 2 columns as they are and keep our 2 items with the width provided as the min value in minmax.
+
+This is it. I think I have covered most of the important things about grid. But there are still a few things remaining, like subgrid and alignment, which I will cover in the next blog.
+
+Till then, practice these, and byeee!!!!
+
+### Resources I used to learn:
+- [Learn CSS Grid the easy way by Kevin Powell](https://youtu.be/rg7Fvvl3taU?si=upAayDUl-R4VQO0B)
+- [CSS Grid Course - The Only Grid Tutorial You'll Ever Need! by coding2go](https://youtu.be/JYfiaSKeYhE?si=qVatyVHFyxJW-ZjI)
