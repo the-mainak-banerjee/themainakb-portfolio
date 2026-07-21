@@ -17,6 +17,7 @@ import { ComponentSourceCode } from "../../features/doc/components/component-sou
 import { Steps, Step } from "../../features/doc/components/steps";
 import { Pre } from "../../features/doc/components/pre";
 import { AutoTypeTable } from "../../features/doc/components/auto-type-table";
+import Image from "next/image";
 
 const mdxComponents: MDXRemoteProps["components"] = {
   h1: (props: React.ComponentProps<"h1">) => (
@@ -42,6 +43,15 @@ const mdxComponents: MDXRemoteProps["components"] = {
   p: (props: React.ComponentProps<"p">) => (
     <Typography variant="body" allowProse={true} {...props} />
   ),
+  img: (props: React.ComponentProps<"img">) => (
+    <Image
+      src={(props.src as string) ?? ""}
+      width={800}
+      height={450}
+      className="rounded-lg"
+      alt={props.alt ?? ""}
+    />
+  ),
   pre: Pre,
   ComponentPreview,
   InstallTabs,
@@ -60,7 +70,7 @@ export function DocContent({ source }: { source: string }) {
     mdxOptions: {
       rehypePlugins: [
         rehypeSlug,
-        [rehypeExternalLinks, { target: "_blank", rel: "nofollow noopener"  }],
+        [rehypeExternalLinks, { target: "_blank", rel: "nofollow noopener" }],
       ],
     },
   };
