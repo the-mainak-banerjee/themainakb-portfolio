@@ -1,5 +1,6 @@
 import { ItemCard } from "@/components/global/item-card";
 import { LabType } from "../data/labs-data";
+import { cn } from "@/lib/utils";
 
 interface LabItem {
   slug: string;
@@ -17,7 +18,7 @@ interface ILabItemCardProps {
 
 export function LabItemCard({ item, className }: ILabItemCardProps) {
   return (
-    <ItemCard href={`/labs/${item.slug}`} className={className}>
+    <ItemCard href={`/labs/${item.slug}`} className={cn(className, "min-h-14")}>
       <ItemCard.Header>
         <ItemCard.Title>{item.title}</ItemCard.Title>
         <ItemCard.CategoryBadges categories={[item.type]}/>
@@ -26,7 +27,7 @@ export function LabItemCard({ item, className }: ILabItemCardProps) {
       <ItemCard.Description>{item.description}</ItemCard.Description>
       <ItemCard.Credit inspiredBy={item.inspiredBy} />
 
-      <ItemCard.Footer>
+      <ItemCard.Footer className="items-start">
         <ItemCard.Topics topics={item.topics} />
         <ItemCard.Arrow />
       </ItemCard.Footer>
