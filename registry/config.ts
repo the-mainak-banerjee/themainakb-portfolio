@@ -6,19 +6,19 @@ import { RegistryItem } from "shadcn/schema";
 
 export const REGISTRY_ITEM_CATEGORY = {
   reveal: "reveal",
-  text: "text",
+  // text: "text",
   layout: "layout",
   svg: "svg",
-  scroll: "scroll",
+  // scroll: "scroll",
   utility: "utility",
 } as const;
 
 export const REGISTRY_ITEM_CATEGORY_DISPLAY = {
   reveal: "Reveal",
-  text: "Text",
+  // text: "Text",
   layout: "Layout",
   svg: "SVG",
-  scroll: "Scroll",
+  // scroll: "Scroll",
   utility: "Utility",
 } as const;
 
