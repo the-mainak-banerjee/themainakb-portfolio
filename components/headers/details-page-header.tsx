@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Typography } from "@/components/ui/typography";
 
-interface PrevNextItem {
+export interface PrevNextItem {
   slug?: string;
   title?: string;
 }

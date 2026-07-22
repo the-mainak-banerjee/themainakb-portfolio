@@ -35,7 +35,6 @@ export function LabItemGrid({
             description: item.description,
             title: item.title!,
             slug: item.slug,
-            inspiredBy: item.inspiredBy,
             topics: item.tags,
             type: item.type,
           }}

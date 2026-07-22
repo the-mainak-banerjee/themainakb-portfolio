@@ -23,3 +23,7 @@ const xPct = mouseXBasedOnBox / width - 0.5;
 const yPct = mouseYBasedOnBox / height - 0.5;
 ```
 I subtract `0.5` because `mouseXBasedOnBox / width` gives a value between `0` and `1`. By subtracting `0.5`, I shift that range to `-0.5` to `0.5`, making the **center of the element become `(0, 0)`** instead of the browser's default top-left corner. This makes it much easier to create natural cursor-based animations.
+
+## Inspiration
+
+I learned this technique from [this lesson](https://www.acelearn.dev/learn/motion/hooks) by Manu Arora.
