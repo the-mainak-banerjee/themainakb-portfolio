@@ -7,6 +7,7 @@ import DetailsPageHeader from "@/components/headers/details-page-header";
 import Prose from "@/components/ui/prose";
 import { NAV_LINK_KEYS, NAV_LINKS } from "@/config/site";
 import { LabDetailLayout } from "@/features/lab/components/lab-details-layout";
+import { LabDisclaimer } from "@/features/lab/components/lab-disclaimer";
 import {
   getAdjacentItem,
   getAllLabsItem,
@@ -84,6 +85,7 @@ async function LabsItemPage({ params }: PageProps<"/labs/[slug]">) {
             <DocContent source={learning?.content} />
           </Prose>
         )}
+        <LabDisclaimer />
       </SectionListContainer>
       {learning?.content && (
         <aside className="relative max-lg:hidden">
