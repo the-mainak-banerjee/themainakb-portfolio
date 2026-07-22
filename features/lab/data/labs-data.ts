@@ -75,6 +75,7 @@ export const labs: LabItem[] = [
       "motion-sequence",
       "spring-shake",
       "layout-animation",
+      "micro-interaction",
     ],
     github: `${GIHUB_REPO}statefull-button`,
     description:
@@ -83,7 +84,7 @@ export const labs: LabItem[] = [
       () => import("@/features/lab/previews/statefull-button/statefull-button"),
     ),
   },
-   {
+  {
     slug: "tilt-card-spotlight",
     index: "003",
     title: "Tilt Card Spotlight",
