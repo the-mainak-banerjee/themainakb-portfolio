@@ -26,7 +26,7 @@ export function LabItemCard({ item, className }: ILabItemCardProps) {
       <ItemCard.Description>{item.description}</ItemCard.Description>
       <ItemCard.Credit inspiredBy={item.inspiredBy} />
 
-      <ItemCard.Footer>
+      <ItemCard.Footer className="items-start">
         <ItemCard.Topics topics={item.topics} />
         <ItemCard.Arrow />
       </ItemCard.Footer>

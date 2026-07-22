@@ -112,7 +112,7 @@ function DetailsPageHeader({
           <Link href={`/${categorySlug}/${next.slug}`}>
             <IconButton
               with_tooltip={true}
-              label={`Next ${next.title}`}
+              label={`Next: ${next.title}`}
               allowHoverAnimation={false}
               allowTapAnimation={true}
               className="bg-hover-fill-icon rounded-md"
