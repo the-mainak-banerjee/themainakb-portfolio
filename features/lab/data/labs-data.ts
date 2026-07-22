@@ -15,11 +15,10 @@ export interface LabItem {
   tags: string[];
   github: string;
   /** Set only when this lab is a recreation/clone of existing work */
-  inspiredBy?: { name: string; url?: string };
   description: string;
-  /** Long-form writeup — shown on the lab's detail page, not the card */
-  learnings: string;
+  screenshot?: string;
   component: ComponentType<LabDemoProps>;
+  // Learnings: ComponentType;
 }
 
 export const LAB_ITEM_CATEGORY = {
@@ -51,16 +50,25 @@ export const labs: LabItem[] = [
     index: "001",
     title: "Ripple Button",
     type: LAB_ITEM_CATEGORY.component,
-    tags: ["click", "spring", "layout"],
+    tags: [
+      "AnimatePresence",
+      "Enter & Exit Animations",
+      "Hover States",
+      "Tap Feedback",
+    ],
     github:
-      "https://github.com/your-username/your-repo/tree/main/labs/ripple-button",
+      "https://github.com/the-mainak-banerjee/motion-design-components/tree/main/lab/components/ripple-button",
     description:
-      "A button that spawns a ripple from wherever you click, with a hover-swap label underneath.",
-    learnings:
-      "How to convert a raw click event into a ripple's local origin using getBoundingClientRect, sizing the ripple off the larger of the button's width/height so it always fully covers the surface regardless of aspect ratio. Also handled the keyboard-activation case (detail === 0 on a click event means it came from Enter/Space, not a mouse) by centering the ripple instead of guessing a cursor position that doesn't exist. AnimatePresence's popLayout mode was what let the hover-state text swap in and out without the button reflowing while ripples animate underneath it.",
-    component: dynamic(() => import("@/features/lab/previews/ripple-button")),
+      "A button with a cursor-following ripple effect and animated hover text transitions.",
+    component: dynamic(
+      () => import("@/features/lab/previews/ripple-button/ripple-button"),
+    ),
   },
 ];
+
+export function getLabsItemBySlug(slug: string): LabItem | undefined {
+  return labs.find((lab) => lab.slug === slug);
+}
 
 export function getLabsItemsByCategory(category?: LabType): LabItem[] {
   if (!category) return labs;
