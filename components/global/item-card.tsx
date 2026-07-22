@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Typography } from "@/components/ui/typography";
 
-
 interface ItemCardRootProps {
   href: string;
   className?: string;
@@ -26,7 +25,6 @@ function Root({ href, className, children }: ItemCardRootProps) {
     </Link>
   );
 }
-
 
 function Header({
   children,
@@ -67,7 +65,6 @@ function CategoryBadges({ categories }: { categories?: string[] }) {
   );
 }
 
-
 function Description({ children }: { children?: ReactNode }) {
   if (!children) return null;
 
@@ -81,6 +78,19 @@ function Description({ children }: { children?: ReactNode }) {
   );
 }
 
+function Credit({
+  inspiredBy,
+}: {
+  inspiredBy?: { name: string; url?: string };
+}) {
+  if (!inspiredBy) return null;
+
+  return (
+    <span className="text-muted-foreground/50 text-[11px] italic">
+      Inspired by {inspiredBy.name}
+    </span>
+  );
+}
 
 function Footer({
   children,
@@ -128,7 +138,6 @@ function Topics({ topics }: { topics?: string[] }) {
   );
 }
 
-
 function Arrow({ className }: { className?: string }) {
   return (
     <ArrowRight
@@ -145,6 +154,7 @@ export const ItemCard = Object.assign(Root, {
   Title,
   CategoryBadges,
   Description,
+  Credit,
   Footer,
   NewBadge,
   Topics,

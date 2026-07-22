@@ -9,7 +9,7 @@ interface MoreCardConfig {
   href?: string;
 }
 
-interface IItemGridProps {
+interface IShowcaseItemGridProps {
   items: RegistryItemWithStatus[];
   /** Pass this to render a trailing "+N more" tile. Caller decides the
    *  numbers — this component just renders what it's given. */
@@ -18,12 +18,12 @@ interface IItemGridProps {
   className?: string;
 }
 
-export function ItemGrid({
+export function ShowcaseItemGrid({
   items,
   moreCard,
   emptyMessage = "No components yet.",
   className,
-}: IItemGridProps) {
+}: IShowcaseItemGridProps) {
   if (items.length === 0) {
     return (
       <div className="border-border/60 text-muted-foreground flex min-h-40 items-center justify-center rounded-xl border border-dashed text-sm">
