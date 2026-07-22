@@ -1,7 +1,8 @@
 import React from "react";
 import { getPreviewComponentCode } from "@/features/doc/data/documents";
-import { CodeBlock } from "./code-block";
+import { CodeBlock } from "@/components/global/code-block";
 import ComponentPreviewClient from "./component-preview-client";
+
 
 function ComponentPreview({ name }: { name: string }) {
   
