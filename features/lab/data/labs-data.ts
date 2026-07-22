@@ -67,8 +67,26 @@ export const labs: LabItem[] = [
     ),
   },
   {
-    slug: "tilt-card-spotlight",
+    slug: "statefull-button",
     index: "002",
+    title: "Statefull Button",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: [
+      "motion-sequence",
+      "spring-shake",
+      "layout-animation",
+      "micro-interaction",
+    ],
+    github: `${GIHUB_REPO}statefull-button`,
+    description:
+      "A deploy button with morphing state transitions.Background wipes, spring-driven error shake, and success pop",
+    component: dynamic(
+      () => import("@/features/lab/previews/statefull-button/statefull-button"),
+    ),
+  },
+  {
+    slug: "tilt-card-spotlight",
+    index: "003",
     title: "Tilt Card Spotlight",
     type: LAB_ITEM_CATEGORY.component,
     tags: ["useMotionValue", "useSpring", "useTransform", "useMotionTemplate"],
@@ -77,23 +95,6 @@ export const labs: LabItem[] = [
     component: dynamic(
       () =>
         import("@/features/lab/previews/tilt-card-spotlight/tilt-card-spotlight"),
-    ),
-  },
-  {
-    slug: "statefull-button",
-    index: "003",
-    title: "Statefull Button",
-    type: LAB_ITEM_CATEGORY.component,
-    tags: [
-      "motion-sequence",
-      "spring-shake",
-      "layout-animation",
-    ],
-    github: `${GIHUB_REPO}statefull-button`,
-    description:
-      "A deploy button with morphing state transitions.Background wipes, spring-driven error shake, and success pop",
-    component: dynamic(
-      () => import("@/features/lab/previews/statefull-button/statefull-button"),
     ),
   },
 ];

@@ -57,7 +57,7 @@ async function ComponentItemPage({ params }: PageProps<"/components/[slug]">) {
           registryTypeSlug={doc.registryTypeSlug}
           itemTitle={doc.title}
           itemName={doc.name}
-          slug={`/${NAV_LINKS.components}/${slug}`}
+          slug={slug}
         />
         <div>
           <Typography variant="h1" className="font-geist-sans">

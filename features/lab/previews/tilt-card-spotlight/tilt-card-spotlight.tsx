@@ -71,7 +71,7 @@ export default function TiltCardSpotlight() {
   };
 
   return (
-    <div className="perspective-distant transform-3d">
+    <div className="perspective-distant transform-3d max-md:mx-2">
       <motion.div
         ref={containerRef}
         className="relative h-70 overflow-hidden rounded-[18px] border border-[#2a2a2e] bg-linear-to-br from-[#17171a] to-[#0e0e10]"
@@ -104,7 +104,7 @@ export default function TiltCardSpotlight() {
           </span>
 
           <div>
-            <h2 className="m-0 text-xl font-semibold">Tilt Card Spotlight</h2>
+            <h2 className="m-0 text-xl font-semibold text-white">Tilt Card Spotlight</h2>
             <p className="mt-1.5 text-sm text-[#9a9aa0]">
               Cursor-driven 3D tilt with a dynamic spotlight highlight.
             </p>
