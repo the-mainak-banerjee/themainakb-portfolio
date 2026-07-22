@@ -79,6 +79,23 @@ export const labs: LabItem[] = [
         import("@/features/lab/previews/tilt-card-spotlight/tilt-card-spotlight"),
     ),
   },
+  {
+    slug: "statefull-button",
+    index: "003",
+    title: "Statefull Button",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: [
+      "motion-sequence",
+      "spring-shake",
+      "layout-animation",
+    ],
+    github: `${GIHUB_REPO}statefull-button`,
+    description:
+      "A deploy button with morphing state transitions.Background wipes, spring-driven error shake, and success pop",
+    component: dynamic(
+      () => import("@/features/lab/previews/statefull-button/statefull-button"),
+    ),
+  },
 ];
 
 export function getAllLabsItem() {

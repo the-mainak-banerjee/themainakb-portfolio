@@ -1,5 +1,71 @@
+## Overview
+
+I built this component to explore how to combine multiple interaction patterns into a single button. The goal was to create a button that feels responsive by combining a cursor-based ripple effect, animated text transitions, and keyboard accessibility.
+
+Along the way, I learned several small implementation details that make these interactions more robust.
+
+## What I Built
+
+This button combines several interaction techniques:
+
+* Cursor-positioned ripple animation.
+* Keyboard-friendly ripple fallback.
+* Animated text transitions using `AnimatePresence`.
+* Tap feedback with subtle scaling.
+* Automatic cleanup of completed ripple animations.
+
+
+## Biggest Learnings
+
+### 1. Creating a ripple from the click position
+
+The ripple should originate exactly where the user clicks, not from the center of the button.
+
+To achieve this, I first convert the browser coordinates into coordinates relative to the button.
+
+```ts
+const { left, top, width, height } =
+  currentTarget.getBoundingClientRect();
+
+const size = Math.max(width, height);
+
+const x = clientX - left - size / 2;
+const y = clientY - top - size / 2;
+```
+
+Using the larger of the button's width and height ensures the ripple always grows large enough to cover the entire button.
+
+
+### 2. Animating content with `AnimatePresence`
+
+Instead of instantly replacing the button text, I used `AnimatePresence` so the outgoing and incoming content could animate smoothly.
+
+This creates a much more polished interaction compared to simply swapping text.
+
+
+### 3. Managing multiple ripples
+
+Each ripple is stored as an object with its own position, size, and unique ID.
+
+This allows multiple ripple animations to run independently if the user clicks several times in quick succession.
+
+After each animation completes, the ripple is removed from state to prevent unnecessary renders.
+
+---
+
 ## Notes
 
-- initial={false} prop on AnimatePresence prevents the initial enter animation, ensuring animations only run when the content actually changes. ✅
-- Absolutely positioned animated elements don't contribute to layout, so an invisible sizing element is needed to preserve the button's dimensions.
-- Keyboard-triggered clicks (event.detail === 0) don't have pointer coordinates, so the ripple should originate from the button's center.
+* `initial={false}` on `AnimatePresence` prevents the initial enter animation, ensuring animations only run when the content actually changes.
+* Absolutely positioned animated elements don't contribute to layout, so an invisible sizing element is needed to preserve the button's dimensions.
+* Keyboard-triggered clicks (`event.detail === 0`) don't have pointer coordinates, so the ripple should originate from the center of the button.
+* Using `Math.max(width, height)` ensures the ripple is always large enough to cover the entire button, regardless of its aspect ratio.
+* Cleaning up ripples with `onAnimationComplete` prevents unused ripple objects from accumulating in state.
+
+
+## Key Takeaways
+
+* Convert browser coordinates into element-relative coordinates for pointer-driven effects.
+* Store each animated item with a unique ID when multiple animations can exist simultaneously.
+* `AnimatePresence` makes UI state transitions feel much smoother than instantly replacing content.
+* Consider keyboard interactions when building pointer-based effects.
+* Small implementation details often make the difference between a working interaction and a production-ready component.

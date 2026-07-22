@@ -1,6 +1,8 @@
 import { DocContainer } from "@/components/global/containers";
 import { DocContent } from "@/components/global/doc-content";
 import SectionListContainer from "@/components/global/section-list-container";
+import TocInline from "@/components/global/toc-inline";
+import TocSidebar from "@/components/global/toc-sidebar";
 import DetailsPageHeader from "@/components/headers/details-page-header";
 import Prose from "@/components/ui/prose";
 import { NAV_LINK_KEYS, NAV_LINKS } from "@/config/site";
@@ -76,12 +78,18 @@ async function LabsItemPage({ params }: PageProps<"/labs/[slug]">) {
           }}
         />
         <LabDetailLayout lab={labItem} />
+        {learning?.content && <TocInline content={learning.content} />}
         {learning?.content && (
           <Prose className="[&>*+*:not(h2):not(h3)]:mt-6">
             <DocContent source={learning?.content} />
           </Prose>
         )}
       </SectionListContainer>
+      {learning?.content && (
+        <aside className="relative max-lg:hidden">
+          <TocSidebar content={learning?.content} />
+        </aside>
+      )}
     </DocContainer>
   );
 }
