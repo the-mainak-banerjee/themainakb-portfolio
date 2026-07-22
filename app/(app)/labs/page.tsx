@@ -1,3 +1,6 @@
+import { MainContainer } from "@/components/global/containers";
+import ListPageHeader from "@/components/global/list-page-header";
+import SectionContainer from "@/components/global/section-container";
 import { labs } from "@/features/lab/data/labs-data";
 import Link from "next/link";
 
@@ -9,6 +12,21 @@ export const metadata = {
 
 export default function LabsPage() {
   const sorted = [...labs].sort((a, b) => Number(b.index) - Number(a.index));
+
+  return (
+    <MainContainer>
+      <SectionContainer>
+        <ListPageHeader
+          title="Labs"
+          description=" A running log of components I've rebuilt to learn motion and
+          interaction — not production-ready, not optimized, just practice."
+          eyebrow="Assembling"
+          // count={counts.all}
+          countLabel="components"
+        />
+      </SectionContainer>
+    </MainContainer>
+  );
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-16">

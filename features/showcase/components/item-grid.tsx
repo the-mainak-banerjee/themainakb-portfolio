@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { RegistryItemWithStatus } from "@/registry/config";
-import { ItemCard } from "./item-card";
+import { ShowcaseItemCard } from "./showcase-item-card";
 import { MoreComponentsCard } from "@/features/portfolio/components/components-section/more-components-card";
 
 interface MoreCardConfig {
@@ -18,9 +18,6 @@ interface IItemGridProps {
   className?: string;
 }
 
-// Pure UI: no fetching, no knowledge of category/registry/labs/whatever.
-// Feed it items from anywhere — the component registry, the labs page,
-// a search result, etc.
 export function ItemGrid({
   items,
   moreCard,
@@ -43,7 +40,16 @@ export function ItemGrid({
       )}
     >
       {items.map((item) => (
-        <ItemCard key={item.name} item={item} />
+        <ShowcaseItemCard
+          key={item.name}
+          item={{
+            name: item.name,
+            description: item.description,
+            title: item.title!,
+            category: item.catalog.category,
+            isNew: item.isNew,
+          }}
+        />
       ))}
 
       {moreCard && (
