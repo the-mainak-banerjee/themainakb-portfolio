@@ -1,20 +1,18 @@
 "use client";
-import { getComponentRegistryItemByCategory } from "@/lib/registry";
-import { ShowcaseItemGrid } from "./showcase-item-grid";
-import { REGISTRY_ITEM_CATEGORY } from "@/registry/config";
 import { AnimatePresence, motion, Variants } from "motion/react";
 import { useDirection } from "@/hooks/useCategoryDirection";
-import { CATEGORIES } from "../data/categories";
+import { getLabsItemsByCategory, LAB_TYPE_CATEGORIES, LabType } from "../data/labs-data";
+import { LabItemGrid } from "./lab-item-grid";
 
-interface IRegistryComponentGridProps {
-  category?: keyof typeof REGISTRY_ITEM_CATEGORY;
+interface IAnimatedLabItemGridProps {
+  type?: LabType;
   limit?: number;
   showMoreCard?: boolean;
   moreCardHref?: string;
   className?: string;
 }
 
-const OFFSET = 24
+const OFFSET = 24;
 
 const slideVariants: Variants = {
   enter: (dir: 1 | -1) => ({
@@ -34,37 +32,29 @@ const slideVariants: Variants = {
   }),
 };
 
-export function RegistryComponentGrid({
-  category,
+export function AnimatedLabItemGrid({
+  type,
   limit,
-  showMoreCard = false,
-  moreCardHref,
   className,
-}: IRegistryComponentGridProps) {
-  const items = getComponentRegistryItemByCategory(category);
+}: IAnimatedLabItemGridProps) {
+  const items = getLabsItemsByCategory(type);
   const visible = limit ? items.slice(0, limit) : items;
-  const remaining = limit ? Math.max(items.length - limit, 0) : 0;
 
-  const direction = useDirection(category, CATEGORIES);
+  const direction = useDirection(type, LAB_TYPE_CATEGORIES);
 
   return (
     <AnimatePresence initial={false} mode="wait" custom={direction}>
       <motion.div
-        key={category}
+        key={type}
         custom={direction}
         variants={slideVariants}
         initial="enter"
         animate="center"
         exit="exit"
       >
-        <ShowcaseItemGrid
+        <LabItemGrid
           items={visible}
           className={className}
-          moreCard={
-            showMoreCard && remaining > 0
-              ? { count: remaining, total: items.length, href: moreCardHref }
-              : undefined
-          }
         />
       </motion.div>
     </AnimatePresence>

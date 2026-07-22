@@ -4,6 +4,7 @@ import ProgressIndicator from "@/components/global/progress-indicator";
 import SectionListContainer from "@/components/global/section-list-container";
 import TocInline from "@/components/global/toc-inline";
 import TocSidebar from "@/components/global/toc-sidebar";
+import DetailsPageHeader from "@/components/headers/details-page-header";
 import Prose from "@/components/ui/prose";
 import { NAV_LINKS } from "@/config/site";
 import BlogFooterNav from "@/features/doc/components/blog-footer-nav";
@@ -58,6 +59,20 @@ async function BlogContentPage({ params }: PageProps<"/blog/[slug]">) {
     <DocContainer>
       <aside className="max-lg:hidden"></aside>
       <SectionListContainer className="mx-auto w-full md:max-w-3xl">
+        <DetailsPageHeader
+          category="Blog"
+          categorySlug="blog"
+          itemTitle={doc.data.title}
+          slug={slug}
+          next={{
+            slug: next?.slug,
+            title: next?.title,
+          }}
+          previous={{
+            slug: previous?.slug,
+            title: previous?.title,
+          }}
+        />
         <BlogHeader
           category={doc.data.category}
           title={doc.data.title}
@@ -68,9 +83,6 @@ async function BlogContentPage({ params }: PageProps<"/blog/[slug]">) {
           updatedDate={doc.data.updatedAt}
           readingTime={doc.readingTime}
           tags={doc.data.tags}
-          slug={`/${NAV_LINKS.blog}/${slug}`}
-          previous={previous}
-          next={next}
         />
         <TocInline content={doc.content} />
         <ProgressIndicator className="border-border border-b pb-10">

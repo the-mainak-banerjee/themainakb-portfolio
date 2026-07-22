@@ -4,7 +4,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { Typography } from "../ui/typography";
 import { TabsContent } from "../ui/tabs";
-import ComponentPreview from "./component-preview";
 import {
   InstallTabs,
   InstallTabsListType,
@@ -14,6 +13,7 @@ import {
   UniversalPackageManagerCommand,
 } from "../../features/doc/components/component-cli-command";
 import { ComponentSourceCode } from "../../features/doc/components/component-source-code";
+import ComponentPreview from "../../features/doc/components/component-preview";
 import { Steps, Step } from "../../features/doc/components/steps";
 import { Pre } from "../../features/doc/components/pre";
 import { AutoTypeTable } from "../../features/doc/components/auto-type-table";
