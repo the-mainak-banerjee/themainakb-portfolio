@@ -1,13 +1,20 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-function  SectionListContainer({
+function SectionListContainer({
   children,
   className,
+  as: Component = "div",
 }: {
   children: React.ReactNode;
-  className?: string}) {
-  return <div className={cn("space-y-6 md:space-y-10", className)}>{children}</div>;
+  className?: string;
+  as?: React.ElementType;
+}) {
+  return (
+    <Component className={cn("space-y-6 md:space-y-10", className)}>
+      {children}
+    </Component>
+  );
 }
 
 export default SectionListContainer;

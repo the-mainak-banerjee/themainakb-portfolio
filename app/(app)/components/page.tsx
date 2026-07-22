@@ -1,9 +1,10 @@
+import { CategoryTabs } from "@/components/global/category-tab";
 import { MainContainer } from "@/components/global/containers";
 import ListPageHeader from "@/components/global/list-page-header";
 import SectionListContainer from "@/components/global/section-list-container";
 import { NAV_LINKS } from "@/config/site";
-import { CategoryTabs } from "@/features/showcase/components/category-tab";
 import { RegistryComponentGrid } from "@/features/showcase/components/registry-components-grid";
+import { CATEGORIES } from "@/features/showcase/data/categories";
 import { getRegistryItemCategoryCounts } from "@/lib/registry";
 import {
   REGISTRY_ITEM_CATEGORY,
@@ -41,7 +42,12 @@ async function ComponentsPage({ searchParams }: IComponentsPageProps) {
           count={counts.all}
           countLabel="components"
         />
-        <CategoryTabs active={activeCategory} counts={counts} />
+        <CategoryTabs
+          items={CATEGORIES}
+          active={category}
+          counts={counts}
+          basePath={NAV_LINKS.components}
+        />
         <RegistryComponentGrid category={activeCategory} />
       </SectionListContainer>
     </MainContainer>

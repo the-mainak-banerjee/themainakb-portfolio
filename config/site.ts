@@ -1,6 +1,7 @@
 import { NavItem } from "@/types/nav";
 import {
   Component,
+  FlaskConical,
   House,
   Mail,
   NotebookPen,
@@ -13,8 +14,16 @@ export const NAV_LINKS = {
   components: "/components",
   templates: "/templates",
   blog: "/blog",
+  labs: "/labs",
   contact: "/contact"
 };
+
+
+export const NAV_LINK_KEYS = Object.fromEntries(
+  Object.entries(NAV_LINKS).map(([key, value]) => [key, value.slice(1)]),
+) as {
+  [K in keyof typeof NAV_LINKS]: string;
+  };
 
 export const MAIN_NAV: NavItem<Route>[] = [
   {
@@ -26,6 +35,11 @@ export const MAIN_NAV: NavItem<Route>[] = [
     title: "Blog",
     icon: NotebookPen,
     href: NAV_LINKS.blog,
+  },
+  {
+    title: "Labs",
+    icon: FlaskConical,
+    href: NAV_LINKS.labs,
   },
   {
     title: "Contact",
