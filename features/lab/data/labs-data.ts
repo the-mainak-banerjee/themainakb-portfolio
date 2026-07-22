@@ -7,6 +7,9 @@ export interface LabDemoProps {
 
 export type LabType = "component" | "template" | "page";
 
+const GIHUB_REPO =
+  "https://github.com/the-mainak-banerjee/motion-design-components/tree/main/lab/components/";
+
 export interface LabItem {
   slug: string;
   index: string;
@@ -56,15 +59,31 @@ export const labs: LabItem[] = [
       "Hover States",
       "Tap Feedback",
     ],
-    github:
-      "https://github.com/the-mainak-banerjee/motion-design-components/tree/main/lab/components/ripple-button",
+    github: `${GIHUB_REPO}ripple-button`,
     description:
       "A button with a cursor-following ripple effect and animated hover text transitions.",
     component: dynamic(
       () => import("@/features/lab/previews/ripple-button/ripple-button"),
     ),
   },
+  {
+    slug: "tilt-card-spotlight",
+    index: "002",
+    title: "Tilt Card Spotlight",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["useMotionValue", "useSpring", "useTransform", "useMotionTemplate"],
+    github: `${GIHUB_REPO}tilt-card-spotlight`,
+    description: " Cursor-driven 3D tilt with a dynamic spotlight highlight.",
+    component: dynamic(
+      () =>
+        import("@/features/lab/previews/tilt-card-spotlight/tilt-card-spotlight"),
+    ),
+  },
 ];
+
+export function getAllLabsItem() {
+  return labs;
+}
 
 export function getLabsItemBySlug(slug: string): LabItem | undefined {
   return labs.find((lab) => lab.slug === slug);
@@ -89,4 +108,20 @@ export function getLabsItemsCount(): Record<string, number> {
   }
 
   return counts;
+}
+
+export function getAdjacentItem(slug: string) {
+  const index = labs.findIndex((item) => item.slug === slug);
+
+  if (index === -1) {
+    return {
+      previous: undefined,
+      next: undefined,
+    };
+  }
+
+  return {
+    previous: index > 0 ? labs[index - 1] : undefined,
+    next: index < labs.length - 1 ? labs[index + 1] : undefined,
+  };
 }

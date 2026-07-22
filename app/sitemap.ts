@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { REGISTRY_TYPE_SLUGS, getRegistryItemByRegistryType } from "@/registry/config";
 import { MOBILE_NAV, NAV_LINKS, SITE_URL } from "@/config/site";
 import { getAllBlogPosts } from "@/features/doc/data/blogs";
+import { getAllLabsItem } from "@/features/lab/data/labs-data";
 
 export const revalidate = false;
 export const dynamic = "force-static";
@@ -23,6 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const labs = getAllLabsItem().map((labItem) => {
+    return {
+      url: `${SITE_URL}${NAV_LINKS.labs}/${labItem.slug}`,
+      lastModified: new Date().toISOString(),
+    };
+  })
+
   const routes = MOBILE_NAV.map((item) => {
     return {
       url: `${SITE_URL}${item.href}`,
@@ -30,5 +38,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [...routes, ...blogs, ...components];
+  return [...routes, ...blogs, ...components, ...labs];
 }

@@ -2,17 +2,22 @@ import { CategoryTabs } from "@/components/global/category-tab";
 import { MainContainer } from "@/components/global/containers";
 import ListPageHeader from "@/components/global/list-page-header";
 import SectionContainer from "@/components/global/section-container";
+import { NAV_LINKS } from "@/config/site";
 import { AnimatedLabItemGrid } from "@/features/lab/components/animated-lab-item-grid";
 import {
   getLabsItemsCount,
   LAB_TYPE_CATEGORIES,
   LabType,
 } from "@/features/lab/data/labs-data";
- 
-export const metadata = {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Labs",
   description:
     "A running log of components rebuilt to learn motion and interaction.",
+  alternates: {
+    canonical: `${NAV_LINKS.labs}`,
+  },
 };
 
 interface ILabsPageProps {
@@ -37,7 +42,7 @@ export default async function LabsPage({ searchParams }: ILabsPageProps) {
           items={LAB_TYPE_CATEGORIES}
           active={activeType}
           counts={counts}
-          basePath="/labs"
+          basePath={NAV_LINKS.labs}
           queryParam="type"
         />
         <AnimatedLabItemGrid type={activeType} />
