@@ -91,10 +91,23 @@ export const labs: LabItem[] = [
     type: LAB_ITEM_CATEGORY.component,
     tags: ["useMotionValue", "useSpring", "useTransform", "useMotionTemplate"],
     github: `${GIHUB_REPO}tilt-card-spotlight`,
-    description: " Cursor-driven 3D tilt with a dynamic spotlight highlight.",
+    description: "Cursor-driven 3D tilt with a dynamic spotlight highlight.",
     component: dynamic(
       () =>
         import("@/features/lab/previews/tilt-card-spotlight/tilt-card-spotlight"),
+    ),
+  },
+  {
+    slug: "pricing-card",
+    index: "004",
+    title: "Pricing Card",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["useMotionValue", "useMotionTemplate", "animate()", "Gradient Border"],
+    github: `${GIHUB_REPO}pricing-card`,
+    description: "A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included",
+    component: dynamic(
+      () =>
+        import("@/features/lab/previews/pricing-card/pricing-card"),
     ),
   },
 ];

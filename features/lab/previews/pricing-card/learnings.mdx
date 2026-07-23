@@ -1,0 +1,70 @@
+## Overview
+
+A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included
+
+## Learnings
+
+#### Gradient Border
+
+A css border can't be a gradient that moves, it only take static color. But I achieved that border gradient technique with a padding trick. What is it?
+
+- Wrap the card by a div.
+- Add a gradient background to the div.
+- Now add a small padding to the div, now you can see only that padding area will be visible around our card. This will give a border like feel.
+
+But how did I animate the border on hover?
+
+Here I used the same mouse position technique used in this [Tilt Card Spotlight](https://themainakb.com/labs/tilt-card-spotlight) component. Using this technique I found the mouse position on the card as percentage.
+
+Than I just use those percentage as gradient center of our background center.
+
+```js
+const backgroundGradient = useMotionTemplate`radial-gradient(450px circle at center ${springX}% ${springY}%, #c8f31d, transparent 70%)`;
+```
+
+#### useMotionTemplate
+
+Why I am using useMotionTemplate here instead of normal JS template string?
+
+Lets explore this step by step:
+
+Here `springX` and `springY` are not normal Javascript number, they are actually motion value.
+Motion value is an object that store the actual value internally, which we can access by using the `get()` function.
+
+So if we use normal js template string it will become something like this `radial-gradient  circle at [object Object] [object Object],....`.
+
+Fair enough but we can still use it like `radial-gradient  circle at ${springX.get()}...`. Actually no.
+
+Because motion value does not trigger react rerender. So first time it will work properly but when the value changes there is no way for react to know that. So there will be no visible change.
+
+Arey, now we can solve this very easily, let's use our good friend useState.
+
+Yes absolutely, that will work perfectly fine. But it has big downside, react will rebuild the component everytime you move your mouse inside the card, which is unnecessary.
+
+Motion value was designed exactly to avoid this problem.
+
+That's why I used `useMotionTemplate`.
+
+Instead of creating the string once this creates a template that **subscribes** to Motion Values. So whenever the value changes Motion automatically rebuilds the string **without React rendering again**.
+
+#### Scramble Text effect
+
+To achieve this I used `animate` function of Motion.
+
+Basically here I am not animating the text but animating few numbers.
+
+```ts
+animate(0, finalText.length, {
+    duration,
+    onUpdate: (latest) => {...}})
+```
+
+What it does is. it animates the number from 0 to `finalText.length` . Inside `onUpdate` function we will get the different versions of the number like 0.1,0.9,1.2,1.5... and so on. By using these number we can display random string untill we reach the end of the loop.
+
+## Key Takeaways
+
+* A moving gradient border is created using a wrapper with padding, not the CSS `border` property.
+* Animate the **center** of a radial gradient to create the illusion of a moving light source.
+* Motion Values update without React re-renders, making them ideal for high-frequency animations.
+* `useMotionTemplate` creates reactive CSS strings that automatically update when Motion Values change.
+* The `animate()` function can interpolate any numeric value, making it useful for effects like text scrambling, counters, and custom animations.
