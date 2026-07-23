@@ -115,7 +115,7 @@ function PreviewFrame({
         )}
       </div>
       <div
-        className="bg-card relative flex min-h-125 flex-col rounded-b-md"
+        className="bg-card relative flex min-h-125 flex-col rounded-b-md py-5"
         ref={containerRef}
       >
         {canShowSource && (
