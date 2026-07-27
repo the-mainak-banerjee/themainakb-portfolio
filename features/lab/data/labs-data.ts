@@ -102,12 +102,35 @@ export const labs: LabItem[] = [
     index: "004",
     title: "Pricing Card",
     type: LAB_ITEM_CATEGORY.component,
-    tags: ["useMotionValue", "useMotionTemplate", "animate()", "Gradient Border"],
+    tags: [
+      "useMotionValue",
+      "useMotionTemplate",
+      "animate()",
+      "Gradient Border",
+    ],
     github: `${GIHUB_REPO}pricing-card`,
-    description: "A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included",
+    description:
+      "A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included",
     component: dynamic(
-      () =>
-        import("@/features/lab/previews/pricing-card/pricing-card"),
+      () => import("@/features/lab/previews/pricing-card/pricing-card"),
+    ),
+  },
+  {
+    slug: "app-store-grid",
+    index: "005",
+    title: "App store grid",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: [
+      "layoutId",
+      "Shared layout animation",
+      "AnimatePresence",
+      "create()",
+    ],
+    github: `${GIHUB_REPO}app-store-grid`,
+    description:
+      "A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included",
+    component: dynamic(
+      () => import("@/features/lab/previews/app-store-grid/app-store-grid"),
     ),
   },
 ];
