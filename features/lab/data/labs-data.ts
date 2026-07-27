@@ -117,7 +117,7 @@ export const labs: LabItem[] = [
   },
   {
     slug: "app-store-grid",
-    index: "004",
+    index: "005",
     title: "App store grid",
     type: LAB_ITEM_CATEGORY.component,
     tags: [
