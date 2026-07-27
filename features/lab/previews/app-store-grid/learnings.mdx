@@ -1,0 +1,29 @@
+## Overview
+
+An App Store–style expandable card grid powered by Motion's shared layout animation.
+
+## Learnings
+
+To build this animation, I used Motion's shared layout animations. By assigning the same layoutId to matching elements in the card and modal, Motion automatically handled the transition between them.
+
+#### AnimatePresence
+
+But it wasn't as simple as just adding a `layoutId`.
+
+While building this component, I ran into a major issue. 
+
+When I was opening the modal it was smoothly transitioning between the cards and the modal. But while closing it the image was getting stretched and it was looking very junky and unpolished.
+
+The fix turned out to be surprisingly small: wrapping the modal with Motion's `AnimatePresence`.
+
+Why did this work? 
+
+Without `AnimatePresence`, React immediately unmounts the modal as soon as the state changes. That means Motion loses the source element before it can measure both layouts for the reverse shared layout animation. `AnimatePresence` keeps the exiting component mounted just long enough for Motion to measure both the modal and the grid card, calculate the transform, and animate smoothly between them before finally removing the modal.
+
+#### create() function
+
+To render the images, I used Next.js's `Image` component. However, since it's a custom React component, you can't pass Motion-specific props like `layoutId` to it directly.
+
+To solve this, I wrapped it using Motion's `create` function. This creates a motion-enabled version of the component while preserving all of Next.js `Image`'s built-in features, such as optimization and lazy loading.
+
+The same approach works for any custom React component, allowing you to animate it with Motion without losing its original functionality.

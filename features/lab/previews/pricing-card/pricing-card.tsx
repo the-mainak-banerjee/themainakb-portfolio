@@ -83,7 +83,7 @@ export default function PricingCard() {
         background: backgroundGradient,
       }}
     >
-      <div className="font-inter w-97 max-w-95 rounded-2xl border border-zinc-200 bg-linear-to-b from-white to-zinc-100 p-6 shadow-sm dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900">
+      <div className="font-inter w-70 md:w-97 rounded-2xl border border-zinc-200 bg-linear-to-b from-white to-zinc-100 p-6 shadow-sm dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900">
         <div className="mx-auto mb-6 flex w-fit justify-center rounded-full bg-zinc-100 dark:bg-zinc-600">
           {(["monthly", "yearly"] as const).map((option) => (
             <button
