@@ -133,6 +133,19 @@ export const labs: LabItem[] = [
       () => import("@/features/lab/previews/app-store-grid/app-store-grid"),
     ),
   },
+  {
+    slug: "travel-card-drag",
+    index: "006",
+    title: "Travel Card Drag",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["drag", "useTransform", "useMotionValue"],
+    github: `${GIHUB_REPO}travel-card-drag`,
+    description:
+      "Draggable stacked cards with smooth reveal and hide animation",
+    component: dynamic(
+      () => import("@/features/lab/previews/travel-card-drag/travel-card-drag"),
+    ),
+  },
 ];
 
 export function getAllLabsItem() {

@@ -1,0 +1,56 @@
+## Overview
+
+I built this component to understand how drag interactions can drive engaging UI animations. The goal was to create a stack of cards that feels responsive by combining drag gestures, swipe thresholds, card reordering, and smooth motion transitions.
+
+## Learning
+
+The main learning from this component is how to handle the drag interaction by motion.
+
+Let me list down what I learned in each step while building this:
+
+### The drag property
+
+To make any Motion element draggable, we just need to pass the `drag` prop to it. In our case, we want to allow dragging only on the x-axis, so I used this:
+
+```ts
+drag = "x";
+```
+
+But there is a small hidden issue in our case. Even after making the card container draggable using the `drag` prop, we still won't be able to drag the cards.
+
+This is because we're rendering an image, and images are draggable by default in the browser. To prevent this behavior, we need to add the `pointer-events-none` class to the `Image` component. Only then will the drag interaction work properly.
+
+I also added `dragConstraints` to limit the drag area for the card. I then added a subtle elastic effect at the edges of the drag area using `dragElastic`.
+
+#### Card Behavior
+
+In this component, I added two swipe interactions:
+
+* If we drag the top card, it moves to the back of the stack.
+* If we drag any other card, it moves to the front of the stack.
+
+If you want only the top card to be draggable, you can use:
+
+```ts
+drag={isTop ? "x" : undefined}
+```
+
+This ensures that only the top card can be dragged.
+
+### Swipe Threshold
+
+To avoid accidental swipes, I added a threshold of **80px** in both directions. If the card is dragged less than `80px`, it snaps back to its original position using `dragSnapToOrigin`. Only when the drag exceeds this threshold is the swipe action triggered.
+
+```ts
+onDragEnd={() => {
+  if (x.get() > -80 && x.get() < 80) return;
+  animate(x, 0);
+  handleDragEnd?.();
+}}
+```
+
+## Inspiration
+
+I learned this technique from [this lesson](https://www.acelearn.dev/learn/motion-examples/drag-animation) by Manu Arora.
+
+
