@@ -1,0 +1,126 @@
+## Overview
+
+Swipe-to-reveal actions with iOS-style delete expansion and hold-to-delete interaction.
+
+## Learning
+
+The main learning from this component is how to build a native-feeling swipe interaction using Motion.
+
+While the final interaction looks simple, there are many small pieces working together. Here's what I learned while building it.
+
+
+### Drag constraints
+
+Motion provides `dragConstraints`, but it only limits **how far** an element can be dragged. It doesn't decide what should happen when the user reaches a certain point.
+
+For example, Motion doesn't provide built-in support for:
+
+* Revealing action buttons after dragging a certain distance.
+* Snapping to different positions based on drag progress.
+* Expanding the delete button after a threshold.
+* Triggering a delete action when the user holds the card.
+* Showing or hiding UI based on drag distance.
+
+All of these behaviors have to be implemented manually by reading the drag position and adding our own logic.
+
+```tsx
+drag="x"
+dragConstraints={{ left: -384, right: 0 }}
+dragElastic={0.1}
+```
+
+So, `dragConstraints` is not a complete swipe solution, it is more of a boundary for user input.
+
+
+### `useMotionValue`
+
+Instead of storing the drag position in React state, I used a `MotionValue`.
+
+```tsx
+const cardX = useMotionValue(0);
+```
+
+This became the single source of truth for the entire interaction.
+
+Everything responds to this one value:
+
+* Card position
+* Delete button width
+* Button label opacity
+* Edit button visibility
+* Delete threshold
+* Hold-to-delete logic
+
+Because `MotionValue` updates outside React's render cycle, the interaction stays extremely smooth.
+
+
+### Function syntax of `useTransform`
+
+Before this component, I mostly used the mapping syntax of `useTransform`.
+
+```tsx
+useTransform(x, [0, 100], [0, 1]);
+```
+
+This time I learned the callback version.
+
+```tsx
+const deleteButtonWidth = useTransform(cardX, (latest) => {
+  const dragged = Math.abs(latest);
+
+  if (dragged < ARM_THRESHOLD) {
+    return ACTION_WIDTH;
+  }
+
+  return Math.max(ACTION_WIDTH, dragged - ITEMS_GAP);
+});
+```
+
+The callback syntax gives much more flexibility because we can write any JavaScript logic instead of simple linear interpolation.
+
+This is useful whenever the animation has conditions, thresholds, or multiple stages.
+
+
+### `useMotionValueEvent`
+
+Instead of storing every drag update inside React state, I listened directly to changes in the motion value.
+
+```tsx
+useMotionValueEvent(cardX, "change", (latest) => {
+  ...
+});
+```
+
+This lets us react to drag progress without causing unnecessary React re-renders.
+
+I used it to decide when the Edit button should appear and when it should disappear.
+
+
+### `useSpring`
+
+The delete button width changes based on the drag distance.
+
+Instead of using the transformed value directly, I wrapped it inside a spring.
+
+```tsx
+const deleteButtonWidth = useSpring(deleteButtonWidthRaw);
+```
+
+This small change makes the expansion feel much more natural instead of mechanically following the cursor.
+
+
+### Building multi-stage interactions
+
+The most interesting part of this component wasn't the animation itself. It was coordinating multiple interaction states.
+
+As the user drags:
+
+1. The card moves.
+2. The Edit button fades away.
+3. The Delete button starts expanding.
+4. The label fades in.
+5. Holding beyond a threshold triggers the delete animation.
+
+All of these are driven from a single drag gesture, which makes the interaction feel cohesive rather than a collection of separate animations.
+
+
