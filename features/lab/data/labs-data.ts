@@ -146,6 +146,19 @@ export const labs: LabItem[] = [
       () => import("@/features/lab/previews/travel-card-drag/travel-card-drag"),
     ),
   },
+  {
+    slug: "swipe-action-card",
+    index: "007",
+    title: "Swipe Action Card",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["drag", "useTransform", "useAnimate", "useMotionValueEvent"],
+    github: `${GIHUB_REPO}swipe-action-card`,
+    description:
+      "iOS-style swipe actions with progressive delete expansion and hold-to-delete interaction.",
+    component: dynamic(
+      () => import("@/features/lab/previews/swipe-action-card/swipe-action-card"),
+    ),
+  },
 ];
 
 export function getAllLabsItem() {
