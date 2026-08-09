@@ -1,0 +1,24 @@
+## Overview
+
+A multi step form with direction based animation
+
+## Learnings
+
+One of the main learnings while building this component was how to use **dynamic variants with the `custom` prop** in Motion.
+
+I used this to create a direction-aware animation for the steps.
+
+One interesting thing I learned is that if we try to pass the state directly to the `exit` animation, it won't work reliably because the exiting component is no longer receiving updated React props/state.
+
+`custom` solves this by allowing us to pass the required data directly to Motion, even while the component is exiting.
+
+This was a really useful pattern to learn for building directional components.
+
+#### useReducedMotion
+
+`useReducedMotion` is a small but important accessibility feature in Motion. It detects whether the user has enabled **Reduce Motion** in their system preferences, allowing us to replace movement-heavy animations with simpler ones.
+
+For users with normal motion preferences, I’m using a combination of **slide, blur, and opacity animations**, along with a smooth **height animation** for the card and a subtle **layout animation** for the action buttons.
+
+For users who have enabled **Reduce Motion**, I simplify the experience by animating only the **opacity of the steps**, reducing unnecessary movement while still providing visual feedback.
+
