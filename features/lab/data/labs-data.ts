@@ -127,8 +127,7 @@ export const labs: LabItem[] = [
       "create()",
     ],
     github: `${GIHUB_REPO}app-store-grid`,
-    description:
-      "A pricing card with gradient border on hover, billing type selector with scramble text animation and a dropdown with features included",
+    description: "An App Store–style expandable card grid powered by Motion",
     component: dynamic(
       () => import("@/features/lab/previews/app-store-grid/app-store-grid"),
     ),
@@ -156,7 +155,25 @@ export const labs: LabItem[] = [
     description:
       "iOS-style swipe actions with progressive delete expansion and hold-to-delete interaction.",
     component: dynamic(
-      () => import("@/features/lab/previews/swipe-action-card/swipe-action-card"),
+      () =>
+        import("@/features/lab/previews/swipe-action-card/swipe-action-card"),
+    ),
+  },
+  {
+    slug: "multi-step-form",
+    index: "008",
+    title: "Multi Step Form",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: [
+      "variants",
+      "custom properties",
+      "AnimatePresense",
+      "useReducedMotion",
+    ],
+    github: `${GIHUB_REPO}multi-step-form`,
+    description: "Direction-Aware Multi-Step Form",
+    component: dynamic(
+      () => import("@/features/lab/previews/multi-step-form/multi-step-form"),
     ),
   },
 ];
