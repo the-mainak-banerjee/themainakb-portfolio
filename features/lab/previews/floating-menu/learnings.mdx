@@ -1,0 +1,25 @@
+## Overview
+
+A macOS-style dock menu with cursor-magnetized icon zoom and a synced tooltip, built for both desktop and mobile.
+
+## Learnings
+
+The desktop version is the magnetic zoom effect menu bar and on mobile icons are revealed on button click with stagger animation.
+
+### Desktop
+
+It was a refresher on cursor-based animation while building the desktop version. I’m calculating the mouse position when the user enters the menu card, and then, based on the distance from each icon within a range of -150 to 150, I’m animating the icons’ width and height.
+
+One detail I paid attention to in the desktop version:
+
+The zoom effect calculates distance from the mouse position across the whole container, but the tooltip only opens when you're actually hovering over the icon itself. So there's a mismatch — the icon reacts to the background, the tooltip doesn't. 
+
+### Mobile
+
+On mobile, I used index-based delays to create an outward reveal. I also animated the SVG icon on the button, morphing it from a hamburger into an X.
+
+It was a great opportunity to practice SVG animations.
+
+### Inspiration
+
+This component is inspired by [Floating Dock Component](https://ui.aceternity.com/components/floating-dock) of Aceternity UI by Manu Arora.
