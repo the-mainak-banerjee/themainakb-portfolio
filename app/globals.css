@@ -175,7 +175,6 @@
   html {
     @apply font-geist-sans;
     /* Prevent layout shift when the vertical scrollbar appears or disappears. */
-    scrollbar-gutter: stable;
   }
   button {
     cursor: pointer;
@@ -198,6 +197,10 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
+  }
+
+  [id] {
+    @apply scroll-mt-18;
   }
 }
 
