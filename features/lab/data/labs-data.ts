@@ -176,6 +176,18 @@ export const labs: LabItem[] = [
       () => import("@/features/lab/previews/multi-step-form/multi-step-form"),
     ),
   },
+  {
+    slug: "floating-menu",
+    index: "009",
+    title: "Floating Menu",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["useMotionValue", "useTransform", "AnimatePresense", "SVGAnimation"],
+    github: `${GIHUB_REPO}floating-menu`,
+    description: "A macOS style dock menu",
+    component: dynamic(
+      () => import("@/features/lab/previews/floating-menu/floating-menu"),
+    ),
+  },
 ];
 
 export function getAllLabsItem() {
