@@ -113,7 +113,7 @@ const CopyButtonSkeleton = React.forwardRef<
         className={cn(
           "relative items-center justify-center overflow-hidden rounded-md",
           "border-border text-muted-foreground border",
-          "hover:text-foreground hover:bg-hover-fill-icon",
+          "hover:text-foreground hover:bg-accent",
           "disabled:cursor-not-allowed",
           buttonText ? "flex gap-2 px-2 py-1" : "inline-flex h-8 w-8",
           className,

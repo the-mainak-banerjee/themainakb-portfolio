@@ -25,7 +25,7 @@ export type TypographyProps<T extends ElementType = "p"> = {
 
 const variants: Record<TypographyVariant, string> = {
   h1: `
-    font-mono
+    font-montserrat
     text-2xl
     md:text-3xl
     lg:text-4xl
@@ -35,7 +35,7 @@ const variants: Record<TypographyVariant, string> = {
   `,
 
   h2: `
-    font-mono
+    font-montserrat
     text-xl
     md:text-2xl
     lg:text-3xl
@@ -45,7 +45,7 @@ const variants: Record<TypographyVariant, string> = {
   `,
 
   h3: `
-    font-mono
+    font-montserrat
     text-lg
     md:text-xl
     lg:text-2xl
@@ -54,7 +54,7 @@ const variants: Record<TypographyVariant, string> = {
   `,
 
   h4: `
-    font-mono
+    font-montserrat
     text-base
     md:text-lg
     lg:text-xl

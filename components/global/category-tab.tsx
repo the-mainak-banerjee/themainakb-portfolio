@@ -49,21 +49,28 @@ export function CategoryTabs({
               key={item.label}
               href={href}
               className={cn(
-                "relative shrink-0 px-3.5 py-1.5 text-[13px] whitespace-nowrap transition-colors",
+                "group relative shrink-0 px-3.5 py-1.5 text-[13px] whitespace-nowrap transition-colors",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
               <span className="relative z-10">{item.label}</span>
-              <span className="text-muted-foreground/60 relative z-10 ml-1.5 font-mono text-[11px]">
+              <span
+                className={cn(
+                  "relative z-10 ml-1.5 font-mono text-[11px]",
+                  isActive
+                    ? "text-foreground"
+                    : "text-muted-foreground/60 group-hover:text-foreground",
+                )}
+              >
                 {count}
               </span>
               {isActive && (
                 <motion.span
                   layout
                   layoutId={layoutId}
-                  className="border-border bg-muted absolute inset-0 rounded-full border"
+                  className="border-border bg-accent absolute inset-0 rounded-full border"
                   transition={{
                     type: "spring",
                     stiffness: 500,
@@ -77,7 +84,7 @@ export function CategoryTabs({
         })}
       </div>
 
-      <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent sm:hidden" />
+      <div className="from-accent pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent sm:hidden" />
     </div>
   );
 }

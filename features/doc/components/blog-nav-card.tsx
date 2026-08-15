@@ -19,8 +19,8 @@ function BlogNavCard({ direction, slug, title }: BlogNavCardProps) {
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "group border-border rounded-xl border p-5",
-        "hover:border-foreground/20 transition-colors ease-out hover:bg-accent active:bg-transparent",
+        "group border-border/60 rounded-xl border p-5",
+        "hover:border-border hover:bg-accent transition-colors duration-300 ease-in hover:duration-100 hover:ease-out active:bg-transparent",
         !isPrevious && "text-right",
       )}
     >

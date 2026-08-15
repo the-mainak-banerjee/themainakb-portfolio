@@ -31,7 +31,7 @@ export function SourceCodeViewer({
     <Collapsible
       defaultOpen={!collapsible}
       className={cn(
-        "group/collapsible border-border bg-muted text-card-foreground",
+        "group/collapsible border-border bg-accent text-card-foreground",
         "relative w-full overflow-hidden rounded-md border",
       )}
     >
@@ -98,7 +98,7 @@ export function SourceCodeViewer({
           <CollapsibleTrigger asChild>
             <Button
               variant="secondary"
-              className="border-border text-muted-foreground relative rounded-md"
+              className="border-border relative rounded-md"
             >
               View Code
             </Button>

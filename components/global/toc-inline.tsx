@@ -16,7 +16,7 @@ function TocInline({ content }: { content: string }) {
   const tocItems = getTableOfContents(content);
 
   return (
-    <Collapsible className="lg:hidden bg-muted border-border rounded-lg border py-2">
+    <Collapsible className="lg:hidden bg-card border-border rounded-lg border py-2">
       <CollapsibleTrigger className="group flex w-full items-center gap-2 px-4">
         <List size={16} />
         <Typography variant="body" className="text-[14px]">On This page</Typography>

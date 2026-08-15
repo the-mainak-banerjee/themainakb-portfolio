@@ -17,7 +17,7 @@ function Root({ href, className, children }: ItemCardRootProps) {
       href={href}
       className={cn(
         "group border-border/60 bg-card flex min-h-27.5 flex-col gap-3 rounded-xl border p-5",
-        "hover:border-border hover:bg-accent/40 transition-all hover:-translate-y-0.5",
+        "hover:border-border hover:bg-accent transition-colors duration-300 ease-in hover:duration-100 hover:ease-out",
         className,
       )}
     >
@@ -56,7 +56,7 @@ function CategoryBadges({ categories }: { categories?: string[] }) {
       {categories.map((category) => (
         <span
           key={category}
-          className="border-border/60 bg-muted/40 text-muted-foreground shrink-0 rounded-md border px-1.5 py-0.5 font-mono text-[9.5px] tracking-wide uppercase"
+          className="border-border/60 bg-muted/40 text-muted-foreground shrink-0 rounded-md border px-1.5 pt-1 pb-0.5 font-mono text-[9.5px] tracking-wide uppercase"
         >
           {category}
         </span>

@@ -40,9 +40,9 @@ function ProgressIndicator({
 
   return (
     <div className={cn("relative space-y-10", className)} ref={containerRef}>
-      <div className="bg-hover-fill-icon sticky top-14 z-50 h-2 max-lg:mx-4">
+      <div className="bg-muted sticky top-14 z-50 h-2 max-lg:mx-4">
         <motion.div
-          className="from-primary via-ring to-text-accent h-full w-full origin-left rounded-r-full bg-linear-to-r"
+          className="from-primary via-ring to-primary h-full w-full origin-left rounded-r-full bg-linear-to-r"
           style={{ scaleX }}
         />
         <motion.div

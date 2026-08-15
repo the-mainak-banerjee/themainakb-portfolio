@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { getBaseUrl, isProd } from "@/config/site";
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +61,7 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         spaceGrotesk.variable,
+        montserrat.variable,
       )}
     >
       <body className="flex min-h-full flex-col">
