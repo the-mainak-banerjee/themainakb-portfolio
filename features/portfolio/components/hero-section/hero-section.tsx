@@ -3,7 +3,6 @@ import { USER } from "../../data/user";
 import FlipSentences from "./flip-sentences";
 import Greetings from "./greetings";
 import ProfileImage from "./profile-image";
-import Actions from "./actions";
 import ContactInfo from "./contact-info";
 import { Reveal } from "@/components/global/reveal";
 import Prose from "@/components/ui/prose";
@@ -29,11 +28,10 @@ function HeroSection() {
         <div className="space-y-4">
           <div>
             <Greetings className="mb-2" />
-            <Prose className="prose-p:mt-4 prose-p:mb-4 prose-p:first:mt-0 prose-p:last:mb-0 prose-p:text-muted-foreground">
+            <Prose className="prose-p:mt-1 prose-p:mb-1 prose-p:leading-7 prose-p:first:mt-0 prose-p:last:mb-0 prose-p:text-muted-foreground">
               <ReactMarkDown>{USER.about}</ReactMarkDown>
             </Prose>
           </div>
-          <Actions />
         </div>
       </div>
     </Reveal>

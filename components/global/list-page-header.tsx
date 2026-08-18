@@ -24,7 +24,7 @@ function ListPageHeader({
 
         {count && (
           <div className="text-right">
-            <Typography className="text-text-accent text-xl font-medium">
+            <Typography className="text-secondary text-xl font-medium">
               {padZero(count)}
             </Typography>
             <Typography

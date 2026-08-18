@@ -17,7 +17,7 @@ export function MoreComponentsCard({
   return (
     <Link
       href={href}
-      className="group border-border/60 bg-card hover:border-border hover:bg-accent/40 flex min-h-27.5 flex-col items-center justify-center gap-3.5 rounded-xl border p-5 text-center transition-colors"
+      className="group border-border/60 bg-card hover:border-border hover:bg-accent flex min-h-27.5 flex-col items-center justify-center gap-3.5 rounded-xl border p-5 text-center transition-colors duration-300 ease-in hover:duration-100 hover:ease-out"
     >
       <div className="flex items-center justify-center">
         <div className="border-border bg-muted flex h-8.5 w-8.5 items-center justify-center rounded-[9px] border shadow-sm transition-transform">

@@ -39,7 +39,7 @@ export function Footer() {
             <a href={`mailto:${USER.email}`} aria-label="Send email">
               <Typography
                 variant="body-sm"
-                className="text-muted-foreground text-xs underline-offset-2 max-lg:underline lg:hover:underline"
+                className="text-muted-foreground text-xs underline-offset-2 max-lg:underline lg:hover:underline hover:text-primary"
               >
                 {USER.email}
               </Typography>
@@ -55,7 +55,7 @@ export function Footer() {
             <Link
               key={item.href}
               href={item.href}
-              className="hover:text-foreground lowercase"
+              className="hover:text-primary lowercase"
             >
               {item.title}
             </Link>
@@ -66,13 +66,13 @@ export function Footer() {
       {/* Credits row */}
       <div className="border-border flex flex-wrap items-start justify-between gap-2 border-t py-5 text-xs">
         <div className="flex flex-col gap-1">
-          <span className="text-foreground/80">
+          <span className="text-muted-foreground">
             Crafted by{" "}
             <a
               href={USER_SOCIAL_MEDIA_LINKS.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground font-medium underline underline-offset-2"
+              className="text-foreground font-medium underline underline-offset-2 hover:text-primary"
             >
               @themainakb
             </a>{" "}

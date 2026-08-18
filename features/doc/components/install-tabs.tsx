@@ -47,7 +47,7 @@ export function InstallTabs({
  */
 export function InstallTabsListType() {
   return (
-    <TabsList className="bg-muted h-auto gap-4 rounded-md p-0.5">
+    <TabsList className="bg-accent h-auto gap-4 rounded-md p-0.5">
       {["CLI", "Manual"].map((item) => {
         return (
           <TabsTrigger

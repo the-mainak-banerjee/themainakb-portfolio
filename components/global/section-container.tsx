@@ -37,7 +37,7 @@ function SectionContainerSkaleton({
         {action && (
           <Link
             href={action.href}
-            className="text-muted-foreground hover:text-foreground flex shrink-0 items-center gap-1.5 pb-1 text-[13px] transition-colors"
+            className="text-muted-foreground hover:text-primary flex shrink-0 items-center gap-1.5 pb-1 text-[13px] transition-colors"
           >
             <span>{action.label}</span>
             <ArrowRight size={14} />

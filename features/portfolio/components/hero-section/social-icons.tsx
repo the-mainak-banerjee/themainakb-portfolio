@@ -25,14 +25,11 @@ function SocialIcons() {
                     rel="noopener"
                     className="group flex items-center"
                   >
-                    <div className="md:border-border relative inline-block rounded-md md:p-2 md:border text-tool-icon">
+                    <div className="md:border-border text-foreground relative inline-block rounded-sm md:border md:p-2">
                       <Icon name={item.icon} size={12} />
-                      <div className="bg-hover-fill-icon absolute inset-0 hidden rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 md:block" />
+                      <div className="bg-accent absolute inset-0 -z-10 hidden rounded-sm opacity-0 transition-opacity duration-500 ease-in group-hover:opacity-100 group-hover:duration-100 group-hover:ease-out md:block" />
                     </div>
-                    <Typography
-                      variant="caption"
-                      className="ml-1 md:hidden"
-                    >
+                    <Typography variant="caption" className="ml-1 md:hidden">
                       {item.label}
                     </Typography>
                     <VisuallyHidden>{item.label}</VisuallyHidden>

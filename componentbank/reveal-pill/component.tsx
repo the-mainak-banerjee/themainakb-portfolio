@@ -103,7 +103,7 @@ export function RevealPill({
           {isHovered && (
             <motion.div
               key={`${id}-hover`}
-              className="bg-border absolute inset-0 z-10"
+              className="bg-accent absolute inset-0 z-10"
               initial={{
                 opacity: 0,
                 clipPath: "inset(0 100% 0 0)",

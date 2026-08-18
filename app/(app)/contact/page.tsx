@@ -21,7 +21,7 @@ function ContactPage() {
   return (
     <MainContainer className="space-y-8">
       <div className="space-y-3">
-        <div className="bg-text-accent/10 dark:bg-text-accent/30 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1">
+        <div className="bg-primary/10 dark:bg-primary/30 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1">
           <span className="relative flex size-2.5 items-center justify-center">
             <span className="bg-text-accent absolute size-2.5 animate-ping rounded-full opacity-50" />
 
@@ -65,7 +65,7 @@ function ContactPage() {
       </div>
 
       <div className="space-y-2">
-        <div className="border-border bg-card hover:border-foreground/30 flex items-center justify-between rounded-lg border px-4 py-2 transition-colors duration-200">
+        <div className="border-border bg-card flex items-center justify-between rounded-lg border px-4 py-2 transition-colors duration-200">
           <div className="flex items-start gap-2">
             <Mail size={16} className="mt-1" />
             <div>
@@ -74,7 +74,7 @@ function ContactPage() {
                 <a href={`mailto:${USER.email}`} aria-label="Send email">
                   <Typography
                     variant="body-sm"
-                    className="text-foreground underline-offset-2 max-lg:underline lg:hover:underline"
+                    className="text-foreground hover:text-primary underline-offset-2 max-lg:underline lg:hover:underline"
                   >
                     {USER.email}
                   </Typography>
@@ -108,7 +108,7 @@ function ContactPage() {
         <a
           href="/Mainak_Banerjee.pdf"
           target="_blank"
-          className="border-border bg-card hover:border-foreground/30 flex w-fit items-center gap-2 rounded-lg border px-4 py-2 transition-colors duration-200"
+          className="border-border bg-card hover:bg-accent flex w-fit items-center gap-2 rounded-lg border px-4 py-2 transition-colors duration-500 ease-in hover:duration-100 hover:ease-out"
         >
           <Download size={16} />
           <Typography variant="body-sm">View resume</Typography>

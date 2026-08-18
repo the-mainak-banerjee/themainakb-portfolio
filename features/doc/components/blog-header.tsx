@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { Typography } from "@/components/ui/typography";
 
 export interface IBlogHeaderProps {
@@ -28,8 +27,6 @@ function BlogHeader({
   category,
   title,
   description,
-  authorName,
-  authorInitials,
   publishDate,
   updatedDate,
   readingTime,
@@ -50,7 +47,7 @@ function BlogHeader({
         )}
 
         <div className="flex-1">
-          <span className="text-text-accent font-mono text-xs tracking-wide uppercase">
+          <span className="text-secondary font-mono text-xs tracking-wide uppercase">
             {category}
           </span>
 
@@ -65,14 +62,14 @@ function BlogHeader({
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-x-2.5 gap-y-1">
-            <div className="bg-secondary text-secondary-foreground flex h-6.5 w-6.5 items-center justify-center rounded-full text-[11px] font-medium">
+            {/* <div className="bg-secondary text-secondary-foreground flex h-6.5 w-6.5 items-center justify-center rounded-full text-[11px] font-medium">
               {authorInitials}
             </div>
             <Typography variant="caption">{authorName}</Typography>
-            <span className="text-muted-foreground/50 text-sm">·</span>
+            <span className="text-muted-foreground/50 text-sm">·</span> */}
             <Typography
               variant="caption"
-              className="text-muted-foreground text-sm"
+              className="text-muted-foreground"
             >
               {formatDate(publishDate)}
             </Typography>
@@ -82,7 +79,7 @@ function BlogHeader({
                 <span className="text-muted-foreground/50 text-sm">·</span>
                 <Typography
                   variant="caption"
-                  className="text-muted-foreground text-sm"
+                  className="text-muted-foreground"
                 >
                   Updated {formatDate(updatedDate!)}
                 </Typography>
@@ -91,7 +88,7 @@ function BlogHeader({
             <span className="text-muted-foreground/50 text-sm">·</span>
             <Typography
               variant="caption"
-              className="text-muted-foreground text-sm"
+              className="text-muted-foreground"
             >
               {readingTime}
             </Typography>
@@ -100,11 +97,11 @@ function BlogHeader({
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Link key={tag} href={`/blog/tags/${tag}`}>
-                  <span className="bg-accent text-accent-foreground hover:bg-secondary rounded-md px-2.5 py-1 text-xs transition-colors">
+                // <Link key={tag} href={`/blog/tags/${tag}`}>
+                  <span key={tag} className="bg-accent text-accent-foreground rounded-md px-2.5 py-1 text-xs transition-colors">
                     {tag}
                   </span>
-                </Link>
+                // </Link>
               ))}
             </div>
           )}

@@ -18,12 +18,12 @@ function AccentHeading({
 }: IAccentHeadingProps) {
   return (
     <div className={cn("flex gap-3.5", className)}>
-      <div className="bg-text-accent w-0.75 shrink-0 self-stretch rounded-full" />
+      <div className="bg-secondary w-0.75 shrink-0 self-stretch rounded-full" />
       <div className="space-y-1.5">
         {label && (
           <Typography
             variant="caption-sm"
-            className="text-text-accent font-mono tracking-wide uppercase"
+            className="text-secondary font-mono tracking-wide uppercase"
           >
             {label}
           </Typography>
