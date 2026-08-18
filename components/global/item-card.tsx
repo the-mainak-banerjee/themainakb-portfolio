@@ -17,7 +17,7 @@ function Root({ href, className, children }: ItemCardRootProps) {
       href={href}
       className={cn(
         "group border-border/60 bg-card flex min-h-27.5 flex-col gap-3 rounded-xl border p-5",
-        "hover:border-border hover:bg-accent transition-colors duration-300 ease-in hover:duration-100 hover:ease-out",
+        "hover:border-border hover:bg-accent transition-all duration-300 ease-in hover:duration-100 hover:ease-out active:scale-95",
         className,
       )}
     >

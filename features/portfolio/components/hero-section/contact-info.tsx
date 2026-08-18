@@ -1,6 +1,5 @@
 import { Typography } from "@/components/ui/typography";
 import { Mail, MapPin } from "lucide-react";
-import React from "react";
 import { USER } from "../../data/user";
 import SocialIcons from "./social-icons";
 import CopyButton from "@/components/global/copy-button";

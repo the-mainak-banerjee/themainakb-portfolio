@@ -31,7 +31,7 @@ export function LabDetailLayout({ lab }: LabDetailLayoutProps) {
             {lab.tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-accent text-accent-foreground hover:bg-secondary rounded-md px-2.5 py-1 text-xs transition-colors"
+                className="bg-accent text-accent-foreground rounded-md px-2.5 py-1 text-xs"
               >
                 {tag}
               </span>
