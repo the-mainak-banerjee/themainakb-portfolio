@@ -12,9 +12,7 @@ function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="light"
-      enableSystem
-    //   disableTransitionOnChange
+      disableTransitionOnChange
       {...props}
     >
       <TooltipProvider>

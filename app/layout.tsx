@@ -63,8 +63,9 @@ export default function RootLayout({
         spaceGrotesk.variable,
         montserrat.variable,
       )}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster />
