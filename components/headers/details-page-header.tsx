@@ -49,16 +49,19 @@ function DetailsPageHeader({
       : slug;
   const urlEncoded = encodeURIComponent(absoluteUrl);
 
+  const backgroundColors =
+    "bg-card hover:bg-accent transition-colors duration-300 hover:duration-100 ease-in hover:ease-out";
+
   return (
     <div className="flex items-center justify-between">
       <Link
         href={`/${categorySlug}`}
         className={cn(
           "group flex items-center gap-1.5",
-          "hover:text-foreground text-muted-foreground",
+          "hover:text-primary text-muted-foreground",
         )}
       >
-        <ChevronLeft size={14} className="group-hover:text-foreground" />
+        <ChevronLeft size={14} className="group-hover:text-primary" />
         <span className="text-xs">{category.toLowerCase()}</span>
       </Link>
 
@@ -70,7 +73,7 @@ function DetailsPageHeader({
               label={`Previous: ${previous.title}`}
               allowHoverAnimation={false}
               allowTapAnimation={true}
-              className="bg-hover-fill-icon rounded-md"
+              className={cn("rounded-md", backgroundColors)}
             >
               <ChevronLeft size={16} />
             </IconButton>
@@ -80,7 +83,12 @@ function DetailsPageHeader({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <ShareMenuTrigger className="bg-hover-fill-icon hover:bg-hover-fill-icon flex h-7 w-7 items-center justify-center rounded-md border-0">
+                <ShareMenuTrigger
+                  className={cn(
+                    "flex h-7 w-7 items-center justify-center rounded-md border-0",
+                    backgroundColors,
+                  )}
+                >
                   <Share size={16} />
                 </ShareMenuTrigger>
               </TooltipTrigger>
@@ -115,7 +123,7 @@ function DetailsPageHeader({
               label={`Next: ${next.title}`}
               allowHoverAnimation={false}
               allowTapAnimation={true}
-              className="bg-hover-fill-icon rounded-md"
+              className={cn("rounded-md", backgroundColors)}
             >
               <ChevronRight size={16} />
             </IconButton>

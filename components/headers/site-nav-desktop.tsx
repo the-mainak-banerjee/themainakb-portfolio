@@ -22,10 +22,10 @@ function SiteNavDesktop({className}: {className?: string}) {
               key={item.href}
               href={item.href}
               className={cn(
-                "relative group text-muted-foreground/80 font-mono",
-                isActiveItem ? "text-ring scale-105" : "",
+                "relative group text-accent-foreground",
+                isActiveItem ? "text-primary scale-105" : "",
                 isHoveredItem && !isActiveItem
-                  ? "scale-105 text-ring transition-all duration-300 ease-out"
+                  ? "scale-105 text-primary transition-all duration-300 ease-out"
                   : "",
               )}
               onMouseEnter={() => setHoveredLink(item.title)}

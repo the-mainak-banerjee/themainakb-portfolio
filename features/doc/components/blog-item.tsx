@@ -30,7 +30,7 @@ function BlogItem({
       )}
     >
       <span
-        className="bg-text-accent absolute top-4 left-0 h-4 w-0.75 scale-y-0 transition-transform duration-150 group-hover:scale-y-100 group-active:scale-y-100"
+        className="bg-primary absolute top-4 left-0 h-4 w-0.75 scale-y-0 transition-transform group-hover:duration-150 group-hover:ease-out duration-300 ease-in group-hover:scale-y-100 group-active:scale-y-100"
         aria-hidden="true"
       />
 

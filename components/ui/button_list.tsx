@@ -157,14 +157,14 @@ export const IconButtonSkeleton = ({
     <button
       className={cn(
         "group relative flex h-7 w-7 items-center justify-center",
-        allowTapAnimation && "active:scale-95 transition-all ease-out ",
+        allowTapAnimation && "transition-all ease-out active:scale-95",
         className,
       )}
       {...props}
     >
       {children}
       {allowHoverAnimation && (
-        <div className="bg-hover-fill-icon absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+        <div className="bg-accent absolute inset-0 rounded-md opacity-0 transition-opacity duration-300 ease-in group-hover:opacity-100 group-hover:duration-100 group-hover:ease-out -z-10" />
       )}
       <VisuallyHidden>{label}</VisuallyHidden>
     </button>

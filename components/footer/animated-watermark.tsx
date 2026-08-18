@@ -48,7 +48,7 @@ function AnimatedWatermark() {
         style={{
           clipPath: useMotionTemplate`inset(0 ${springClipRight}% 0 0)`,
         }}
-        className="text-foreground/50 pointer-events-none absolute inset-0 pb-0 text-center text-[15vw] leading-none font-medium tracking-tight select-none"
+        className="text-foreground pointer-events-none absolute inset-0 pb-0 text-center text-[15vw] leading-none font-medium tracking-tight select-none"
       >   
         themainakb
       </motion.div>

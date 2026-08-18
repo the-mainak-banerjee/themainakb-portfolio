@@ -95,7 +95,7 @@ function PreviewFrame({
 
   return (
     <div
-      className={`border-border bg-muted text-card-foreground rounded-md border ${className ?? ""}`}
+      className={`border-border bg-accent rounded-md border ${className ?? ""}`}
     >
       <div className="text-muted-foreground flex items-center justify-between border-b px-4 py-2.5 font-mono text-sm">
         <div className="flex items-center gap-1">
@@ -107,7 +107,7 @@ function PreviewFrame({
             href={githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors"
+            className="text-muted-foreground hover:text-primary flex items-center gap-1.5 transition-colors"
           >
             <Icon name="github" className="h-4 w-4" />
             View source
@@ -119,10 +119,10 @@ function PreviewFrame({
         ref={containerRef}
       >
         {canShowSource && (
-          <div className="mt-2 flex justify-end">
+          <div className="flex justify-end">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 rounded-md"
+              className="flex items-center gap-2 rounded-md mr-2"
               onClick={onOpen}
             >
               <Code size={16} />
@@ -157,11 +157,11 @@ function PreviewFrame({
                     transition: { duration: 0.2, delay: 0.15 },
                   }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="bg-foreground/20 absolute inset-0 z-60 h-full w-full rounded-b-lg backdrop-blur-sm"
+                  className="bg-muted/60 absolute inset-0 z-60 h-full w-full rounded-b-lg backdrop-blur-sm"
                 />
                 <motion.div
                   ref={ref}
-                  className="bg-muted no-scrollbar absolute inset-0 z-70 m-auto max-h-[80%] max-w-[80%] overflow-y-auto rounded-md p-3"
+                  className="bg-card no-scrollbar absolute inset-0 z-70 m-auto max-h-[80%] max-w-[80%] overflow-y-auto rounded-md p-3"
                   initial={CLIP_VARIANTS[modalVariant].initial}
                   animate={CLIP_VARIANTS[modalVariant].animate}
                   exit={{
