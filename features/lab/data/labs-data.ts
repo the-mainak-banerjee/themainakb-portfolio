@@ -188,6 +188,44 @@ export const labs: LabItem[] = [
       () => import("@/features/lab/previews/floating-menu/floating-menu"),
     ),
   },
+  {
+    slug: "split-button-interaction",
+    index: "010",
+    title: "Split Button Interaction",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["AnimatePresence", "useReducedMotion", "layout"],
+    github: `${GIHUB_REPO}split-button-interaction`,
+    description: "An expandable split button with project options",
+    component: dynamic(
+      () =>
+        import("@/features/lab/previews/split-button-interaction/split-button-interaction"),
+    ),
+  },
+  {
+    slug: "grok-bot",
+    index: "011",
+    title: "Grok Bot",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["useAnimate", "SVG ellipse morphing"],
+    github: `${GIHUB_REPO}grok-bot`,
+    description: "An expressive SVG character",
+    component: dynamic(
+      () => import("@/features/lab/previews/grok-bot/grok-bot"),
+    ),
+  },
+  {
+    slug: "back-button-reveal",
+    index: "012",
+    title: "Back Button Reveal",
+    type: LAB_ITEM_CATEGORY.component,
+    tags: ["AnimatePresence", "SVG Gooey Filter"],
+    github: `${GIHUB_REPO}back-button-reveal`,
+    description: "An expressive SVG character",
+    component: dynamic(
+      () =>
+        import("@/features/lab/previews/back-button-reveal/back-button-reveal"),
+    ),
+  },
 ];
 
 export function getAllLabsItem() {
