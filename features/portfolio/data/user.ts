@@ -202,13 +202,14 @@ export const USER: User = {
   email: "developer.mainakbanerjee@gmail.com",
   jobTitle: "React Developer",
   jobRoles: USER_JOB_ROLES,
-  about: `I'm Mainak, a React developer who ships fast without shipping sloppy.
+  about: `I'm Mainak, a frontend engineer turned Applied AI Engineer who ships fast without shipping sloppy.
 
-Over the last 3 years, I've shipped 7+ production frontends across SaaS, e-commerce, and B2C products.
+Over the last 3+ years, I've shipped production frontends across SaaS, e-commerce, and B2C products. Now, I'm expanding that frontend foundation into Applied AI.
 
-I work best with founders and teams who need an MVP delivered fast, but still expect the kind of thoughtful interactions and interface details that make a product feel finished.
+I use modern AI development tools to move faster without losing engineering quality, while focusing on the things that make products actually useful: thoughtful UX, reliable systems, strong interfaces, and a polished experience.
 
-Currently open to full-time roles and freelance projects — happy to talk either way.`,
+I work best with founders and teams who want to turn an idea into a working product quickly, without comprosing the quality of the MVP. Currently open to full-time Applied AI / product engineering roles and freelance projects.Happy to talk either way.
+`,
   timeZone: "Asia/Kolkata",
   keywords: [
     "mainak banerjee",
