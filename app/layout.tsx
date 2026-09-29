@@ -30,11 +30,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),
   title: {
-    default: "Mainak Banerjee - Design Engineer",
+    default: "Mainak Banerjee - Applied AI Enginner",
     template: "%s | Mainak Banerjee",
   },
   description:
-    "Frontend developer turned design engineer. I design and build interactive UI components with production-grade motion, from concept to shipped code.",
+    "Frontend Engineer transitioning into Applied AI Engineering. I design and build interactive, AI-powered products with production-grade UI, thoughtful UX, and reliable engineering — turning ideas from concept into shipped code.",
   alternates: {
     canonical: "/",
   },
