@@ -35,6 +35,7 @@ function SiteNavMobile() {
           <Link
             key={item.href}
             href={item.href}
+            aria-label={item.title}
             className={cn(
               "text-muted-foreground/80 relative flex flex-col items-center justify-center gap-1 text-xs transition-all duration-300 ease-out font-mono w-7 h-7",
               isActiveItem && "text-foreground",

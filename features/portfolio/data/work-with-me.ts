@@ -1,7 +1,8 @@
 import quizImage from "@/public/quiz-mb.webp";
 import frameImage from "@/public/frame-mb.jpg";
+import { NAV_LINKS } from "@/config/site";
 
-export const WORK_URL = "/work";
+export const WORK_URL = NAV_LINKS.work;
 
 export const referralConfig = {
   quizmb: {
@@ -23,8 +24,8 @@ export const referralConfig = {
       "Responsive product UI",
       "Production architecture",
     ],
-    href: "/work-with-me?ref=quizmb",
-    linkLabel: "Explore the product context",
+    href: "https://quizmb.themainakb.com/",
+    linkLabel: "Open QuizMB",
   },
   framemb: {
     productName: "FrameMB",
@@ -34,8 +35,8 @@ export const referralConfig = {
       "From image workflows to polished product interfaces, I design and build production-ready web and AI applications with thoughtful interactions at every step.",
     image: frameImage,
     imageAlt:
-      "FrameMB image editor with an image upload area and controls for size, image, looks, background, style, and branding.",
-    imageCaption: "FrameMB · An image workflow designed for a smaller screen.",
+      "FrameMB desktop image editor with an upload canvas, platform formats, aspect ratios, image fit controls, and themed backgrounds.",
+    imageCaption: "FrameMB · A focused desktop image workflow.",
     summary:
       "An image framing tool that turns screenshots and graphics into polished visuals. Its editor brings image workflows, visual customization, and responsive interaction design into one focused product.",
     capabilities: [
