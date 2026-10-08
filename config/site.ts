@@ -1,5 +1,6 @@
 import { NavItem } from "@/types/nav";
 import {
+  BriefcaseBusiness,
   Component,
   FlaskConical,
   House,
@@ -8,24 +9,30 @@ import {
 } from "lucide-react";
 import { Route } from "next";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://themainakb.com";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_APP_URL || "https://themainakb.com";
 
 export const NAV_LINKS = {
+  work: "/work",
   components: "/components",
   templates: "/templates",
   blog: "/blog",
   labs: "/labs",
-  contact: "/contact"
+  contact: "/contact",
 };
-
 
 export const NAV_LINK_KEYS = Object.fromEntries(
   Object.entries(NAV_LINKS).map(([key, value]) => [key, value.slice(1)]),
 ) as {
   [K in keyof typeof NAV_LINKS]: string;
-  };
+};
 
 export const MAIN_NAV: NavItem<Route>[] = [
+  {
+    title: "Work",
+    icon: BriefcaseBusiness,
+    href: NAV_LINKS.work,
+  },
   {
     title: "Components",
     icon: Component,
@@ -56,7 +63,6 @@ export const MOBILE_NAV: NavItem<Route>[] = [
   },
   ...MAIN_NAV,
 ];
-
 
 export function getBaseUrl() {
   if (process.env.NODE_ENV === "development") {
